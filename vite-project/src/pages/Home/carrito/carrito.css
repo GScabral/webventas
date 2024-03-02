@@ -1,0 +1,113 @@
+.carrito {
+  margin: 20px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+}
+
+.carrito-titulo {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.lista-productos {
+  list-style: none;
+  padding: 0;
+}
+
+.producto {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.producto-info {
+  flex-grow: 1;
+}
+
+.producto-imagen {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin-right: 20px;
+  border-radius: 5px;
+}
+
+.producto-nombre {
+  font-weight: bold;
+}
+
+.producto-acciones {
+  display: flex;
+  align-items: center;
+}
+
+
+
+.boton-cantidad {
+  font-size: 18px;
+}
+
+.boton-eliminar {
+  background-color: #dc3545;
+}
+
+.mensaje-error {
+  color: #dc3545;
+}
+
+.mensaje-vacio {
+  font-style: italic;
+}
+
+.total {
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+.formas-pago {
+  margin-top: 20px;
+}
+
+.logos-pago {
+  display: flex;
+  align-items: center;
+}
+
+.logo-pago {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+.boton-carrito {
+  border: none; 
+  color: black; 
+  padding: 14px 28px; 
+  cursor: pointer; 
+  border-radius: 5px; 
+  
+}
+
+.boton-vaciar {
+  background-color: white; border: 2px solid #007bff;
+}
+
+.boton-vaciar:hover{
+  background: #0b7dda; color: white;
+}
+
+.boton-volver {
+  background-color: white; border: 2px solid #010407;
+}
+
+.boton-volver:hover{
+  background: #9b2b2b; color: white;
+} 
+
+.enlace-home {
+  text-decoration: none;
+}

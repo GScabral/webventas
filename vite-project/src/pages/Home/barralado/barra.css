@@ -1,0 +1,109 @@
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    /* background-color: #f3f3f3; */
+    padding: 20px;
+    /* border-radius: 5px; */
+    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+    max-width: 400px;
+    margin: 20px;
+    max-height: 500px;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    background-image: url("../../../../flores5.jfif");
+    
+}
+.sidebar::-webkit-scrollbar {
+    display: none;
+}
+
+.sidebar-h1 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+/* Estilos de los botones de filtro */
+.button-filtros {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #17a589;
+    color: rgb(233, 247, 247);
+   border-radius: 0px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    -webkit-transition: 0,5s linear;
+    transition:0,5s linear;
+}
+
+.button-filtros:hover {
+    background-color: #000000;
+    border-radius: 20px;
+    color: rgb(80, 197, 201);
+}
+
+/* Estilos de los elementos de lista */
+.ul-filtros {
+    list-style-type: none;
+    padding: 0;
+}
+
+.li-filtros {
+    padding: 8px 0;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.li-filtros:hover {
+    color: #3498db;
+}
+
+/* Estilos para los filtros desplegables */
+.button-talles, .button-precio {
+    display: block;
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 5px;
+    background-color: #e0e0e0;
+    color: #333;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button-selected {
+    /* Estilos para resaltar la selección, como un color de fondo diferente */
+    display: block;
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 5px;
+    background-color: #c71111;
+    color: #333;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    /* Otros estilos para indicar la selección */
+}
+
+.button-talles:hover, .button-precio:hover {
+    background-color: #ccc;
+}
+
+.divider {
+    margin: 10px 0; /* Margen para separar visualmente las secciones */
+    border: none; /* Sin borde */
+    border-top: 1px solid #ccc; /* Borde superior de color gris claro */
+  }
+
+.letra-titulo{
+    color: rgb(83, 180, 183);
+    font-family: "Cinzel", serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+}
+

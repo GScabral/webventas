@@ -1,0 +1,27 @@
+.div-search {
+  display: flex;
+  align-items: center;
+}
+
+/* Estilos para el campo de entrada */
+input[type="search"] {
+  padding: 8px;
+  border: 1px solid  rgb(80, 197, 201);
+  border-radius: 5px;
+  margin-right: 5px; /* Espacio entre el campo de entrada y el botón */
+  width: 200px; /* Ancho del campo de entrada */
+}
+
+/* Estilos para el botón de búsqueda */
+button.lupa {
+  padding: 8px;
+  background-color: #f2f2f2;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Estilos para el icono dentro del botón */
+button.lupa svg {
+  color: #333; /* Color del icono */
+}

@@ -1,0 +1,47 @@
+.back-nav {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10px;
+  background-image:url("../../../../public/flores5.jfif");
+  color: white;
+  
+}
+
+.superior {
+  margin-right: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: transparent;
+  color: rgb(80, 197, 201);
+  cursor: pointer;
+}
+
+.superior:hover {
+  background-color: #555;
+}
+
+.Nav-dos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+.inferior {
+  border: none;
+  border-radius: 5px;
+  background-color: transparent;
+  color: #333;
+  cursor: pointer;
+  padding: 8px 16px;
+  transition: background-color 0.3s ease;
+}
+
+.inferior:hover {
+  background-color: #ddd;
+}
+
+

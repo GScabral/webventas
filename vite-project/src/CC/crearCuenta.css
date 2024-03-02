@@ -1,0 +1,74 @@
+.body-cc {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  margin: 0;
+background-image: url("../../flores5.jfif");
+  color: rgb(244, 245, 245);
+  font-family: Arial, sans-serif;
+}
+
+.CC-container {
+  width: 800px;
+  height: auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  padding: 20px;
+  border: 3px solid #00a6bc;
+  box-shadow: 0 0 50px 0 #dbe7e8;
+  background-color: rgb(213, 211, 222);
+}
+
+.form-label {
+  padding-bottom: 10px;
+  border-bottom: 2px solid #eee;
+  font-size: 18px;
+}
+
+.titulo-cc {
+  font-size: 35px;
+  margin-bottom: 20px;
+}
+
+input[type="text"] {
+  border: 1px solid #ccc; /* Agregar un borde de 1px sólido de color gris claro */
+  outline: none;
+  background: none;
+  width: calc(100% - 20px);
+  padding-right: 10px;
+  font-size: 17px;
+  color: #0ef;
+}
+
+.error-message {
+  color: red;
+  margin-top: 5px;
+  font-size: 14px;
+}
+
+.form-button {
+  border: none;
+  outline: none;
+  width: calc(100% - 20px);
+  padding: 10px 0;
+  font-size: 20px;
+  border-radius: 40px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  background: linear-gradient(45deg, #0ef, #c800ff);
+}
+
+.form-button:hover {
+  background-color: #0056b3;
+}
+
+.invalid-button {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.valid-button:disabled {
+  background-color: #007bff;
+  cursor: pointer;
+}

@@ -1,0 +1,81 @@
+.carousel {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.image-container-carrusel {
+  border:  solid 1px black;
+  position: relative;
+  width: 100%; /* Asegura que la imagen ocupe todo el ancho */
+  max-width: 700px; /* Establece un ancho máximo mayor para el contenedor */
+  height: 300px; /* Establece una altura fija para el contenedor */
+  margin: 0 auto; /* Centra el contenedor horizontalmente */
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.image-container-carrusel img {
+  width: 100%; /* Hace que la imagen ocupe todo el ancho del contenedor */
+  height: 100%; /* Hace que la imagen ocupe todo el alto del contenedor */
+  display: block;
+}
+
+
+.buton-carousel-left {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0);
+  top: 50%;
+  left: 370px; /* Ajusta la distancia desde el borde izquierdo */
+  transform: translateY(-50%);
+  z-index: 1;
+  font-size: 30px;
+  border: none;
+  transition: transform 0.2s;
+}
+
+
+.buton-carousel-left:hover{
+  transform: scale(1.1);
+}
+
+.buton-carousel-right{
+  background-color: rgba(0, 0, 0, 0);
+  position: absolute;
+  top: 50%;
+  right: 370px; /* Ajusta la distancia desde el borde derecho */
+  transform: translateY(-50%);
+  font-size: 30px;
+  border: none;
+  transition: transform 0.2s;
+}
+
+.buton-carousel-right:hover{
+  transform: scale(1.1);
+}
+
+
+
+.dots-container {
+  position: absolute;
+  bottom: 0; /* Alinea los puntos al pie del contenedor de la imagen */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2; /* Asegura que los puntos estén en una capa superior */
+  width: 100%; /* Ajusta el ancho para que los puntos ocupen todo el contenedor */
+  text-align: center; /* Centra los puntos horizontalmente */
+}
+
+.dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.dot.active {
+  background-color: #333;
+}

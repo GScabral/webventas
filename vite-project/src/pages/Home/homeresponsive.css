@@ -1,0 +1,10 @@
+@media screen and (max-width: 768px) {
+    .sidebar-container {
+      display: none; /* Ocultar la barra lateral en dispositivos pequeños */
+    }
+  
+    .main-content {
+      width: 100%; /* Ocupar todo el ancho en dispositivos pequeños */
+      margin-left: 0; /* Eliminar el margen izquierdo */
+    }
+  }

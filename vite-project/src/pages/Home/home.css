@@ -1,0 +1,157 @@
+/* Estilos generales */
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+/* Estilos para el contenedor principal */
+.home-fondo {
+  background-color: #c8e9eb;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  width: 100%;
+  min-height: 100vh; /* Asegura que el contenedor principal ocupe al menos toda la altura de la ventana del navegador */
+}
+
+/* Estilos para la rejilla de los elementos del contenido */
+.Home-container {
+  margin-left: 200px; /* Considera el ancho de la barra lateral */
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+/* Estilos para el footer */
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: black;
+  color: white;
+  padding: 20px; /* Agregado para dar espacio al contenido del footer */
+}
+
+/* Estilo del botón lateral */
+.boton-lateral {
+  color: rgb(204, 21, 21);
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 999;
+  padding: 10px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 24px;
+  width: auto;
+}
+
+/* Estilos para los botones de paginación */
+.botones-paginado {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.botones-paginado button {
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 12px;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.botones-paginado button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.botones-paginado button:hover:not(:disabled) {
+  background-color: #e0e0e0;
+}
+
+.paginado {
+  display: inline-block;
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 16px; /* Tamaño de fuente */
+  color: #333; /* Color del texto */
+  background-color: #f8f8f8; /* Color de fondo */
+}
+
+.botones-paginado button:hover {
+  background-color: #ccc; /* Cambia el color al pasar el mouse */
+}
+
+.botones-paginado button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5; /* Opacidad reducida para los botones deshabilitados */
+}
+
+/* Estilos cuando la barra lateral está abierta */
+.sidebar-container {
+  width: 200px;
+  background-image: url("../../../flores5.jfif");
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0; /* Cambio aquí para mantener la barra lateral abierta */
+  transition: left 0.3s ease;
+}
+
+.paginado:hover {
+  transform: scale(1.1); /* Aumenta el tamaño al pasar el cursor */
+  transition: transform 0.3s ease-in-out; /* Agrega una transición suave */
+}
+
+.contacto-home {
+  background-color: #f8f8f8;
+  padding: -3px;
+  text-align: center;
+}
+
+.contacto-home p {
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.logos-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  width: 20px; /* Ajusta el tamaño de los logos según sea necesario */
+  margin: 0 10px; /* Espacio entre los logos */
+  transition: transform 0.3s ease; /* Efecto de transición al hacer hover */
+}
+
+.logo:hover {
+  transform: scale(1.1); /* Aumenta ligeramente el tamaño al hacer hover */
+}
+
+.whatsapp-logo {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 30px;
+  -webkit-transition: 1s linear;
+  transition: 1s linear;
+  box-shadow: #f1c40f;
+  border-radius: 50%;
+}
+
+
+.whatsapp-logo:hover{
+  -webkit-box-shadow:10px 10px 14px 2px rgba(0,0,0,0.47);
+  box-shadow: 10px 10px 14px 2px rgba(0,0,0,0.47);
+}

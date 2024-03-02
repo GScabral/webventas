@@ -1,0 +1,46 @@
+.sidebar-admin{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    max-width: 400px;
+    margin: 20px;
+    max-height: 500px;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    overflow-y: hidden; 
+}
+.sidebar-container-admin{
+    width: 200px;
+  background-color: #b95c5c;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0; /* Cambio aquí para mantener la barra lateral abierta */
+  transition: left 0.3s ease;
+  overflow-y: hidden; 
+}
+
+.Mi-Tienda {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Estilos para los botones */
+.barra-admin-button {
+  display: block;
+  width: calc(100% ); /* Resta 40px para considerar el padding de la barra lateral */
+  margin-bottom: 10px;
+  padding: 10px;
+  border: none;
+  background-color: #555; /* Color de fondo de los botones */
+  color: white; /* Color del texto de los botones */
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Transición suave para el color de fondo */
+}
+
+.barra-admin-button:hover {
+  background-color: #777; /* Cambio de color al pasar el ratón sobre los botones */
+}

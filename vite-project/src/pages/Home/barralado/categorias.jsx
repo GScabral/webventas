@@ -1,0 +1,26 @@
+export const categoria={
+    "Remeras":[
+        "Remeritas",
+    ],
+    "Tops y bustiers":[],
+    "Blusas":[],
+    "Camisas":[],
+    "Bodies":[],
+    "Blazer":[],
+    "Pantalones":[],
+    "Shorts":[],
+    "Polleras":[],
+    "Sweaters":[],
+    "Camperas":[],
+    "Bestidos":[],
+    "Calzas":[],
+    "Tops deportivos":[],
+    "Sudaderas":[],
+    "Bikinis":[
+        "Bikinis dama",
+        "Bikinis niñas",
+    ],
+    "Lenceria":[],
+    "Boxer niños":[],
+    "accesorios":[],
+}

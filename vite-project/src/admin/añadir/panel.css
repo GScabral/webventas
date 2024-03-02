@@ -1,0 +1,85 @@
+.admin-panel {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.h1-panel {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.label-admin {
+  font-weight: bold;
+}
+
+.input-admin {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.input-admin[type="file"] {
+  display: none;
+}
+
+.button-admin {
+  width: 100%;
+  padding: 12px;
+  margin-top: 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.button-admin:hover {
+  background-color: #0056b3;
+}
+
+.button-imagen-adm {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.button-imagen-adm:hover {
+  background-color: #218838;
+}
+
+.button-newproduc-adm {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.button-newproduc-adm:hover {
+  background-color: #c82333;
+}
+
+.image-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.image-container img {
+  max-width: 100px;
+  max-height: 100px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}

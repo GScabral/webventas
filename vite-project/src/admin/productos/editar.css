@@ -1,0 +1,69 @@
+.container-Modal-editar {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999; /* Asegura que el modal esté por encima del resto del contenido */
+}
+
+.modal-content-editar {
+  width: 400px; /* Ajusta el ancho del modal según sea necesario */
+  background-color: #fff; /* Color de fondo del modal */
+  border-radius: 8px; /* Bordes redondeados */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra */
+}
+
+.modal-header-editar {
+  padding: 15px;
+  border-bottom: 1px solid #ddd; /* Línea divisoria en el encabezado */
+}
+
+.modal-title-editar {
+  margin: 0;
+  font-size: 18px;
+}
+
+.modal-body-editar {
+  padding: 15px;
+}
+
+.modal-footer-editar {
+  padding: 15px;
+  border-top: 1px solid #ddd; /* Línea divisoria en el pie de página */
+  text-align: right;
+}
+
+.form-group-editar {
+  margin-bottom: 15px;
+}
+
+.form-label-editar {
+  display: block;
+  font-weight: bold;
+}
+
+.form-control-editar {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.btn-secondary-editar {
+  background-color: #ccc;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-primary-editar {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}

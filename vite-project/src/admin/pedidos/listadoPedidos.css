@@ -1,0 +1,52 @@
+.pedido-list-container {
+  font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+  
+}
+
+.pedido-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.pedido-table th,
+.pedido-table td {
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+
+.pedido-table th {
+  background-color: #f2f2f2;
+  text-align: left;
+}
+
+.pedido-table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.pedido-table tbody tr:hover {
+  background-color: #ddd;
+}
+
+.pedido-table tbody tr td ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.pedido-table tbody tr td ul li {
+  margin-bottom: 5px;
+}
+
+
+.fa-check-circle {
+  color: green; /* Color verde para el icono de marca de verificación */
+  margin-right: 5px; /* Margen a la derecha para separar el icono del texto */
+}
+
+/* Agrega estilos para los iconos de advertencia */
+.fa-exclamation-circle {
+  color: red; /* Color rojo para el icono de advertencia */
+  margin-right: 5px; /* Margen a la derecha para separar el icono del texto */
+}
