@@ -69,15 +69,20 @@ const Card = ({ id, nombre, descripcion, categoria, precio, imagenes, variantes 
 
     const productoConVariantes = {
       id,
-      idVariante: varianteSeleccionada.idVariante,
-      imagenes,
+      nombre,
       descripcion,
       categoria,
-      talle: varianteSeleccionada.talla,
-      color: varianteSeleccionada.color,
-      cantidad,
       precio,
-      totalDisponible: varianteSeleccionada.cantidad_disponible,
+      imagenes,
+      variantes: [
+        {
+          idVariante: variantes[0].idVariante, // Suponiendo que solo hay una variante por producto
+          talla: talleSeleccionado,
+          color: colorSeleccionado,
+          cantidad_disponible: variantes[0].cantidad_disponible
+        }
+      ],
+      cantidad_elegida:cantidad,
     };
 
     
@@ -151,6 +156,25 @@ const Card = ({ id, nombre, descripcion, categoria, precio, imagenes, variantes 
     }
   };
 
+  const decrementarCantidad = () => {
+    if (!talleSeleccionado || !colorSeleccionado) {
+      console.error('Error: Talle o color no definidos.');
+      return;
+    }
+  
+    const varianteSeleccionada = variantesDisponibles.find(
+      (variante) => variante.talla.toLowerCase() === talleSeleccionado.toLowerCase() && variante.color === colorSeleccionado
+    );
+  
+    if (varianteSeleccionada && cantidad > 1) {
+      const nuevaCantidad = cantidad - 1;
+      setCantidad(nuevaCantidad);
+      setBotonHabilitado(true);
+    } else {
+      console.log('La cantidad mínima es 1');
+    }
+  };
+
   useEffect(() => {
     setColorSeleccionado('');
   }, [talleSeleccionado]);
@@ -212,7 +236,7 @@ const Card = ({ id, nombre, descripcion, categoria, precio, imagenes, variantes 
                 }
               }}
             />
-            <button >
+            <button onClick={decrementarCantidad} >
               -
             </button>
             <button onClick={confirmarAgregarAlCarrito} disabled={!botonHabilitado}>

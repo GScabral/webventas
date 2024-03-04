@@ -13,58 +13,72 @@ import "./carrito.css";
 const Carrito = () => {
   const carrito = useSelector((state) => state.carrito);
   const allProductos = useSelector((state) => state.allProductos);
-  const [cantidadMinima, setCantidadMinima] = useState({});
-  const [cantidadMaxima, setCantidadMaxima] = useState({});
+  const [cantidadMinima, setCantidadMinima] = useState([]);
+  const [cantidadMaxima, setCantidadMaxima] = useState([]);
   const [errorStock, setErrorStock] = useState(false);
   const [mostrarModal, setMostrarModal] = useState(false);
   const [numeroPedido, setNumeroPedido] = useState(null);
   const dispatch = useDispatch();
 
+
+  console.log("carrito",carrito)
+
   const eliminarDeCarrito = (index) => {
     dispatch(eliminarProductoCarrito(index));
   };
 
-console.log(carrito)
-
   const incrementarCantidad = (index) => {
-    const productoEnCarrito = carrito[index];
-
-    if (productoEnCarrito && productoEnCarrito.totalDisponible > 0) {
-      const nuevoCarrito = [...carrito];
-
-      if (productoEnCarrito.cantidad < productoEnCarrito.totalDisponible) {
-        nuevoCarrito[index] = {
-          ...productoEnCarrito,
-          cantidad: productoEnCarrito.cantidad + 1,
-        };
-        dispatch(actualizarCarrito(nuevoCarrito));
-      } else {
-        setCantidadMaxima((prev) => ({ ...prev, [index]: true }));
-        setTimeout(() => {
-          setCantidadMaxima((prev) => ({ ...prev, [index]: false }));
-        }, 3000);
-      }
-    } else {
-      console.error('Producto en carrito o cantidad total no definidos o inválidos.');
-    }
-  };
-
-  const decrementarCantidad = (index) => {
-    const productoEnCarrito = carrito[index];
     const nuevoCarrito = [...carrito];
-
-    if (productoEnCarrito.cantidad > 1) {
-      nuevoCarrito[index] = {
-        ...productoEnCarrito,
-        cantidad: productoEnCarrito.cantidad - 1,
-      };
+    const producto = nuevoCarrito[index];
+    
+    if (!producto) {
+      console.error('Producto no encontrado');
+      return;
+    }
+  
+    // Verificar si hay una variante disponible para el producto
+    if (producto.variantes.length === 0) {
+      console.error('El producto no tiene variantes disponibles.');
+      return;
+    }
+  
+    // Obtener la cantidad disponible para la variante
+    const cantidadDisponible = producto.variantes[0].cantidad_disponible;
+  
+    // Verificar si la cantidad elegida es menor que la cantidad disponible
+    if (producto.cantidad_elegida < cantidadDisponible) {
+      // Incrementar la cantidad elegida en 1
+      producto.cantidad_elegida++;
+      console.log('Cantidad elegida incrementada:', producto.cantidad_elegida);
+  
+      // Actualizar el carrito en el estado
       dispatch(actualizarCarrito(nuevoCarrito));
     } else {
-      setCantidadMinima((prev) => ({ ...prev, [index]: true }));
-      setTimeout(() => {
-        setCantidadMinima((prev) => ({ ...prev, [index]: false }));
-      }, 3000);
+      console.warn('La cantidad máxima disponible ya ha sido alcanzada.');
     }
+  }
+  
+  const decrementarCantidad = (index) => {
+    const nuevoCarrito = [...carrito];
+    const producto = nuevoCarrito[index];
+    
+    if (!producto) {
+      console.error('Producto no encontrado');
+      return;
+    }
+  
+    // Buscamos la variante con cantidad elegida mayor que 1
+   
+    if (!producto.cantidad_elegida > 1) {
+      console.error('La cantidad mínima es 1');
+      return;
+    }
+  
+    // Decrementamos la cantidad elegida de la variante
+    producto.cantidad_elegida--;
+    
+    // Actualizar el carrito en el estado
+    dispatch(actualizarCarrito(nuevoCarrito));
   };
 
   const calcularTotal = () => {
@@ -98,25 +112,25 @@ console.log(carrito)
   const handleRealizarPedido = async () => {
     try {
       for (const producto of carrito) {
-        const { id, cantidad, idVariante, color, talle } = producto;
+        const { id, cantidad, idVariante } = producto;
         const productoEnStock = allProductos.find((p) => p.id === id);
-  
+
         if (!productoEnStock) {
           console.error(`Producto con ID ${id} no encontrado en allProductos.`);
           return;
         }
-  
-        const variante = productoEnStock.variantes.find(
-          (v) => v.idVariante === idVariante && v.color === color && v.talle === talle
-        );
-  
+
+        const variante = productoEnStock.variantes.find((v) => v.idVariante === idVariante)
+
         if (!variante) {
-          console.error(`Variante del producto con ID ${id}, color ${color} y talla ${talle} no encontrada.`);
+          console.error(`Variante del producto con ID ${id}, color ${color} y talla ${talla} no encontrada.`);
           return;
         }
-  
+
+        const { color, talla } = variante;
+
         const nuevaCantidadDisponible = variante.cantidad_disponible - cantidad;
-  
+
         if (nuevaCantidadDisponible < 0) {
           console.error(`No hay suficiente cantidad en stock para el producto con ID ${id}`);
           const nombreProducto = productoEnStock.nombre;
@@ -124,23 +138,24 @@ console.log(carrito)
           setErrorStock(true);
           return;
         }
-  
+
         // Actualiza la cantidad disponible de la variante
         variante.cantidad_disponible = nuevaCantidadDisponible;
-  
+
         // Llama a actualizarVariante para actualizar la base de datos
         await dispatch(actualizarVariante(id, variante));
       }
-  
+
       // Si no hay errores de stock, procede con el pedido
       if (!errorStock) {
         // Generar un número de pedido simulado
+        await dispatch(addPedido(carrito));
         const numeroPedidoSimulado = Math.floor(Math.random() * 1000000);
         setNumeroPedido(numeroPedidoSimulado);
-  
+
         // Mostrar el modal
         setMostrarModal(true);
-  
+
         // Finalmente, vacía el carrito después de realizar el pedido
         dispatch(vaciarCarrito());
       }
@@ -163,19 +178,24 @@ console.log(carrito)
           {carrito.map((producto, index) => (
             <li key={index} className="producto">
               <div className="producto-info">
-                <p className="producto-detalle">Talle: {producto.talle}</p>
-                <p className="producto-detalle">Color: {producto.color}</p>
                 {producto.imagenes && producto.imagenes.length > 0 && (
                   <img className="producto-imagen" src={producto.imagenes[0]} alt={producto.nombre} />
                 )}
-                <p className="producto-nombre">{producto.nombre}</p>
                 <p className="producto-precio">${producto.precio} c/u</p>
+                <div className="variantes-info">
+                  {producto.variantes.map((variante, vIndex) => (
+                    <div key={vIndex} className="variante">
+                      <p>Talla: {variante.talla}</p>
+                      <p>Color: {variante.color}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
               <div className="producto-acciones">
                 <button className="boton-carrito boton-cantidad" onClick={() => decrementarCantidad(index)}>
                   -
                 </button>
-                <span className="cantidad-carrito">{producto.cantidad}</span>
+                <span className="cantidad-carrito">{producto.cantidad_elegida}</span> {/* Aquí muestra la cantidad */}
                 <button className="boton-carrito boton-cantidad" onClick={() => incrementarCantidad(index)}>
                   +
                 </button>

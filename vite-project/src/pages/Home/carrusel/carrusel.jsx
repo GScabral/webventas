@@ -12,6 +12,7 @@ const Carousel = () => {
   "/eliminardepues2.jpeg",
   "/eliminardepues3.jpeg",
   "/eliminardepues4.jpeg",
+  "/oferta.png"
   ]);
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
