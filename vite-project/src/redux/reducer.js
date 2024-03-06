@@ -27,6 +27,7 @@ import {
   // OBTENER_INFO_USUARIO,
   GET_PEDIDOS,
   GET_CLIENTES,
+  ENVIAR_ESTADO,
 } from "./action"
 
 const initialState = {
@@ -49,6 +50,7 @@ const initialState = {
   allPedidos:[],
   allPedidosBackup:[],
   isLoggedIn: false, 
+  estado: null,
 }
 
 const ITEMS_PER_PAGE = 12;
@@ -416,7 +418,13 @@ const reducer = (state = initialState, action) => {
       allClientes:action.payload,
       allClientesBackUp:action.payload,
       };
-     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
+     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      case ENVIAR_ESTADO:
+        return {
+          ...state,
+          estado: action.payload,
+        };
+       ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
     default:
       return state;
 

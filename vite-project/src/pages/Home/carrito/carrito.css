@@ -1,15 +1,45 @@
+/* carrito.css */
+
+.carrito-fondo {
+  background-color: #c8e9eb;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  width: 100%;
+  min-height: 100vh;
+}
+
 .carrito {
+  background-color: antiquewhite;
   margin: 20px;
   padding: 20px;
-  background-color: #f9f9f9;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-
 }
 
 .carrito-titulo {
   font-size: 24px;
   margin-bottom: 20px;
+  display: flex;
+  justify-content: center; /* Centrado horizontal */
+  align-items: center;
+}
+
+.carrito-table{
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.carrito-th {
+  background-color: #f2f2f2;
+}
+
+.carrito-th,
+.carrito-td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
 }
 
 .lista-productos {
@@ -22,10 +52,12 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+  border: solid 1px black;
 }
 
 .producto-info {
-  flex-grow: 1;
+  display: flex;
+  align-items: center;
 }
 
 .producto-imagen {
@@ -45,10 +77,31 @@
   align-items: center;
 }
 
+.producto-precio {
+  margin-bottom: 5px;
+}
 
+.variantes-info {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.variantes-info .variante {
+  margin-right: 10px; /* Espacio entre los elementos */
+}
+
+.producto-acciones {
+  display: flex;
+  align-items: center;
+}
+
+.boton-cantidad-div {
+  display: flex;
+  align-items: center;
+}
 
 .boton-cantidad {
-  font-size: 18px;
+  margin-left: 5px; /* Espacio entre los botones */
 }
 
 .boton-eliminar {
@@ -84,30 +137,43 @@
 }
 
 .boton-carrito {
-  border: none; 
-  color: black; 
-  padding: 14px 28px; 
-  cursor: pointer; 
-  border-radius: 5px; 
-  
+  border: none;
+  color: black;
+  padding: 14px 28px;
+  cursor: pointer;
+  border-radius: 5px;
 }
 
 .boton-vaciar {
-  background-color: white; border: 2px solid #007bff;
+  background-color: white;
+  border: 2px solid #007bff;
 }
 
-.boton-vaciar:hover{
-  background: #0b7dda; color: white;
+.boton-vaciar:hover {
+  background: #0b7dda;
+  color: white;
 }
 
 .boton-volver {
-  background-color: white; border: 2px solid #010407;
+  background-color: white;
+  border: 2px solid #010407;
 }
 
-.boton-volver:hover{
-  background: #9b2b2b; color: white;
-} 
+.boton-volver:hover {
+  background: #9b2b2b;
+  color: white;
+}
 
 .enlace-home {
   text-decoration: none;
+}
+
+.pedido-carrito {
+  background-color: white;
+  border: 2px solid #010407;
+}
+
+.pedido-carrito:hover {
+  background: #9b2b2b;
+  color: white;
 }

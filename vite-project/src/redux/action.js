@@ -28,6 +28,7 @@ export const CHECK_EMAIL_EXISTENCE_FAILURE = 'CHECK_EMAIL_EXISTENCE_FAILURE';
 // export const  OBTENER_INFO_USUARIO=" OBTENER_INFO_USUARIO";
 export const GET_PEDIDOS='GET_PEDIDOS';
 export const GET_CLIENTES='GET_CLIENTES';
+export const ENVIAR_ESTADO='ENVIAR_ESTADO';
 
 export const getProductos = () => {
     return async function (dispatch) {
@@ -462,3 +463,7 @@ export const checkEmailExistence = (correo) => {
 };
 
 
+export const enviarEstado = (nuevoEstado) => ({
+  type:ENVIAR_ESTADO,
+  payload: nuevoEstado,
+});

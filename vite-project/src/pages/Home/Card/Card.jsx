@@ -27,7 +27,6 @@ const Card = ({ id, nombre, descripcion, categoria, precio, imagenes, variantes 
 
 
 
-
   const handleAgregarAlCarrito = () => {
     setShowModal(true);
   };
