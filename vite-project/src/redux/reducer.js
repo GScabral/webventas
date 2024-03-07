@@ -52,6 +52,7 @@ const initialState = {
   allPedidosBackup:[],
   isLoggedIn: false, 
   estado: null,
+  productosDespuesPedido: [],
 }
 
 const ITEMS_PER_PAGE = 12;
@@ -302,7 +303,7 @@ const reducer = (state = initialState, action) => {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     case PEDIDO:
       const productosEnCarrito = state.carrito;
-    
+  
       // Actualizar la cantidad disponible de los productos en base a lo que se ha comprado en el carrito
       const productosActualizadosCompra = state.allProductosBackUp.map(producto => {
         const cantidadEnCarrito = productosEnCarrito.filter(item => item.id === producto.id).length;
@@ -312,43 +313,52 @@ const reducer = (state = initialState, action) => {
         };
       });
     
+  console.log("Productos actualizados después del pedido:", productosActualizadosCompra); // Agrega console.log aquí
+
       return {
         ...state,
         carrito: [], // Vaciar el carrito después de completar el pedido
         allProductosBackUp: productosActualizadosCompra, // Actualizar la lista completa de productos con las cantidades actualizadas
         allProductos: productosActualizadosCompra.slice(0, ITEMS_PER_PAGE), // Actualizar los productos mostrados si es necesario
+        productosDespuesPedido: productosEnCarrito, // Agregar productos al estado después del pedido
       };
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     case ACTUALIZAR_VARIANTES:
-  const { id, cantidad_disponible } = action.payload;
-
-  const variantesIndex = state.carrito.findIndex((producto) => producto.id === id);
-
-  if (variantesIndex !== -1) {
-    const carritoActualizado = [...state.carrito];
-    carritoActualizado[variantesIndex] = {
-      ...carritoActualizado[variantesIndex], cantidad_disponible
-    };
-    const allProductosActualizados = state.allProductosBackUp.map(producto => {
-  if (producto.id === id) {
-    return {
-      ...producto,
-      cantidad_disponible: cantidad_disponible // Asignar cantidad_disponible como un valor directo
-    }
-  }
-  return producto
-});
-
-    console.log("Carrito actualizado:", carritoActualizado);
-    console.log("allProductos actualizado:", allProductosActualizados);
-
-    return {
-      ...state,
-      carrito: carritoActualizado,
-      allProductosBackUp: allProductosActualizados,
-      allProductos: allProductosActualizados.slice(0, ITEMS_PER_PAGE)
-    };
-  }
+      const { id, cantidad_disponible } = action.payload;
+    
+      const variantesIndex = state.carrito.findIndex((producto) => producto.id === id);
+    
+      if (variantesIndex !== -1) {
+        const carritoActualizado = [...state.carrito];
+        carritoActualizado[variantesIndex] = {
+          ...carritoActualizado[variantesIndex], cantidad_disponible
+        };
+    
+        const allProductosActualizados = state.allProductos.map(producto => {
+          if (producto.id === id) {
+            return {
+              ...producto,
+              variantes: producto.variantes.map(variante => {
+                if (variante.id === id) {
+                  return {
+                    ...variante,
+                    cantidad_disponible: cantidad_disponible
+                  };
+                }
+                return variante;
+              })
+            };
+          }
+          return producto;
+        });
+    
+        return {
+          ...state,
+          carrito: carritoActualizado,
+          allProductos: allProductosActualizados,
+        };
+      }
+      return state; // Agregar este return al final del case
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     case ACTUALIZAR_CARRITO:
       return {

@@ -390,15 +390,10 @@ export const addPedido = (productos) => {
 export const actualizarVariante = (id, cantidad_disponible) => {
   return async function (dispatch) {
     try {
-      
-
       // Realizar la solicitud PATCH al servidor
       const response = await axios.patch(`http://localhost:3004/producto/cambio/${id}`, {
         cantidad_disponible: cantidad_disponible // Ajuste aquí para obtener el valor directamente
       });
-
-   
-
       // Despachar la acción después de que la solicitud sea exitosa
       dispatch({
         type: ACTUALIZAR_VARIANTES,

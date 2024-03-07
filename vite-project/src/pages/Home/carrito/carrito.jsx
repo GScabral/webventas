@@ -33,43 +33,49 @@ const Carrito = () => {
   const incrementarCantidad = (index) => {
     const nuevoCarrito = [...carrito];
     const producto = nuevoCarrito[index];
-
+  
     if (!producto) {
       console.error('Producto no encontrado');
       return;
     }
-
+  
     if (producto.variantes.length === 0) {
       console.error('El producto no tiene variantes disponibles.');
       return;
     }
-
+  
     const cantidadDisponible = producto.variantes[0].cantidad_disponible;
-
+  
+    console.log('Cantidad elegida antes de incrementar:', producto.cantidad_elegida); // Agregar este log
+  
     if (producto.cantidad_elegida < cantidadDisponible) {
       producto.cantidad_elegida++;
       dispatch(actualizarCarrito(nuevoCarrito));
+      console.log('Cantidad elegida después de incrementar:', producto.cantidad_elegida); // Agregar este log
     } else {
       console.warn('La cantidad máxima disponible ya ha sido alcanzada.');
     }
   }
-
+  
   const decrementarCantidad = (index) => {
     const nuevoCarrito = [...carrito];
     const producto = nuevoCarrito[index];
-
+  
     if (!producto) {
       console.error('Producto no encontrado');
       return;
     }
-
+  
     if (producto.cantidad_elegida === 1) {
       console.error('La cantidad mínima es 1');
       return;
     }
-
+  
+    console.log('Cantidad elegida antes de decrementar:', producto.cantidad_elegida); // Agregar este log
+  
     producto.cantidad_elegida--;
     dispatch(actualizarCarrito(nuevoCarrito));
+    console.log('Cantidad elegida después de decrementar:', producto.cantidad_elegida); // Agregar este log
   };
 
   const calcularTotal = () => {
@@ -93,26 +99,33 @@ const Carrito = () => {
     return total.toFixed(2);
   };
 
-  const handleRealizarPedido = async () => {
-    try {
-      const pedido = carrito.map(producto => ({
-        id: producto.id,
-        nombre:producto.nombre,
-        cantidad: producto.cantidad_elegida,
-        color: producto.variantes[0].color,
-        talla: producto.variantes[0].talla
-      }));
+ const handleRealizarPedido = async () => {
+  try {
+    const pedido = carrito.map(producto => ({
+      id: producto.id,
+      nombre:producto.nombre,
+      cantidad: producto.cantidad_elegida,
+      color: producto.variantes[0].color,
+      talla: producto.variantes[0].talla
+    }));
 
-      await dispatch(addPedido(pedido));
+    await dispatch(addPedido(pedido));
 
-      const numeroPedidoSimulado = Math.floor(Math.random() * 1000000);
-      setNumeroPedido(numeroPedidoSimulado);
-      setMostrarModal(true);
-      dispatch(vaciarCarrito());
-    } catch (error) {
-      console.error("Error al realizar cambios", error);
-    }
-  };
+    // Llamar a actualizarVariante después de que se agregue correctamente el pedido
+    carrito.forEach(producto => {
+       console.log()
+  
+      dispatch(actualizarVariante(producto.variantes[0].idVariante, producto.cantidad_elegida));
+    });
+
+    const numeroPedidoSimulado = Math.floor(Math.random() * 1000000);
+    setNumeroPedido(numeroPedidoSimulado);
+    setMostrarModal(true);
+    dispatch(vaciarCarrito());
+  } catch (error) {
+    console.error("Error al realizar cambios", error);
+  }
+};
 
   useEffect(() => {
     if (errorStock) {
