@@ -1,17 +1,20 @@
 .sidebar {
     display: flex;
     flex-direction: column;
-    /* background-color: #f3f3f3; */
+    background-color: #f3f3f3; 
     padding: 20px;
     /* border-radius: 5px; */
     /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
     max-width: 400px;
     margin: 20px;
     max-height: 500px;
+    top: 40px;
     overflow-y: auto;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    background-image: url("../../../../flores5.jfif");
+    position: relative; /* Cambio de posición */
+    top: 60px;
+    
     
 }
 .sidebar::-webkit-scrollbar {

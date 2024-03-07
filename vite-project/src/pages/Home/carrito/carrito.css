@@ -1,17 +1,16 @@
 /* carrito.css */
 
 .carrito-fondo {
-  background-color: #c8e9eb;
-  background-size: cover;
-  background-attachment: fixed;
-  background-position: center;
-  width: 100%;
+    background-color: white; /* Fondo blanco */
+  display: flex;
+  justify-content: center; /* Centra horizontalmente el contenido */
+  align-items: center; /* Centra verticalmente el contenido */
   min-height: 100vh;
 }
 
 .carrito {
   background-color: antiquewhite;
-  margin: 20px;
+  margin: 10px;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);

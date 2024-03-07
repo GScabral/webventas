@@ -40,13 +40,13 @@
 }
 
 
-.fa-check-circle {
-  color: green; /* Color verde para el icono de marca de verificación */
-  margin-right: 5px; /* Margen a la derecha para separar el icono del texto */
+.listo{
+  color: red; 
+  margin-right: 5px; 
 }
 
-/* Agrega estilos para los iconos de advertencia */
-.fa-exclamation-circle {
-  color: red; /* Color rojo para el icono de advertencia */
-  margin-right: 5px; /* Margen a la derecha para separar el icono del texto */
+.listo-clicked {
+  
+  color: green; 
+  margin-right: 5px; 
 }

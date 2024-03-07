@@ -10,11 +10,13 @@ const getPedidos = async () => {
             return {
                 id: pedido.id_pedido,
                 fecha: pedido.fecha_pedido,
+                
                 detalles: pedido.DetallesPedidos.map((detalle) => ({
                     idDetalle: detalle.id_detalle_pedido,
-                    cantidad: detalle.cantidad,
-                    precio_u: detalle.precio_unitario,
-                    estado: detalle.estado_pedido // Obtener el estado del pedido desde los detalles
+                    nombre:detalle.nombre,
+                    cantidad: detalle.cantidad,    
+                    color:detalle.color,
+                    talle:detalle.talle                              
                 })),
             };
         });

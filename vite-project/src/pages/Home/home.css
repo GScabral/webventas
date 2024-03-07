@@ -8,7 +8,7 @@ body {
 
 /* Estilos para el contenedor principal */
 .home-fondo {
-  background-color: #c8e9eb;
+  background-color: white;
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
@@ -99,7 +99,7 @@ body {
 /* Estilos cuando la barra lateral está abierta */
 .sidebar-container {
   width: 200px;
-  background-image: url("../../../flores5.jfif");
+  background-color: #000000;
   height: 100vh;
   position: fixed;
   top: 0;
@@ -113,9 +113,10 @@ body {
 }
 
 .contacto-home {
-  background-color: #f8f8f8;
+  background-color: #000000;
   padding: -3px;
   text-align: center;
+  color: white;
 }
 
 .contacto-home p {

@@ -22,6 +22,9 @@ module.exports = (sequelize) => {
       estado_pedido: {
         type: DataTypes.STRING(20),
       },
+      nombre: {
+        type: DataTypes.STRING, // Agregar campo para el nombre
+      },
       // Otros campos adicionales que necesites...
     }, {
       tableName: 'detalles_pedido', // Nombre de la tabla en la base de datos

@@ -1,1 +1,2 @@
-ALTER TABLE detalles_pedido ADD estado_pedido varchar(20);
+ALTER TABLE detalles_pedido
+ADD COLUMN nombre VARCHAR(255);

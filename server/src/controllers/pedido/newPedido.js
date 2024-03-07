@@ -15,11 +15,11 @@ const crearPedido = async (pedidoData) => {
     for (const producto of pedidoData.productos) {
       const detallePedido = {
         PedidoIdPedido: id_pedido,
+        nombre:producto.nombre,
         ProductoIdProducto: producto.id,
-        cantidad: producto.cantidad_elegida,
-        variante: producto.variantes.idVariante, // Suponiendo que la variante es un objeto con un idVariante
-        color: producto.variantes.color, // Suponiendo que la variante es un objeto con un color
-        talle: producto.variantes.talla, // Suponiendo que la variante es un objeto con un talla
+        cantidad: producto.cantidad, 
+        color: producto.color, // Suponiendo que la variante es un objeto con un color
+        talle: producto.talla, // Suponiendo que la variante es un objeto con un talla
       };
 
       // Agregar un console.log para ver los detalles del pedido antes de crearlos

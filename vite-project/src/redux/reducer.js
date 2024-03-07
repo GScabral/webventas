@@ -28,6 +28,7 @@ import {
   GET_PEDIDOS,
   GET_CLIENTES,
   ENVIAR_ESTADO,
+  DESPACHAR_PRODUCTO,
 } from "./action"
 
 const initialState = {
@@ -425,7 +426,32 @@ const reducer = (state = initialState, action) => {
           estado: action.payload,
         };
        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
-    default:
+       case DESPACHAR_PRODUCTO:
+        const { pedidoId, detalleId } = action.payload;
+        return {
+          ...state,
+          allPedidos: state.allPedidos.map((pedido) => {
+            if (pedido.id === pedidoId) {
+              return {
+                ...pedido,
+                detalles: pedido.detalles.map((detalle) => {
+                  if (detalle.idDetalle === detalleId) {
+                    return {
+                      ...detalle,
+                      despachado: true
+                    };
+                  }
+                  return detalle;
+                })
+              };
+            }
+            return pedido;
+          })
+        };
+    
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
+
+       default:
       return state;
 
   }

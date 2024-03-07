@@ -14,7 +14,7 @@ import "./carrito.css";
 
 const Carrito = () => {
   const carrito = useSelector((state) => state.carrito);
-  const allProductos = useSelector((state) => state.allProductos)
+  const allProductos = useSelector((state) => state.allProductos);
 
   const [cantidadMinima, setCantidadMinima] = useState([]);
   const [cantidadMaxima, setCantidadMaxima] = useState([]);
@@ -23,9 +23,8 @@ const Carrito = () => {
   const [numeroPedido, setNumeroPedido] = useState(null);
   const dispatch = useDispatch();
 
-  console.log("carrito", carrito)
 
-
+  console.log(carrito)
 
   const eliminarDeCarrito = (index) => {
     dispatch(eliminarProductoCarrito(index));
@@ -40,22 +39,15 @@ const Carrito = () => {
       return;
     }
 
-    // Verificar si hay una variante disponible para el producto
     if (producto.variantes.length === 0) {
       console.error('El producto no tiene variantes disponibles.');
       return;
     }
 
-    // Obtener la cantidad disponible para la variante
     const cantidadDisponible = producto.variantes[0].cantidad_disponible;
 
-    // Verificar si la cantidad elegida es menor que la cantidad disponible
     if (producto.cantidad_elegida < cantidadDisponible) {
-      // Incrementar la cantidad elegida en 1
       producto.cantidad_elegida++;
-      console.log('Cantidad elegida incrementada:', producto.cantidad_elegida);
-
-      // Actualizar el carrito en el estado
       dispatch(actualizarCarrito(nuevoCarrito));
     } else {
       console.warn('La cantidad máxima disponible ya ha sido alcanzada.');
@@ -71,17 +63,12 @@ const Carrito = () => {
       return;
     }
 
-    // Buscamos la variante con cantidad elegida mayor que 1
-
     if (producto.cantidad_elegida === 1) {
       console.error('La cantidad mínima es 1');
       return;
     }
 
-    // Decrementamos la cantidad elegida de la variante
     producto.cantidad_elegida--;
-
-    // Actualizar el carrito en el estado
     dispatch(actualizarCarrito(nuevoCarrito));
   };
 
@@ -90,7 +77,7 @@ const Carrito = () => {
 
     carrito.forEach((item) => {
       const precioNumerico = parseFloat(item.precio);
-      const cantidad = item.cantidad_elegida || 1; // Utiliza la cantidad elegida en lugar de la cantidad original
+      const cantidad = item.cantidad_elegida || 1;
 
       total += precioNumerico * cantidad || 0;
     });
@@ -108,65 +95,20 @@ const Carrito = () => {
 
   const handleRealizarPedido = async () => {
     try {
-      carrito.forEach(async (producto) => {
-        const { id, cantidad, idVariante } = producto;
-        const productoEnStock = carrito.find((p) => p.id === id);
+      const pedido = carrito.map(producto => ({
+        id: producto.id,
+        nombre:producto.nombre,
+        cantidad: producto.cantidad_elegida,
+        color: producto.variantes[0].color,
+        talla: producto.variantes[0].talla
+      }));
 
-        if (!productoEnStock) {
-          console.error(`Producto con ID ${id} no encontrado en allProductos.`);
-          return;
-        }
+      await dispatch(addPedido(pedido));
 
-
-        console.log("producto ensyokc", productoEnStock)
-
-        const variante = productoEnStock.variantes.find((v) => v.idVariante === v.idVariante);
-
-        console.log("variantes:", variante)
-
-        if (!variante) {
-          console.error(`Variante del producto con ID ${id} y ID de variante ${idVariante} no encontrada.`);
-          return;
-        }
-
-        const { color, talla } = variante;
-        const nuevaCantidadDisponible = variante.cantidad_disponible - cantidad;
-
-        if (nuevaCantidadDisponible < 0) {
-          console.error(`No hay suficiente cantidad en stock para el producto con ID ${id}`);
-          const nombreProducto = productoEnStock.nombre;
-          alert(`Lo sentimos, no hay suficiente cantidad en stock para el producto "${nombreProducto}". Por favor, ajusta la cantidad en tu carrito.`);
-          setErrorStock(true);
-          return;
-        }
-
-        // Actualiza la cantidad disponible de la variante
-        const idVarianteEntero = variante.idVariante;
-
-        // Llama a actualizarVariante para actualizar la base de datos
-        await dispatch(actualizarVariante(id, idVarianteEntero, nuevaCantidadDisponible));
-      });
-
-      // Si no hay errores de stock, procede con el pedido
-      if (!errorStock) {
-        // Generar un número de pedido simulado
-        await dispatch(addPedido({
-          producto: carrito.map(producto => ({
-            id: producto.id,
-            cantidad: producto.cantidad_elegida,
-            color: producto.variante[0].color,
-            talla: producto.variante[0].talla
-          }))
-        }));
-        const numeroPedidoSimulado = Math.floor(Math.random() * 1000000);
-        setNumeroPedido(numeroPedidoSimulado);
-
-        // Mostrar el modal
-        setMostrarModal(true);
-
-        // Finalmente, vacía el carrito después de realizar el pedido
-        dispatch(vaciarCarrito());
-      }
+      const numeroPedidoSimulado = Math.floor(Math.random() * 1000000);
+      setNumeroPedido(numeroPedidoSimulado);
+      setMostrarModal(true);
+      dispatch(vaciarCarrito());
     } catch (error) {
       console.error("Error al realizar cambios", error);
     }
@@ -174,23 +116,23 @@ const Carrito = () => {
 
   useEffect(() => {
     if (errorStock) {
-      setMostrarModal(false); // Ocultar el modal si hay un error de stock
+      setMostrarModal(false);
     }
   }, [errorStock]);
 
   return (
     <div className="carrito-fondo">
-      <h2 className="carrito-titulo">Carrito </h2>
       <div className="carrito">
         {carrito && carrito.length > 0 ? (
           <table className="carrito-table">
             <thead>
               <tr>
                 <th className="carrito-th">Producto</th>
-                <th className="carrito-th">Descripcion</th>
+                <th className="carrito-th">Descripción</th>
                 <th className="carrito-th">Color</th>
                 <th className="carrito-th">Talle</th>
                 <th className="carrito-th">Cantidad</th>
+                <th className="carrito-th">Eliminar</th>
               </tr>
             </thead>
             <tbody>
@@ -206,18 +148,14 @@ const Carrito = () => {
                     <div className="cantidad-acciones">
                       <span className="cantidad-carrito">{producto.cantidad_elegida}</span>
                       <div className="boton-cantidad-div">
-                        <button className="boton-cantidad" onClick={() => decrementarCantidad(index)}>
-                          -
-                        </button>
+                        <button className="boton-cantidad" onClick={() => decrementarCantidad(index)}>-</button>
                       </div>
                       <div className="boton-cantidad-div">
-                        <button className="boton-cantidad" onClick={() => incrementarCantidad(index)}>
-                          +
-                        </button>
+                        <button className="boton-cantidad" onClick={() => incrementarCantidad(index)}>+</button>
                       </div>
                     </div>
                   </td>
-                  <td>
+                  <td className="carrito-td">
                     <button className="boton-eliminar" onClick={() => eliminarDeCarrito(index)}>
                       <FontAwesomeIcon icon={faTrashAlt} />
                     </button>
@@ -242,9 +180,7 @@ const Carrito = () => {
         {mostrarModal && (
           <div className="modal-compra">
             <div className="modal-content-compra">
-              <span className="close-compra" onClick={() => setMostrarModal(false)}>
-                &times;
-              </span>
+              <span className="close-compra" onClick={() => setMostrarModal(false)}>&times;</span>
               <h2>Número de pedido: {numeroPedido}</h2>
               <p>
                 Utiliza este número de pedido para retirar tu producto en la tienda física.
@@ -268,4 +204,5 @@ const Carrito = () => {
     </div>
   );
 }
+
 export default Carrito;
