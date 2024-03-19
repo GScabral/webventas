@@ -21,9 +21,7 @@ module.exports = (sequelize) => {
     categoria: {
       type: DataTypes.STRING(50)
     },
-    imagenes: {
-      type: DataTypes.ARRAY(DataTypes.STRING),
-    },
+ 
     
   });
 

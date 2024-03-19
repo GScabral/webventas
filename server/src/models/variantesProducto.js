@@ -17,7 +17,10 @@ module.exports = (sequelize) => {
         cantidad_disponible: {
             type: DataTypes.INTEGER,
             allowNull: false,
-        }
+        },
+        imagenes: {
+            type: DataTypes.ARRAY(DataTypes.STRING),
+          },
     }, {
         timestamps: false
     });

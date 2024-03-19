@@ -20,6 +20,9 @@ const Detail = () => {
   const [imagenActual, setImagenActual] = useState(0);
   const [showModal, setShowModal] = useState(false);
 
+
+  console.log("detail",info)
+
   const handleTalleChange = (event) => {
     const talleSeleccionado = event.target.value;
     setTalleSeleccionado(talleSeleccionado);

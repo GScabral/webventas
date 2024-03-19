@@ -25,6 +25,7 @@ const Card = ({ id, nombre, descripcion, categoria, precio, imagenes, variantes 
   const variantesDisponibles = variantes || [];
 
 
+  console.log(allProductos)
 
 
   const handleAgregarAlCarrito = () => {
@@ -72,13 +73,13 @@ const Card = ({ id, nombre, descripcion, categoria, precio, imagenes, variantes 
       descripcion,
       categoria,
       precio,
-      imagenes,
       variantes: [
         {
           idVariante: variantes[0].idVariante, // Suponiendo que solo hay una variante por producto
           talla: talleSeleccionado,
           color: colorSeleccionado,
-          cantidad_disponible: variantes[0].cantidad_disponible
+          cantidad_disponible: variantes[0].cantidad_disponible,
+          imagenes:variantes[0].imagenes,
         }
       ],
       cantidad_elegida:cantidad,
@@ -246,7 +247,7 @@ const Card = ({ id, nombre, descripcion, categoria, precio, imagenes, variantes 
       )}
       <Link to={`/detail/${id}`} className="card-link">
         <div className="card-content">
-          <img className="card-imagen" src={`http://localhost:3004${imagenes[0]}`} alt="" />
+        <img className="card-imagen" src={`http://localhost:3004/${variantes[0].imagenes[0]}`} alt="" />
           <span className="card-categoria">{categoria}</span>
           <p className="card-inf">{descripcion}</p>
           <h3 className="card-precio">${precio}</h3>

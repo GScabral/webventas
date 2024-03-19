@@ -79,27 +79,26 @@ body {
 
 .paginado {
   display: inline-block;
-  border: 1px solid #ccc;
-  padding: 5px 10px;
-  border-radius: 5px;
-  font-size: 16px; /* Tamaño de fuente */
-  color: #333; /* Color del texto */
-  background-color: #f8f8f8; /* Color de fondo */
+  padding: 0;
+  margin: 0;
+  color: #000000;
+  background-color: #f1c40f;
 }
 
-.botones-paginado button:hover {
-  background-color: #ccc; /* Cambia el color al pasar el mouse */
+.paginado li {
+  display: inline;
 }
 
-.botones-paginado button:disabled {
-  cursor: not-allowed;
-  opacity: 0.5; /* Opacidad reducida para los botones deshabilitados */
+.paginado li a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
 }
-
 /* Estilos cuando la barra lateral está abierta */
 .sidebar-container {
   width: 200px;
-  background-color: #000000;
+  background-color: #ffffff;
   height: 100vh;
   position: fixed;
   top: 0;

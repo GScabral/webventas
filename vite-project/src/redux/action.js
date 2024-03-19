@@ -80,8 +80,8 @@ export const getProductos = () => {
  }
 
  export const addProduct = (productData) => {
-
-  console.log("Imágenes que se envían al servidor:", productData.getAll('imagenes'));
+  console.log('Datos recibidos en la acción addProduct:', productData);
+  
   return async function (dispatch) {
     try {
       const response = await axios.post(`http://localhost:3004/producto/nuevoProducto`, productData);
@@ -322,11 +322,11 @@ export const eliminarFav= (index) => {
   };
 };
 
-export const cambios = (id, producto) => {
+export const cambios = (id,  datosProducto) => {
   return async function (dispatch) {
     try {
-      console.log('Datos que se envían para la actualización:', { id, producto }); // Agrega este console.log para ver lo que se envía
-      const response = await axios.patch(`http://localhost:3004/producto/editar/${id}`, producto);
+      console.log('Datos que se envían para la actualización:', { id, datosProducto}); // Agrega este console.log para ver lo que se envía
+      const response = await axios.patch(`http://localhost:3004/Nadmin/cambioAdmin/${id}`, datosProducto);
       dispatch({
         type: CAMBIO,
         payload: response.data,

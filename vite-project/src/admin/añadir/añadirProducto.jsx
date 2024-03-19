@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { addProduct } from "../../redux/action";
 import "./panel.css";
@@ -8,10 +8,6 @@ const NewProduct = ({ addProduct }) => {
   const [productPrice, setProductPrice] = useState('');
   const [productDescrip, setProductDescrip] = useState('');
   const [productCategoria, setProductCategoria] = useState('');
-  const [tallasDisponibles, setTallasDisponibles] = useState([]);
-  const [coloresDisponibles, setColoresDisponibles] = useState([]);
-  const [productCantidad, setProductCantidad] = useState('');
-  const [productImages, setProductImages] = useState([]);
   const [variantesData, setVariantesData] = useState([]);
 
   const handleProductNameChange = (event) => {
@@ -30,38 +26,8 @@ const NewProduct = ({ addProduct }) => {
     setProductCategoria(event.target.value);
   };
 
-  const handleTallasDisponibles = (event) => {
-    const tallas = event.target.value.split(',');
-    const tallasFormatted = tallas.map(talla => talla.trim());
-    setTallasDisponibles(tallasFormatted);
-  };
-
-  const handleColoresDisponibles = (event) => {
-    const colores = event.target.value.split(',');
-    const coloresFormatted = colores.map(color => color.trim());
-    setColoresDisponibles(coloresFormatted);
-  };
-
-  const handleFileChange = (event) => {
-    const files = event.target.files;
-    if (files && files.length > 0) {
-      setProductImages([...productImages, ...files]);
-    }
-  };
-
-  const handleAddImagen = () => {
-    const fileInput = document.getElementById("fileInput");
-    if (fileInput) {
-      fileInput.click();
-    }
-  };
-
-  const handleCantidad = (event) => {
-    setProductCantidad(event.target.value);
-  };
-
   const handleAddVariante = () => {
-    const newVariante = { talla: '', color: '', cantidad_disponible: '' };
+    const newVariante = { talla: '', color: '', cantidad_disponible: '', imagenes: [] };
     setVariantesData([...variantesData, newVariante]);
   };
 
@@ -69,6 +35,15 @@ const NewProduct = ({ addProduct }) => {
     const updatedVariantes = [...variantesData];
     updatedVariantes[index][key] = value;
     setVariantesData(updatedVariantes);
+  };
+
+  const handleFileChange = (event, index) => {
+    const files = event.target.files;
+    if (files && files.length > 0) {
+      const updatedVariantes = [...variantesData];
+      updatedVariantes[index].imagenes = [...updatedVariantes[index].imagenes, ...files];
+      setVariantesData(updatedVariantes);
+    }
   };
 
   const handleSubmit = async (event) => {
@@ -85,28 +60,28 @@ const NewProduct = ({ addProduct }) => {
       formData.append('precio', productPrice);
       formData.append('categoria', productCategoria);
 
-      productImages.forEach((image) => {
-        formData.append(`imagenes`, image);
-      });
-
       variantesData.forEach((variante, index) => {
         formData.append(`variantesData[${index}][talla]`, variante.talla);
         formData.append(`variantesData[${index}][color]`, variante.color);
         formData.append(`variantesData[${index}][cantidad_disponible]`, variante.cantidad_disponible);
+        variantesData.forEach((variante, index) => {
+          formData.append(`variantes.imagenes`, variante.imagenes[0]); // Sin incluir el índice [0]
+        });
       });
+
+      console.log("info que se manda", formData)
 
       await addProduct(formData);
 
-      // Limpiar el estado después de cargar la imagen
+      // Limpiar el estado después de agregar el producto
       setProductName('');
       setProductPrice('');
       setProductDescrip('');
       setProductCategoria('');
-      setProductImages([]);
       setVariantesData([]);
 
     } catch (error) {
-      console.error('Error al subir la imagen y los datos del producto', error);
+      console.error('Error al agregar el producto', error);
     }
   };
 
@@ -151,28 +126,7 @@ const NewProduct = ({ addProduct }) => {
           onChange={handleProductCategoria}
           required
         /><br /><br />
-        <input
-          type="file"
-          id="fileInput"
-          name="imagenes"
-          onChange={handleFileChange}
-          multiple
-          style={{ position: 'absolute', left: '-9999px' }}
-        />
-        <div>
-          <button
-            className="button-imagen-adm"
-            type="button"
-            onClick={handleAddImagen}
-          >
-            Agregar imagen
-          </button>
-          {productImages.map((image, index) => (
-            <div key={index}>
-              <img src={URL.createObjectURL(image)} alt={`imagen-${index}`} style={{ maxWidth: '100px', maxHeight: '100px', marginRight: '10px' }} />
-            </div>
-          ))}
-        </div>
+
         <div>
           <button
             className="button-newproduc-adm"
@@ -181,6 +135,7 @@ const NewProduct = ({ addProduct }) => {
           >
             Agregar Variante
           </button>
+
           {variantesData.map((variante, index) => (
             <div key={index}>
               <label>Variante {index + 1}:</label>
@@ -189,19 +144,47 @@ const NewProduct = ({ addProduct }) => {
                 type="text"
                 value={variante.talla}
                 onChange={(e) => handleVariantesData(index, 'talla', e.target.value)}
+                name={`variantesData[${index}][talla]`} // Asignar el atributo name correctamente
               />
               <label>Color:</label>
               <input
                 type="text"
                 value={variante.color}
                 onChange={(e) => handleVariantesData(index, 'color', e.target.value)}
+                name={`variantesData[${index}][color]`} // Asignar el atributo name correctamente
               />
               <label>Cantidad disponible:</label>
               <input
                 type="number"
                 value={variante.cantidad_disponible}
                 onChange={(e) => handleVariantesData(index, 'cantidad_disponible', e.target.value)}
+                name={`variantesData[${index}][cantidad_disponible]`} // Asignar el atributo name correctamente
               />
+              <input
+                type="file"
+                name={`variantes.imagenes`}
+                id={`fileInput-${index}`}
+                onChange={(e) => handleFileChange(e, index)}
+                multiple
+                style={{ display: 'none' }} // Este estilo oculta el campo de entrada, lo que puede ser problemático
+              />
+              <button
+                className="button-imagen-adm"
+                type="button"
+                onClick={() => {
+                  const fileInput = document.getElementById(`fileInput-${index}`);
+                  if (fileInput) {
+                    fileInput.click(); // Esto activa el clic en el campo de entrada de archivos
+                  }
+                }}
+              >
+                Agregar imagen
+              </button>
+              {variante.imagenes.map((imagen, i) => (
+                <div key={i}>
+                  <img src={URL.createObjectURL(imagen)} alt={`imagen-${i}`} style={{ maxWidth: '100px', maxHeight: '100px', marginRight: '10px' }} />
+                </div>
+              ))}
             </div>
           ))}
         </div>

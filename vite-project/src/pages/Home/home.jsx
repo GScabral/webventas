@@ -22,7 +22,7 @@ const Home = () => {
   const [productosEnFav, setProductosEnFav] = useState([]);
 
 
-// console.log("asi llega la info",allProductos)
+  // console.log("asi llega la info",allProductos)
 
 
   useEffect(() => {
@@ -66,7 +66,7 @@ const Home = () => {
       <div className={`sidebar-container ${sidebarVisible ? 'show' : ''}`}>
         <FiltrosSidebar />
       </div>
-      <Carousel/>
+      <Carousel />
       <div className={`main-content ${sidebarVisible ? 'sidebar-open' : ''}`}>
         <div className="Home-container">
           {allProductos.map((producto) => (
@@ -82,7 +82,11 @@ const Home = () => {
             <FontAwesomeIcon icon={faArrowLeft} />
           </button>
           <div>
-            <p className="paginado">{currentPage} de {totalPages}</p>
+            <ul className="paginado">
+              {Array.from({ length: totalPages }, (_, index) => (
+                <li key={index}><a href="#">{index + 1}</a></li>
+              ))}
+            </ul>
           </div>
           <button
             name="next"
@@ -94,7 +98,7 @@ const Home = () => {
         </div>
 
       </div>
-        <footer className="contacto-home">
+      <footer className="contacto-home">
         <p>Encontranos en Ontiveros 1069 entre Gabriela Mistral y Gregorio de la Ferrere</p>
         <div className="logos-container">
           <a href={"https://maps.app.goo.gl/s6qNmbvebfZF7XLo9"}>
@@ -107,7 +111,7 @@ const Home = () => {
             <img className="whatsapp-logo " src="pngwing.com (8).png" alt="WhatsApp" />
           </a>
         </div>
-      </footer>  
+      </footer>
     </div>
 
 

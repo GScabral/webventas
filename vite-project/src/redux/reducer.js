@@ -250,10 +250,8 @@ const reducer = (state = initialState, action) => {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
     case CAMBIO:
       const productoModificado = action.payload; // Datos del producto modificado
-
       // Verificar que el ID del producto a modificar existe en el estado
       const productoExistente = state.allProductosBackUp.find(producto => producto.id === productoModificado.id);
-
       if (!productoExistente) {
         // Si el producto no existe, retorna el estado actual sin hacer cambios
         return state;
@@ -264,17 +262,27 @@ const reducer = (state = initialState, action) => {
           // Crear un nuevo objeto producto solo si se encuentra el ID correspondiente
           return {
             ...producto,
-            cantidad: productoModificado.cantidad,
-            precio: productoModificado.precio,
-            // Agrega otras propiedades aquí si es necesario
+            variantes: producto.variantes.map(variante => {
+              if (variante.id === productoModificado.idVariante) {
+                // Actualizar la variante si el ID de la variante coincide con el ID recibido
+                return {
+                  ...variante,
+                  cantidad_disponible: productoModificado.cantidad_disponible,
+                  color: productoModificado.color,
+                  talla: productoModificado.talla,
+                  // Agrega otras propiedades aquí si es necesario
+                };
+              }
+              return variante;
+            })
           };
         }
         return producto;
       });
-
+    
       return {
         ...state,
-        allProductosBackUp: productosActualizados, // Actualiza el array completo de productos con el producto modificado
+        allProductosBackUp: productosActualizados, // Actualiza el array completo de productos con las variantes modificadas
         // Actualiza los productos mostrados si es necesario
         allProductos: productosActualizados.slice(0, ITEMS_PER_PAGE),
       };

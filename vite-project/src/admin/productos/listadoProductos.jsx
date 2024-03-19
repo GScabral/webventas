@@ -15,6 +15,9 @@ const ProductList = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [productIdToEdit, setProductIdToEdit] = useState(null);
 
+
+  console.log(allProductos)
+
   useEffect(() => {
     dispatch(getProductos()); // Aquí se debería llamar a la acción para obtener los productos
   }, [dispatch]);
@@ -41,13 +44,7 @@ const ProductList = () => {
     setShowEditModal(false);
   };
 
-  const renderVariantes = (variantes) => {
-    return variantes.map((variante, index) => (
-      <div key={`${variante.id}-${index}-variantes`}>
-        {variante.talla} - {variante.color} - {variante.cantidad_disponible}
-      </div>
-    ));
-  };
+  
 
   return (
     <div className="product-list-container">
@@ -87,7 +84,7 @@ const ProductList = () => {
                   <div key={`${producto.id}-${index}-cantidad`}>{variante.cantidad_disponible}</div>
                 ))}
               </td>
-              <td>{renderVariantes(producto.variantes)}</td>
+             
               <td>
                 <button onClick={() => handleEdit(producto.id)}>
                   <FontAwesomeIcon icon={faPencilAlt} />
@@ -100,7 +97,8 @@ const ProductList = () => {
           ))}
         </tbody>
       </table>
-      <Modal show={showEditModal} onHide={handleClose}>
+    
+      <Modal className="modal-dialog" show={showEditModal} onHide={handleClose}>
         <EditProductModal
           show={showEditModal}
           handleClose={handleClose}
@@ -108,6 +106,7 @@ const ProductList = () => {
           handleSaveChanges={handleSaveChanges}
         />
       </Modal>
+    
     </div>
   );
 };

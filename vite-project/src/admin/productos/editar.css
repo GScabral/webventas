@@ -1,69 +1,71 @@
 .container-Modal-editar {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 9999; /* Asegura que el modal esté por encima del resto del contenido */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.modal-content-editar {
-  width: 400px; /* Ajusta el ancho del modal según sea necesario */
-  background-color: #fff; /* Color de fondo del modal */
-  border-radius: 8px; /* Bordes redondeados */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra */
-}
-
-.modal-header-editar {
-  padding: 15px;
-  border-bottom: 1px solid #ddd; /* Línea divisoria en el encabezado */
-}
-
+/* Estilos para el título del modal */
 .modal-title-editar {
-  margin: 0;
-  font-size: 18px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
 }
 
-.modal-body-editar {
-  padding: 15px;
-}
-
-.modal-footer-editar {
-  padding: 15px;
-  border-top: 1px solid #ddd; /* Línea divisoria en el pie de página */
-  text-align: right;
-}
-
+/* Estilos para los grupos de formulario dentro del modal */
 .form-group-editar {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
+/* Estilos para las etiquetas de formulario dentro del modal */
 .form-label-editar {
   display: block;
-  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 5px;
+  color: #555;
 }
 
+/* Estilos para los campos de entrada dentro del modal */
 .form-control-editar {
   width: 100%;
   padding: 10px;
   font-size: 16px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: border-color 0.3s ease;
 }
 
+/* Estilos para el enfoque de los campos de entrada dentro del modal */
+.form-control-editar:focus {
+  outline: none;
+  border-color: #6c63ff;
+}
+
+/* Estilos para los botones del modal */
 .btn-secondary-editar {
   background-color: #ccc;
-  color: #fff;
+  color: #333;
   border: none;
-  padding: 10px 20px;
-  border-radius: 4px;
-  cursor: pointer;
 }
 
 .btn-primary-editar {
-  background-color: #007bff;
+  background-color: #6c63ff;
   color: #fff;
   border: none;
-  padding: 10px 20px;
-  border-radius: 4px;
-  cursor: pointer;
+}
+
+/* Estilos para los botones del modal al pasar el cursor */
+.btn-secondary-editar:hover,
+.btn-primary-editar:hover {
+  opacity: 0.8;
+}
+
+/* Estilos para el cuerpo del modal */
+.editar-admin {
+  padding: 20px;
+}
+
+/* Estilos para el pie de página del modal */
+.footer-modal-editar {
+  display: flex;
+  justify-content: space-between;
 }

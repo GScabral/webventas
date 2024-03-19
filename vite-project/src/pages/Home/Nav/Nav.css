@@ -3,7 +3,7 @@
   justify-content: flex-end;
   align-items: center;
   padding: 10px;
-  background-color: black;
+  background-color: rgb(255, 255, 255);
   color: white;
   
 }
@@ -15,6 +15,7 @@
   background-color: transparent;
   color: rgb(80, 197, 201);
   cursor: pointer;
+
 }
 
 .superior:hover {

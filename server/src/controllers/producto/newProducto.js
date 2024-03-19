@@ -1,8 +1,12 @@
 const { Productos } = require('../../db');
 const { variantesproductos } = require('../../db');
 
-const createNewProducto = async (bodyData, files, variantesData) => {
+const createNewProducto = async (bodyData, variantesData, files) => {
   try {
+    console.log("en bodyData", bodyData);
+    console.log("en variantesData", variantesData);
+    console.log("Archivos de imagen:", files);
+
     const requiredFields = ['nombre_producto', 'descripcion', 'precio', 'categoria'];
     const missingFields = requiredFields.filter(field => !bodyData[field]);
 
@@ -17,26 +21,34 @@ const createNewProducto = async (bodyData, files, variantesData) => {
       categoria,
     } = bodyData;
 
-    // Obtener las rutas de los archivos como una matriz de cadenas
-    const parsedRutaArchivos = files ? files.map(file => `${file.filename}`) : [];
-
     const newProducto = await Productos.create({
       nombre_producto,
       descripcion,
       precio,
       categoria,
-      imagenes: parsedRutaArchivos, // Almacenar las rutas de los archivos como una matriz de cadenas
     });
 
     if (newProducto) {
       // Guardar las variantes del producto
-      for (const variante of variantesData) {
-        await variantesproductos.create({
-          talla: variante.talla,
-          color: variante.color,
-          cantidad_disponible: variante.cantidad_disponible,
+      for (let i = 0; i < variantesData.length; i++) {
+        const { talla, color, cantidad_disponible } = variantesData[i];
+        const imagenes = files.filter(file => file.fieldname === `variantes.imagenes`);
+      
+        // Obtener las rutas de las imágenes como una matriz de cadenas
+        const parsedRutaArchivos = imagenes.map(imagen => imagen.originalname);
+
+        console.log("esto hay een parse ruta",parsedRutaArchivos)
+      
+        // Crear la variante del producto y asociarla al nuevo producto creado
+        const nuevaVariante = await variantesproductos.create({
+          talla,
+          color,
+          cantidad_disponible,
+          imagenes:parsedRutaArchivos, // Utilizar directamente la variable imagenes que ya contiene la ruta de la imagen
           ProductoIdProducto: newProducto.id_producto,
         });
+      
+        console.log("Variante creada:", nuevaVariante);
       }
     }
 
@@ -46,5 +58,4 @@ const createNewProducto = async (bodyData, files, variantesData) => {
     return { error: 'Error en la creación del producto' };
   }
 };
-
 module.exports = createNewProducto;
