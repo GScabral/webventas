@@ -21,44 +21,44 @@ const Detail = () => {
   const [showModal, setShowModal] = useState(false);
 
 
-  console.log("detail",info)
+  console.log("detail", info)
 
   const handleTalleChange = (event) => {
     const talleSeleccionado = event.target.value;
     setTalleSeleccionado(talleSeleccionado);
     setColorSeleccionado('');
-  
+
     // Filtrar las variantes por el talle seleccionado
     const variantesPorTalle = info.variantes.filter((variante) => variante.talla.toLowerCase() === talleSeleccionado.toLowerCase());
-  
+
     // Obtener los colores disponibles para el talle seleccionado
     const coloresParaTalle = variantesPorTalle.map((variante) => variante.color);
     setColoresDisponibles(coloresParaTalle);
-  
+
     // Obtener la cantidad disponible para el talle seleccionado
     const cantidadDisponible = variantesPorTalle.reduce((total, variante) => total + variante.cantidad_disponible, 0);
     setCantidadDisponible(cantidadDisponible);
-  
+
     // Si el color seleccionado no está disponible para el talle seleccionado, reiniciar la cantidad
     if (!coloresParaTalle.includes(colorSeleccionado)) {
       setCantidad(1);
     }
   };
-  
+
   const handleColorChange = (event) => {
     const colorSeleccionado = event.target.value;
     setColorSeleccionado(colorSeleccionado);
-  
+
     // Obtener la variante correspondiente al talle y color seleccionados
     const varianteSeleccionada = info.variantes.find((variante) =>
       variante.talla.toLowerCase() === talleSeleccionado.toLowerCase() &&
       variante.color === colorSeleccionado
     );
-  
+
     // Actualizar la cantidad disponible según la variante seleccionada
     if (varianteSeleccionada) {
       setCantidadDisponible(varianteSeleccionada.cantidad_disponible);
-      
+
       // Si la cantidad seleccionada excede la cantidad disponible, ajustarla
       if (cantidad > varianteSeleccionada.cantidad_disponible) {
         setCantidad(varianteSeleccionada.cantidad_disponible);
@@ -77,7 +77,7 @@ const Detail = () => {
   };
 
 
-  
+
   const handleImageChange = (index) => {
     setImagenActual(index);
   };
@@ -128,16 +128,16 @@ const Detail = () => {
       {info && (
         <div className="detail-container">
           <div className="detail-imagen-container">
-            {info.imagenes && (
+            {info && info.variantes && info.variantes.length > 0 && (
               <img
                 className="detail-imagen"
-                src={`http://localhost:3004/${info.imagenes[imagenActual]}`}
+                src={`http://localhost:3004/${info.variantes[0].imagenes[imagenActual]}`}
                 alt=""
               />
             )}
-            {info.imagenes && (
+            {info && info.variantes && info.variantes.length > 0 && (
               <div className="imagen-buttons">
-                {info.imagenes.map((imagen, index) => (
+                {Array.from(new Set(info.variantes[0].imagenes)).map((imagen, index) => (
                   <button
                     key={index}
                     className={`imagen-button ${index === imagenActual ? 'active' : ''}`}
@@ -208,13 +208,13 @@ const Detail = () => {
               ))}
             </select>
             <label htmlFor="cantidad">Cantidad:</label>
-            <input 
-              type="number" 
-              id="cantidad" 
-              value={cantidad} 
+            <input
+              type="number"
+              id="cantidad"
+              value={cantidad}
               min="1" // Establecer mínimo en 1
               max={cantidadDisponible} // Establecer máximo según la cantidad disponible
-              onChange={handleCantidadChange} 
+              onChange={handleCantidadChange}
             />
             <button onClick={handleAgregarAlCarrito}>Agregar al Carrito</button>
           </div>
