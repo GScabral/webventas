@@ -158,11 +158,23 @@ const Detail = () => {
               <div className="variantes-container">
                 <h4>Variantes:</h4>
                 <ul>
-                  {info.variantes.map((variante, index) => (
+                  {info.variantes.reduce((accumulator, variante) => {
+                    // Buscar si ya se ha agregado la talla al acumulador
+                    const existingIndex = accumulator.findIndex(item => item.talla === variante.talla);
+
+                    if (existingIndex !== -1) {
+                      // Si la talla ya existe, agregar el color a esa talla
+                      accumulator[existingIndex].colores.push(variante.color);
+                    } else {
+                      // Si la talla no existe, agregar la talla con su color correspondiente
+                      accumulator.push({ talla: variante.talla, colores: [variante.color] });
+                    }
+
+                    return accumulator;
+                  }, []).map((variante, index) => (
                     <li key={index}>
                       <p>Talle: {variante.talla}</p>
-                      <p>Color: {variante.color}</p>
-                      <p>Cantidad Disponible: {variante.cantidad_disponible}</p>
+                      <p>Colores: {variante.colores.join(', ')}</p>
                     </li>
                   ))}
                 </ul>

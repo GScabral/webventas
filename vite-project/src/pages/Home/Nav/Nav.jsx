@@ -36,23 +36,23 @@ const Nav = ({ onSearch }) => {
                 <Link to="/">
                     <button className="superior">Inicio</button>
                 </Link>
-                <Link>
+                {/* <Link>
                     <button className="superior">Productos</button>
-                </Link>
+                </Link> */}
                 <Link to="/comoPagar">
                     <button className="superior">Venta por mayor</button>
                 </Link>
-                <Link to="/newUser">
+                {/* <Link to="/newUser">
                     <button className="superior">Crear Cuenta</button>
                 </Link>
                  <Link to="/iniciar">
                     <button className="superior">Iniciar sesión</button>
-                </Link> 
-                <Link to="/Favorito">
+                </Link>  */}
+                {/* <Link to="/Favorito">
                     <button className="superior">
                         <FontAwesomeIcon icon={faHeart} />
                     </button>
-                </Link>
+                </Link> */}
                 <SearchBar
                     className="barra-buscar"
                     onSearch={handleSearch}

@@ -3,9 +3,9 @@
   justify-content: flex-end;
   align-items: center;
   padding: 10px;
-  background-color: rgb(255, 255, 255);
+  background-color: #f8cdb0;
   color: white;
-  
+  z-index: 2;
 }
 
 .superior {
@@ -13,13 +13,14 @@
   border: none;
   border-radius: 5px;
   background-color: transparent;
-  color: rgb(80, 197, 201);
+  color: #000000;
   cursor: pointer;
+z-index: 2;
 
 }
 
 .superior:hover {
-  background-color: #555;
+  background-color: #dc7430
 }
 
 .Nav-dos {

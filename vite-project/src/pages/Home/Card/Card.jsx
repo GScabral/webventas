@@ -25,7 +25,7 @@ const Card = ({ id, nombre, descripcion, categoria, precio, imagenes, variantes 
   const variantesDisponibles = variantes || [];
 
 
-  console.log(allProductos)
+  
 
 
   const handleAgregarAlCarrito = () => {
@@ -38,8 +38,16 @@ const Card = ({ id, nombre, descripcion, categoria, precio, imagenes, variantes 
       id,
       nombre,
       precio,
-      imagenes,
       descripcion,
+      variantes: [
+        {
+          idVariante: variantes.idVariante, // Suponiendo que solo hay una variante por producto
+          talla: talleSeleccionado,
+          color: colorSeleccionado,
+          cantidad_disponible: variantes.cantidad_disponible,
+          imagenes:variantes.imagenes,
+        }
+      ],
     };
 
     dispatch(agregarFav(producto));
@@ -257,9 +265,9 @@ const Card = ({ id, nombre, descripcion, categoria, precio, imagenes, variantes 
         <button className="card-detail" onClick={handleAgregarAlCarrito}>
           <FontAwesomeIcon icon={faShoppingCart} />
         </button>
-        <button className="card-favorite" onClick={handleAgregarFav}>
+        {/* <button className="card-favorite" onClick={handleAgregarFav}>
           <FontAwesomeIcon icon={faHeart} />
-        </button>
+        </button> */}
       </div>
     </div>
   );

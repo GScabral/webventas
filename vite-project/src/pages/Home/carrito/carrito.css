@@ -9,11 +9,13 @@
 }
 
 .carrito {
-  background-color: antiquewhite;
+  background-color: #f8cdb0;
   margin: 10px;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 1000px; /* Ajusta el ancho según tus necesidades */
+
 }
 
 .carrito-titulo {

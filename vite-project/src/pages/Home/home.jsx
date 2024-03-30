@@ -62,8 +62,8 @@ const Home = () => {
 
 
     <div className="home-fondo">
-
       <div className={`sidebar-container ${sidebarVisible ? 'show' : ''}`}>
+      <img className="logo-tienda" src="public\logo.jpeg" alt="logo" />
         <FiltrosSidebar />
       </div>
       <Carousel />
@@ -99,14 +99,15 @@ const Home = () => {
 
       </div>
       <footer className="contacto-home">
-        <p>Encontranos en Ontiveros 1069 entre Gabriela Mistral y Gregorio de la Ferrere</p>
-        <div className="logos-container">
-          <a href={"https://maps.app.goo.gl/s6qNmbvebfZF7XLo9"}>
+        <p>Encontranos en Ontiveros 1069 entre Gabriela Mistral y Gregorio de la Ferrere
+        <a href={"https://maps.app.goo.gl/s6qNmbvebfZF7XLo9"}>
             <img className="logo" src="pngwing.com (9).png" alt="GoogleMaps" />
           </a>
           <a href={"https://www.instagram.com/amore_mio.showroom?igsh=MXBhdjRua3ltem44cQ=="}>
             <img className="logo" src="pngwing.com.png" alt="Instagram" />
           </a>
+        </p>
+        <div className="logos-container"> 
           <a href={"https://wa.me/message/CTLCYWOO7XTML1"}>
             <img className="whatsapp-logo " src="pngwing.com (8).png" alt="WhatsApp" />
           </a>

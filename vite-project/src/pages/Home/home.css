@@ -8,12 +8,13 @@ body {
 
 /* Estilos para el contenedor principal */
 .home-fondo {
-  background-color: white;
+  background-color: #ffffff;
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
   width: 100%;
   min-height: 100vh; /* Asegura que el contenedor principal ocupe al menos toda la altura de la ventana del navegador */
+  z-index: 1;
 }
 
 /* Estilos para la rejilla de los elementos del contenido */
@@ -82,7 +83,8 @@ body {
   padding: 0;
   margin: 0;
   color: #000000;
-  background-color: #f1c40f;
+  background-color: transparent;
+  
 }
 
 .paginado li {
@@ -94,6 +96,7 @@ body {
   float: left;
   padding: 8px 16px;
   text-decoration: none;
+  border: solid black 1px;
 }
 /* Estilos cuando la barra lateral está abierta */
 .sidebar-container {
@@ -101,9 +104,12 @@ body {
   background-color: #ffffff;
   height: 100vh;
   position: fixed;
-  top: 0;
+  top: 53px;
   left: 0; /* Cambio aquí para mantener la barra lateral abierta */
   transition: left 0.3s ease;
+  text-align: right; 
+  z-index: 1;
+
 }
 
 .paginado:hover {
@@ -155,3 +161,11 @@ body {
   -webkit-box-shadow:10px 10px 14px 2px rgba(0,0,0,0.47);
   box-shadow: 10px 10px 14px 2px rgba(0,0,0,0.47);
 }
+
+
+.logo-tienda{
+  width: 190px;
+  margin-top: 80px;
+  margin-right: 5px;
+}
+

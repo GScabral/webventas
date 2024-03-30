@@ -1,0 +1,52 @@
+.container-vm {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 150px;
+    border: solid black 1px;
+}
+
+.vm-h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.vm-p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.logo-vm {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+.bonton-vm {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.bonton-vm:hover {
+    background-color: #0056b3;
+}
+
+.contacto-vm {
+    margin-top: 50px;
+    font-size: 16px;
+}
+
+.contacto-vm a {
+    text-decoration: none;
+    color: #007bff;
+    margin-left: 10px;
+}
+
+.contacto-vm a:hover {
+    text-decoration: underline;
+}

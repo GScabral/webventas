@@ -1,7 +1,7 @@
 .sidebar {
     display: flex;
     flex-direction: column;
-    background-color: #f3f3f3; 
+    background-color: transparent; 
     padding: 20px;
     /* border-radius: 5px; */
     /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
@@ -32,8 +32,8 @@
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
-    background-color: #17a589;
-    color: rgb(233, 247, 247);
+    background-color: #fcb474;
+    color: #ffffff;
    border-radius: 0px;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -42,9 +42,9 @@
 }
 
 .button-filtros:hover {
-    background-color: #000000;
+    background-color:#dc7430;
     border-radius: 20px;
-    color: rgb(80, 197, 201);
+    color: rgb(248, 255, 255);
 }
 
 /* Estilos de los elementos de lista */
@@ -60,7 +60,7 @@
 }
 
 .li-filtros:hover {
-    color: #3498db;
+    color: #2facbf;
 }
 
 /* Estilos para los filtros desplegables */
@@ -69,8 +69,8 @@
     width: 100%;
     padding: 8px;
     margin-bottom: 5px;
-    background-color: #e0e0e0;
-    color: #333;
+    background-color: #dc7430;
+    color: #ffffff;
     border: none;
     border-radius: 3px;
     cursor: pointer;
@@ -83,9 +83,9 @@
     width: 100%;
     padding: 8px;
     margin-bottom: 5px;
-    background-color: #c71111;
-    color: #333;
-    border: none;
+    background-color: #713813;
+    color: #ffffff;
+    border: solid 1px black;
     border-radius: 3px;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -93,20 +93,12 @@
 }
 
 .button-talles:hover, .button-precio:hover {
-    background-color: #ccc;
+    background-color: #713813;
 }
 
 .divider {
     margin: 10px 0; /* Margen para separar visualmente las secciones */
     border: none; /* Sin borde */
-    border-top: 1px solid #ccc; /* Borde superior de color gris claro */
+    border-top: 1px solid #000000; /* Borde superior de color gris claro */
   }
-
-.letra-titulo{
-    color: rgb(83, 180, 183);
-    font-family: "Cinzel", serif;
-    font-optical-sizing: auto;
-    font-weight: 500;
-    font-style: normal;
-}
 

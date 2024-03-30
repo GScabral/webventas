@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { filterProduc, orderProducto } from "../../../redux/action";
 import { categoria } from "./categorias";
-import CerrarSesion from "../../../IS/cerrarSesion";
+// import CerrarSesion from "../../../IS/cerrarSesion";
 import './barra.css';
 
 const FiltrosSidebar = () => {
@@ -12,7 +12,7 @@ const FiltrosSidebar = () => {
     const [selectedCategory, setSelectedCategory] = useState("");
     const [selectedPriceOrder, setSelectedPriceOrder] = useState("");
     const [lastSelectedPriceOrder, setLastSelectedPriceOrder] = useState("");
-    const cliente = useSelector((state) => state.cliente);
+    // const cliente = useSelector((state) => state.cliente);
     const dispatch = useDispatch();
 
     const toggleFiltros = () => {
@@ -44,21 +44,21 @@ const FiltrosSidebar = () => {
         dispatch(orderProducto("")); // Enviar una acción para eliminar el orden actual
     };
 
-    const handleCerrarSesion = () => {
-        dispatch(cerrarSesion());
-    };
+    // const handleCerrarSesion = () => {
+    //     dispatch(cerrarSesion());
+    // };
 
     return (
         <div className="sidebar">
-            <h1 className="letra-titulo">Amore mio</h1>
-            {cliente && (
+            {/* <h1 className="letra-titulo">Amore mio</h1> */}
+            {/* {cliente && (
                 <>
                     <h1 className="sidebar-h1">
                         {cliente && `Hola, ${cliente.nombre}! Bienvenido de nuevo.`}
                     </h1>
                     <CerrarSesion />
                 </>
-            )}
+            )} */}
             <button className="button-filtros" onClick={toggleFiltros}>FILTRAR POR:</button>
             {mostrarF && (
                 <div>

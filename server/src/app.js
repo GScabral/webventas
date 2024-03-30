@@ -1,3 +1,5 @@
+
+
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
@@ -6,6 +8,8 @@ const cors = require('cors');
 const path = require('path'); // Importa el módulo path
 const routes = require('./routes/index.js');
 const upload = require("../multerConfig.js");
+
+
 require('./db.js');
 
 const server = express();

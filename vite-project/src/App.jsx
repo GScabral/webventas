@@ -5,8 +5,8 @@ import Home from './pages/Home/home'
 // import Landing from './pages/landing/landing'
 import PanelAdmin from'./admin/panelAdmin'
 import Detail from './pages/Home/Detail/detail'
-import NewUser from './CC/crearCuenta'
-import Ingresar from './IS/iniciarSesion'
+// import NewUser from './CC/crearCuenta'
+// import Ingresar from './IS/iniciarSesion'
 import MetodoPago from './pages/Home/Detail/mp'
 import Carrito from './pages/Home/carrito/carrito'
 import Fav from './pages/Home/fav/fav'
@@ -28,8 +28,8 @@ function App() {
         <Route path='/'element={<Home/>}/>
         <Route path='/admin/*' element={<AdminRoutes/>}/>
         <Route path="/detail/:id" element={<Detail/>}/>
-        <Route path='/newUser'element={<NewUser/>}/>
-        <Route path='/iniciar'element={<Ingresar/>}/>
+        {/* <Route path='/newUser'element={<NewUser/>}/>
+        <Route path='/iniciar'element={<Ingresar/>}/> */}
         <Route path='/comoPagar'element={<MetodoPago/>}/>
         <Route path='/carrito'element={<Carrito/>}/>
         <Route path='/Favorito'element={<Fav/>}/>

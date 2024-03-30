@@ -470,3 +470,23 @@ export const despacharProducto = (pedidoId, detalleId) => {
     payload: { pedidoId, detalleId }
   };
 };
+
+export const enviarCorreo = (idPedido,infoPedido,correo) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post('http://localhost:3004/Nadmin/confirmacionPedido', {
+        idPedido: idPedido,
+        infoPedido: infoPedido,
+        correo:correo
+      });
+     console.log("datos que se mandan action",idPedido)
+     console.log("datos que se mandan action",infoPedido)
+     console.log("datos que se mandan action",correo)
+      console.log('Correo enviado exitosamente:', response.data);
+    } catch (error) {
+      // Manejo de errores
+      console.error('Error al enviar el correo:', error);
+      // Aquí puedes enviar una acción de error si lo deseas
+    }
+  };
+};
