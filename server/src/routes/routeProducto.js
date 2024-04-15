@@ -18,27 +18,26 @@ router.get("/producto", async (req, res) => {
         res.status(500).json({ error: "erro al obtener el producto" })
     }
 })
-
-router.post("/nuevoProducto", upload, async (req, res) => {
-   
+router.post("/nuevoProducto", upload, async (req, res) =>{
     try {
-        const { body, files } = req;
-        const { variantesData } = body;
-    
-       
-    
-        const nuevoProducto = await createNewProducto(body, variantesData, files);
-        if (nuevoProducto && nuevoProducto.error) {
-          res.status(404).json({ error: nuevoProducto.message });
-        } else {
-          res.status(200).json(nuevoProducto);
-        }
-      } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Error en el servidor al procesar la solicitud' });
+      const { body, files } = req;
+      const { variantesData } = body;
+  
+      console.log("Estoy aquí en las imagenes:", files); // Imprimir los archivos recibidos
+      console.log("Estoy aquí en las variantes:", variantesData);
+  
+      const nuevoProducto = await createNewProducto(body, variantesData, files);
+      
+      if (nuevoProducto.error) {
+        res.status(400).json({ error: nuevoProducto.error });
+      } else {
+        res.status(200).json({ message: "Producto creado exitosamente", data: nuevoProducto });
       }
-    });
-
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Error en el servidor al procesar la solicitud' });
+    }
+});
 router.get("/ProductoId/:id", async (req, res) => {
     const id = req.params.id;
     try {

@@ -10,7 +10,7 @@
   padding: 10px;
   /* Espaciado interior */
   text-decoration: none;
-  background-color: #f8cdb0;
+  background-color: #e3d4d9;
   position: relative;
   text-decoration: none;
   -webkit-transition: 1s linear;
@@ -58,6 +58,7 @@
   cursor: pointer;
   text-decoration: none;
   transition: color 0.3s ease;
+  width: 100%; /* Añade esta línea para que ocupen todo el ancho disponible */
 }
 
 .card-link {
@@ -84,7 +85,7 @@
 
 .modal-content-card {
   border: solid black 1px;
-  background-color: #f8cdb0;
+  background-color: #cfa78e;
   padding: 20px;
   border-radius: 8px;
 }

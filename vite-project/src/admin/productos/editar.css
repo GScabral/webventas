@@ -1,71 +1,67 @@
-.container-Modal-editar {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Estilos para el título del modal */
-.modal-title-editar {
-  font-size: 24px;
-  font-weight: bold;
-  color: #333;
-}
-
-/* Estilos para los grupos de formulario dentro del modal */
-.form-group-editar {
-  margin-bottom: 20px;
-}
-
-/* Estilos para las etiquetas de formulario dentro del modal */
-.form-label-editar {
-  display: block;
-  font-size: 18px;
-  margin-bottom: 5px;
-  color: #555;
-}
-
-/* Estilos para los campos de entrada dentro del modal */
-.form-control-editar {
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  transition: border-color 0.3s ease;
-}
-
-/* Estilos para el enfoque de los campos de entrada dentro del modal */
-.form-control-editar:focus {
-  outline: none;
-  border-color: #6c63ff;
-}
-
-/* Estilos para los botones del modal */
-.btn-secondary-editar {
-  background-color: #ccc;
-  color: #333;
+.product-table button {
+  background-color: transparent;
   border: none;
+  cursor: pointer;
+  padding: 5px;
+  margin-right: 5px;
+}
+
+/* Estilos para el modal */
+.modal-dialog {
+  max-width: 600px; /* Ancho máximo del modal */
+  margin: 20px auto; /* Margen en la parte superior e inferior y centrado horizontalmente */
+}
+
+.cerrar-modal {
+  background-color: #f2f2f2; /* Color de fondo para el encabezado del modal */
+}
+
+.modal-title-editar {
+  font-size: 20px; /* Tamaño de fuente del título del modal */
+  font-weight: bold; /* Peso de la fuente del título del modal */
+}
+
+.editar-admin {
+  padding: 20px; /* Espaciado interior del cuerpo del modal */
+}
+
+.form-group-editar {
+  margin-bottom: 20px; /* Espaciado inferior entre grupos de formulario */
+}
+
+.form-label-editar {
+  font-weight: bold; /* Peso de la fuente para etiquetas de formulario */
+}
+
+.form-control-editar {
+  width: 100%; /* Ancho completo para campos de formulario */
+  padding: 8px; /* Espaciado interior */
+  border: 1px solid #ccc; /* Borde del campo de formulario */
+  border-radius: 4px; /* Radio del borde */
+}
+
+.footer-modal-editar {
+  justify-content: space-between; /* Distribuir botones en el pie del modal */
+}
+
+.btn-secondary-editar,
+.btn-primary-editar {
+  padding: 10px 20px; /* Espaciado interior de los botones */
+}
+
+.btn-secondary-editar {
+  background-color: #6c757d; /* Color de fondo del botón Cerrar */
+  border-color: #6c757d; /* Color del borde del botón Cerrar */
 }
 
 .btn-primary-editar {
-  background-color: #6c63ff;
-  color: #fff;
-  border: none;
+  background-color: #007bff; /* Color de fondo del botón Guardar Cambios */
+  border-color: #007bff; /* Color del borde del botón Guardar Cambios */
 }
 
-/* Estilos para los botones del modal al pasar el cursor */
 .btn-secondary-editar:hover,
 .btn-primary-editar:hover {
-  opacity: 0.8;
-}
-
-/* Estilos para el cuerpo del modal */
-.editar-admin {
-  padding: 20px;
-}
-
-/* Estilos para el pie de página del modal */
-.footer-modal-editar {
-  display: flex;
-  justify-content: space-between;
+  background-color: #5a6268; /* Color de fondo del botón Cerrar y Guardar Cambios al pasar el mouse */
+  border-color: #5a6268; /* Color del borde del botón Cerrar y Guardar Cambios al pasar el mouse */
+  color: #fff; /* Color del texto al pasar el mouse */
 }

@@ -10,6 +10,8 @@ import Cards from "./Cards/Cards";
 import FiltrosSidebar from "./barralado/filtros";
 import Carrito from "./carrito/carrito";
 import Carousel from "./carrusel/carrusel";
+import { Link } from "react-router-dom";
+
 
 
 const Home = () => {
@@ -63,7 +65,9 @@ const Home = () => {
 
     <div className="home-fondo">
       <div className={`sidebar-container ${sidebarVisible ? 'show' : ''}`}>
+        <Link to="/admin/principal">
       <img className="logo-tienda" src="public\logo.jpeg" alt="logo" />
+      </Link>
         <FiltrosSidebar />
       </div>
       <Carousel />

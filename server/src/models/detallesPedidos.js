@@ -24,7 +24,13 @@ module.exports = (sequelize) => {
       },
       nombre: {
         type: DataTypes.STRING, // Agregar campo para el nombre
+      },    
+      total: {
+        type: DataTypes.FLOAT, // O el tipo de dato adecuado para tu caso
+        allowNull: false,
+        defaultValue: 0, // Puedes establecer un valor predeterminado si lo deseas
       },
+     
       // Otros campos adicionales que necesites...
     }, {
       tableName: 'detalles_pedido', // Nombre de la tabla en la base de datos
@@ -33,3 +39,8 @@ module.exports = (sequelize) => {
   
     return DetallesPedido;
   };
+
+
+
+//   ALTER TABLE detalles_pedido
+// ADD  total NUMERIC(10, 2) DEFAULT 0;

@@ -20,6 +20,7 @@ const PedidoList = () => {
             <th>ID</th>
             <th>Fecha</th>
             <th>Detalles</th>
+            <th>Total</th>
             <th>Despachar</th>
           </tr>
         </thead>
@@ -57,6 +58,15 @@ const PedidoItem = ({ pedido }) => {
         </ul>
       </td>
       <td>
+        <ul> {/* Agregar un elemento ul para los totales */}
+          {pedido.detalles.map((detalle) => (
+            <li key={`${pedido.id}-${detalle.idDetalle}`}>
+              ${detalle.total}
+            </li>
+          ))}
+        </ul>
+      </td>
+      <td>
         {!pedido.despachado && (
           <button
             onClick={() => handlerDespacharProducto(pedido.id, pedido.detalles[0].idDetalle)}
@@ -69,6 +79,5 @@ const PedidoItem = ({ pedido }) => {
       </td>
     </tr>
   );
-};
-
+}
 export default PedidoList;

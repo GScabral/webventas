@@ -12,7 +12,7 @@
 }
 .sidebar-container-admin{
     width: 200px;
-  background-color: #b95c5c;
+  background-color: #db9d60;
   height: 100vh;
   position: fixed;
   top: 0;
@@ -33,8 +33,8 @@
   margin-bottom: 10px;
   padding: 10px;
   border: none;
-  background-color: #555; /* Color de fondo de los botones */
-  color: white; /* Color del texto de los botones */
+  background-color: #ecbdad; /* Color de fondo de los botones */
+  color: rgb(0, 0, 0); /* Color del texto de los botones */
   text-align: left;
   text-decoration: none;
   cursor: pointer;
@@ -42,5 +42,5 @@
 }
 
 .barra-admin-button:hover {
-  background-color: #777; /* Cambio de color al pasar el ratón sobre los botones */
+  background-color: #bea879; /* Cambio de color al pasar el ratón sobre los botones */
 }

@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { agregarAlCarrito, agregarFav } from '../../../redux/action'; // Asegúrate de importar actualizarVariante
-import { all } from 'axios';
+
 
 const Card = ({ id, nombre, descripcion, categoria, precio, imagenes, variantes }) => {
   const dispatch = useDispatch();
@@ -26,7 +26,7 @@ const Card = ({ id, nombre, descripcion, categoria, precio, imagenes, variantes 
 
 
   
-
+console.log(allProductos)
 
   const handleAgregarAlCarrito = () => {
     setShowModal(true);
@@ -255,7 +255,7 @@ const Card = ({ id, nombre, descripcion, categoria, precio, imagenes, variantes 
       )}
       <Link to={`/detail/${id}`} className="card-link">
         <div className="card-content">
-        <img className="card-imagen" src={`http://localhost:3004/${variantes[0].imagenes[0]}`} alt="" />
+        <img className="card-imagen"src={`http://localhost:3004/${variantes && variantes[0] && variantes[0].imagenes && variantes[0].imagenes[0]}`}/>
           <span className="card-categoria">{categoria}</span>
           <p className="card-inf">{descripcion}</p>
           <h3 className="card-precio">${precio}</h3>
@@ -263,11 +263,8 @@ const Card = ({ id, nombre, descripcion, categoria, precio, imagenes, variantes 
       </Link>
       <div className="card-buttons">
         <button className="card-detail" onClick={handleAgregarAlCarrito}>
-          <FontAwesomeIcon icon={faShoppingCart} />
+        añadir al carrito
         </button>
-        {/* <button className="card-favorite" onClick={handleAgregarFav}>
-          <FontAwesomeIcon icon={faHeart} />
-        </button> */}
       </div>
     </div>
   );

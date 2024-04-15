@@ -23,4 +23,5 @@ export const categoria={
     "Lenceria":[],
     "Boxer niños":[],
     "accesorios":[],
+    "Tapados":[],
 }

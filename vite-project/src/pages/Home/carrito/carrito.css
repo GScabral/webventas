@@ -1,180 +1,132 @@
-/* carrito.css */
-
 .carrito-fondo {
-    background-color: white; /* Fondo blanco */
-  display: flex;
-  justify-content: center; /* Centra horizontalmente el contenido */
-  align-items: center; /* Centra verticalmente el contenido */
-  min-height: 100vh;
+  background-color: #f9f9f9;
+  padding: 20px;
 }
 
 .carrito {
-  background-color: #f8cdb0;
-  margin: 10px;
-  padding: 20px;
-  border-radius: 10px;
+  background-color: #fff;
+  border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 1000px; /* Ajusta el ancho según tus necesidades */
-
+  padding: 20px;
 }
 
-.carrito-titulo {
-  font-size: 24px;
-  margin-bottom: 20px;
-  display: flex;
-  justify-content: center; /* Centrado horizontal */
-  align-items: center;
-}
-
-.carrito-table{
+.carrito-table {
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 20px;
+}
+
+.carrito-th,
+.carrito-td {
+  padding: 10px;
+  text-align: left;
 }
 
 .carrito-th {
   background-color: #f2f2f2;
 }
 
-.carrito-th,
 .carrito-td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: left;
-}
-
-.lista-productos {
-  list-style: none;
-  padding: 0;
-}
-
-.producto {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-  border: solid 1px black;
-}
-
-.producto-info {
-  display: flex;
-  align-items: center;
+  border-bottom: 1px solid #ddd;
 }
 
 .producto-imagen {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  margin-right: 20px;
-  border-radius: 5px;
+  width: 50px;
+  height: auto;
 }
 
-.producto-nombre {
-  font-weight: bold;
-}
-
-.producto-acciones {
-  display: flex;
-  align-items: center;
-}
-
-.producto-precio {
-  margin-bottom: 5px;
-}
-
-.variantes-info {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.variantes-info .variante {
-  margin-right: 10px; /* Espacio entre los elementos */
-}
-
-.producto-acciones {
+.cantidad-acciones {
   display: flex;
   align-items: center;
 }
 
 .boton-cantidad-div {
-  display: flex;
-  align-items: center;
+  margin: 0 5px;
 }
 
 .boton-cantidad {
-  margin-left: 5px; /* Espacio entre los botones */
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  padding: 5px 10px;
+  cursor: pointer;
 }
 
 .boton-eliminar {
   background-color: #dc3545;
-}
-
-.mensaje-error {
-  color: #dc3545;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  padding: 5px 10px;
+  cursor: pointer;
 }
 
 .mensaje-vacio {
+  text-align: center;
   font-style: italic;
+  color: #999;
 }
 
 .total {
+  font-weight: bold;
+  text-align: right;
   margin-top: 20px;
-  font-size: 18px;
-}
-
-.formas-pago {
-  margin-top: 20px;
-}
-
-.logos-pago {
-  display: flex;
-  align-items: center;
-}
-
-.logo-pago {
-  width: 50px;
-  height: 50px;
-  margin-right: 10px;
 }
 
 .boton-carrito {
+  background-color: #88a790;
+  color: #fff;
   border: none;
-  color: black;
-  padding: 14px 28px;
+  border-radius: 3px;
+  padding: 10px 20px;
   cursor: pointer;
-  border-radius: 5px;
-}
-
-.boton-vaciar {
-  background-color: white;
-  border: 2px solid #007bff;
-}
-
-.boton-vaciar:hover {
-  background: #0b7dda;
-  color: white;
-}
-
-.boton-volver {
-  background-color: white;
-  border: 2px solid #010407;
-}
-
-.boton-volver:hover {
-  background: #9b2b2b;
-  color: white;
+  margin-top: 10px;
 }
 
 .enlace-home {
   text-decoration: none;
+  display: inline-block;
+  margin-left: 10px;
 }
 
-.pedido-carrito {
-  background-color: white;
-  border: 2px solid #010407;
+.boton-volver {
+  background-color: #dcca94;
 }
 
-.pedido-carrito:hover {
-  background: #9b2b2b;
-  color: white;
+.boton-vaciar {
+  background-color: #cc8d93;
+}
+
+.modal-compra {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content-compra {
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 20px;
+  position: relative;
+}
+
+.close-compra {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.formulario-correo {
+  margin-top: 20px;
+}
+
+#total {
+  font-weight: bold;
 }

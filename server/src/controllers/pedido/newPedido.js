@@ -20,6 +20,7 @@ const crearPedido = async (pedidoData) => {
         cantidad: producto.cantidad, 
         color: producto.color, // Suponiendo que la variante es un objeto con un color
         talle: producto.talla, // Suponiendo que la variante es un objeto con un talla
+        total:producto.total,
       };
 
       // Agregar un console.log para ver los detalles del pedido antes de crearlos

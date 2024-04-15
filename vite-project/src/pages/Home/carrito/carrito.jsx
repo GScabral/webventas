@@ -22,6 +22,7 @@ const Carrito = () => {
   const [mostrarModal, setMostrarModal] = useState(false);
   const [numeroPedido, setNumeroPedido] = useState(null);
   const [infoPedidoCorreo, setInfoPedidoCorreo] = useState(null);
+  const [correoEnviado, setCorreoEnviado] = useState(false); 
   const dispatch = useDispatch();
 
 
@@ -106,12 +107,14 @@ const Carrito = () => {
 
   const handleRealizarPedido = async () => {
     try {
+      const total = calcularTotal();
       const pedido = carrito.map(producto => ({
         id: producto.id,
         nombre: producto.nombre,
         cantidad: producto.cantidad_elegida,
         color: producto.variantes[0].color,
-        talla: producto.variantes[0].talla
+        talla: producto.variantes[0].talla,
+        total:total
       }));
 
       // Realiza la acción addPedido con los datos del pedido
@@ -121,6 +124,7 @@ const Carrito = () => {
         const numeroPedido = response.data.id_pedido;
         setNumeroPedido(numeroPedido);
         setInfoPedidoCorreo(pedido); // Almacena la información del pedido
+        dispatch(actualizarVariante(pedido)); // Corregir esta línea
         setMostrarFormularioCorreo(true);
         setMostrarModal(true);
         dispatch(vaciarCarrito());
@@ -137,6 +141,7 @@ const Carrito = () => {
       const infoPedido = infoPedidoCorreo;
       await dispatch(enviarCorreo(numeroPedido, infoPedido, correo));
       console.log("Correo enviado correctamente");
+      setCorreoEnviado(true); 
       setMostrarFormularioCorreo(false);
     } catch (error) {
       console.error("Error al enviar el correo", error);
@@ -215,13 +220,13 @@ const Carrito = () => {
           Vaciar Carrito
         </button>
         <Link to="/" className="enlace-home">
-          <button className="boton-carrito boton-volver">Volver a la Home</button>
+          <button className="boton-carrito boton-volver">Volver a la tienda</button>
         </Link>
         <button className="boton-carrito pedido-carrito" onClick={handleRealizarPedido}>
           comprar
         </button>
 
-
+ 
         {mostrarModal && (
           <div className="modal-compra">
             <div className="modal-content-compra">
@@ -230,6 +235,7 @@ const Carrito = () => {
                 <label htmlFor="correo">Ingresa tu correo electrónico:</label>
                 <input type="email" id="correo" name="correo" required />
                 <button type="submit" className="boton-carrito">Enviar</button>
+            
               </form>
               <h2>Número de pedido: {numeroPedido}</h2>
               <p>
@@ -248,8 +254,10 @@ const Carrito = () => {
               <a href={"https://wa.me/message/CTLCYWOO7XTML1"}>aquí</a>.
               o muestre el comprobante en el local en caso que lo retire personalmente
             </div>
+            
           </div>
         )}
+ 
 
       </div>
     </div>

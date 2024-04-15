@@ -185,9 +185,9 @@ const Detail = () => {
               <button className='card-detail' onClick={() => setShowModal(true)}>
                 <FontAwesomeIcon icon={faShoppingCart} />
               </button>
-              <button className='card-favorite' onClick={handleAgregarFav}>
+              {/*<button className='card-favorite' onClick={handleAgregarFav}>
                 <FontAwesomeIcon icon={faHeart} />
-              </button>
+              </button>*/}
             </div>
           </div>
         </div>

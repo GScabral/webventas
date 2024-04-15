@@ -3,8 +3,9 @@ const { variantesproductos } = require('../../db');
 
 const getProductos = async () => {
   try {
-    // Obtiene todos los productos con sus variantes asociadas, incluyendo las imágenes de las variantes
-    const productosConVariantes = await Productos.findAll({ include: variantesproductos });
+    // Corrige el uso de la opción include para incluir las variantes de los productos
+    const productosConVariantes = await Productos.findAll({ include: { model: variantesproductos } });
+    console.log('Productos con variantes obtenidos:', productosConVariantes);
     const productos = productosConVariantes.map((producto) => {
       let variantesProducto = [];
     
@@ -13,6 +14,7 @@ const getProductos = async () => {
         variantesProducto = producto.variantesproductos.map((variante) => {
           if (variante && variante.imagenes) {
             const imagenUrls = variante.imagenes.map(imagen => `uploads/${imagen}`);
+            console.log('URLs de imágenes:', imagenUrls);
             
             return {
               idVariante: variante.id_variante,

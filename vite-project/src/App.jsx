@@ -14,6 +14,7 @@ import Nav from './pages/Home/Nav/Nav'
 import Principal from './admin/inicio/principalAdmin'
 import NewProduct from './admin/añadir/añadirProducto'
 import ProductList from './admin/productos/listadoProductos'
+import DevolucionCambio from './pages/Home/devolucion/devolucion'
 
 function App() {
   const location = useLocation();
@@ -30,6 +31,7 @@ function App() {
         <Route path="/detail/:id" element={<Detail/>}/>
         {/* <Route path='/newUser'element={<NewUser/>}/>
         <Route path='/iniciar'element={<Ingresar/>}/> */}
+        <Route path='/DevolucionCambio'element={<DevolucionCambio/>}/>
         <Route path='/comoPagar'element={<MetodoPago/>}/>
         <Route path='/carrito'element={<Carrito/>}/>
         <Route path='/Favorito'element={<Fav/>}/>

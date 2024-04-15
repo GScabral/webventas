@@ -1,2 +1,2 @@
-ALTER TABLE variantesproductos
-ADD COLUMN imagenes TEXT[];
+ALTER TABLE detalles_pedido
+ADD  total NUMERIC(10, 2) DEFAULT 0;

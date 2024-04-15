@@ -9,6 +9,10 @@ const NewProduct = ({ addProduct }) => {
   const [productDescrip, setProductDescrip] = useState('');
   const [productCategoria, setProductCategoria] = useState('');
   const [variantesData, setVariantesData] = useState([]);
+  const [showAddTallaForm, setShowAddTallaForm] = useState(false);
+  const [newTalla, setNewTalla] = useState('');
+  const [newCantidad, setNewCantidad] = useState('');
+  const [cantidad_disponible, setCantidad_disponible] = useState({});
 
   const handleProductNameChange = (event) => {
     setProductName(event.target.value);
@@ -27,21 +31,64 @@ const NewProduct = ({ addProduct }) => {
   };
 
   const handleAddVariante = () => {
-    const newVariante = { talla: '', color: '', cantidad_disponible: '', imagenes: [] };
+    const newVariante = { talla: {}, color: '', imagenes: [], imagenURLs: [], cantidad_disponible: {} };
     setVariantesData([...variantesData, newVariante]);
   };
 
-  const handleVariantesData = (index, key, value) => {
+  const handleAddTalla = (index) => {
+    setNewTalla('');
+    setNewCantidad('');
+    setShowAddTallaForm(true);
+
     const updatedVariantes = [...variantesData];
-    updatedVariantes[index][key] = value;
+    updatedVariantes[index].cantidad_disponible[newTalla] = newCantidad;
+    setVariantesData(updatedVariantes);
+  };
+
+  const handleSaveTalla = (index) => {
+    const cantidad = parseInt(newCantidad, 10);
+    if (!isNaN(cantidad)) {
+      const updatedVariantes = [...variantesData];
+      if (updatedVariantes[index].talla.hasOwnProperty(newTalla)) {
+        console.error('Ya existe una talla con ese nombre');
+        return;
+      }
+      updatedVariantes[index].talla[newTalla] = cantidad;
+      setVariantesData(updatedVariantes);
+      setShowAddTallaForm(false);
+      setNewTalla('');
+      setNewCantidad('');
+    } else {
+      console.error('La cantidad no es un número válido');
+    }
+  };
+
+  const handleTallaChange = (event) => {
+    setNewTalla(event.target.value);
+  };
+
+  const handleCantidadChange = (event) => {
+    setNewCantidad(event.target.value);
+  };
+
+  const handleColorChange = (event, index) => {
+    const { value } = event.target;
+    const updatedVariantes = [...variantesData];
+    updatedVariantes[index].color = value;
     setVariantesData(updatedVariantes);
   };
 
   const handleFileChange = (event, index) => {
     const files = event.target.files;
+    console.log('Archivos cargados:', files);
     if (files && files.length > 0) {
       const updatedVariantes = [...variantesData];
-      updatedVariantes[index].imagenes = [...updatedVariantes[index].imagenes, ...files];
+      updatedVariantes[index].imagenes = Array.from(files); // Convertir files a una matriz
+      const urls = [];
+      for (let i = 0; i < files.length; i++) {
+        urls.push(URL.createObjectURL(files[i]));
+      }
+      updatedVariantes[index].imagenURLs = urls; // Actualizar imagenURLs con las URLs de las imágenes cargadas
       setVariantesData(updatedVariantes);
     }
   };
@@ -60,31 +107,38 @@ const NewProduct = ({ addProduct }) => {
       formData.append('precio', productPrice);
       formData.append('categoria', productCategoria);
 
+      console.log('Variantes de datos:', variantesData);
+
       variantesData.forEach((variante, index) => {
-        formData.append(`variantesData[${index}][talla]`, variante.talla);
+        const serializedTallas = JSON.stringify(variante.talla);
+        formData.append(`variantesData[${index}][tallas]`, serializedTallas);
         formData.append(`variantesData[${index}][color]`, variante.color);
-        formData.append(`variantesData[${index}][cantidad_disponible]`, variante.cantidad_disponible);
-        variantesData.forEach((variante, index) => {
-          formData.append(`variantes.imagenes`, variante.imagenes[0]); // Sin incluir el índice [0]
-        });
+        formData.append(`variantesData[${index}][cantidad_disponible]`, JSON.stringify(variante.cantidad_disponible));
+      
+        // Adjuntar archivos de imagen al FormData
+        const { imagenes } = variante;
+        // Iterar sobre todas las imágenes de la variante
+        for (let i = 0; i < imagenes.length; i++) {
+          const imagen = imagenes[i];
+          formData.append(`imagenes`, imagen);
+        }
       });
 
-      console.log("info que se manda", formData)
+      console.log('Datos del formulario antes de enviar:', formData);
 
       await addProduct(formData);
 
-      // Limpiar el estado después de agregar el producto
       setProductName('');
       setProductPrice('');
       setProductDescrip('');
       setProductCategoria('');
       setVariantesData([]);
+      setCantidad_disponible({});
 
     } catch (error) {
       console.error('Error al agregar el producto', error);
     }
   };
-
   return (
     <div className="admin-panel">
       <div>
@@ -140,51 +194,57 @@ const NewProduct = ({ addProduct }) => {
             <div key={index}>
               <label>Variante {index + 1}:</label>
               <label>Talla:</label>
-              <input
-                type="text"
-                value={variante.talla}
-                onChange={(e) => handleVariantesData(index, 'talla', e.target.value)}
-                name={`variantesData[${index}][talla]`} // Asignar el atributo name correctamente
-              />
+              {Object.entries(variante.talla).map(([talla, cantidad], i) => (
+                <div key={i}>
+                  <span>{talla}:</span> <span>{cantidad_disponible[talla]}</span>
+                </div>
+              ))}
               <label>Color:</label>
               <input
                 type="text"
                 value={variante.color}
-                onChange={(e) => handleVariantesData(index, 'color', e.target.value)}
-                name={`variantesData[${index}][color]`} // Asignar el atributo name correctamente
+                onChange={(e) => handleColorChange(e, index)}
               />
-              <label>Cantidad disponible:</label>
-              <input
-                type="number"
-                value={variante.cantidad_disponible}
-                onChange={(e) => handleVariantesData(index, 'cantidad_disponible', e.target.value)}
-                name={`variantesData[${index}][cantidad_disponible]`} // Asignar el atributo name correctamente
-              />
+              {variante.imagenURLs.map((url, imgIndex) => (
+                <img key={imgIndex} src={url} alt={`Imagen ${imgIndex}`} className="img-preview" />
+              ))}
               <input
                 type="file"
-                name={`variantes.imagenes`}
-                id={`fileInput-${index}`}
                 onChange={(e) => handleFileChange(e, index)}
+                name={`variantesData[${index}][imagenes]`}
                 multiple
-                style={{ display: 'none' }} // Este estilo oculta el campo de entrada, lo que puede ser problemático
               />
               <button
                 className="button-imagen-adm"
                 type="button"
-                onClick={() => {
-                  const fileInput = document.getElementById(`fileInput-${index}`);
-                  if (fileInput) {
-                    fileInput.click(); // Esto activa el clic en el campo de entrada de archivos
-                  }
-                }}
+                onClick={() => handleAddTalla(index)}
               >
-                Agregar imagen
+                Agregar Talla
               </button>
-              {variante.imagenes.map((imagen, i) => (
-                <div key={i}>
-                  <img src={URL.createObjectURL(imagen)} alt={`imagen-${i}`} style={{ maxWidth: '100px', maxHeight: '100px', marginRight: '10px' }} />
+              {showAddTallaForm && (
+                <div>
+                  <label>Nueva Talla:</label>
+                  <input
+                    type="text"
+                    value={newTalla}
+                    onChange={handleTallaChange}
+                  />
+                  <label>Nueva Cantidad:</label>
+                  <input
+                    type="number"
+                    value={newCantidad}
+                    onChange={handleCantidadChange}
+                    onBlur={handleCantidadChange}
+                  />
+                  <button
+                    className="button-imagen-adm"
+                    type="button"
+                    onClick={() => handleSaveTalla(index)}
+                  >
+                    Guardar Talla
+                  </button>
                 </div>
-              ))}
+              )}
             </div>
           ))}
         </div>

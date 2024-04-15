@@ -16,7 +16,8 @@ const getPedidos = async () => {
                     nombre:detalle.nombre,
                     cantidad: detalle.cantidad,    
                     color:detalle.color,
-                    talle:detalle.talle                              
+                    talle:detalle.talle,
+                    total:detalle.total                              
                 })),
             };
         });

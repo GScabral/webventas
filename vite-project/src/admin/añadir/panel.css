@@ -1,85 +1,68 @@
 .admin-panel {
   max-width: 600px;
-  margin: 20px auto;
+  margin: 0 auto;
   padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .h1-panel {
   text-align: center;
-  margin-bottom: 20px;
 }
 
 .label-admin {
-  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
 }
 
 .input-admin {
   width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
+  padding: 8px;
+  margin-bottom: 10px;
   border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.input-admin[type="file"] {
-  display: none;
+  border-radius: 4px;
 }
 
 .button-admin {
-  width: 100%;
-  padding: 12px;
-  margin-top: 20px;
-  background-color: #007bff;
-  color: #fff;
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: pointer;
 }
 
 .button-admin:hover {
-  background-color: #0056b3;
-}
-
-.button-imagen-adm {
-  margin-top: 10px;
-  padding: 10px;
-  background-color: #28a745;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.button-imagen-adm:hover {
-  background-color: #218838;
+  background-color: #45a049;
 }
 
 .button-newproduc-adm {
-  margin-top: 10px;
-  padding: 10px;
-  background-color: #dc3545;
-  color: #fff;
+  background-color: #008CBA;
+  color: white;
+  padding: 10px 20px;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: pointer;
 }
 
 .button-newproduc-adm:hover {
-  background-color: #c82333;
+  background-color: #005f6b;
 }
 
-.image-container {
-  display: flex;
-  flex-wrap: wrap;
+.button-imagen-adm {
+  background-color: #f44336;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 10px;
+  
 }
 
-.image-container img {
-  max-width: 100px;
-  max-height: 100px;
-  margin-right: 10px;
-  margin-bottom: 10px;
+.button-imagen-adm:hover {
+  background-color: #d32f2f;
+}
+
+.img-preview {
+  max-width: 100px; /* Establece el ancho máximo para la imagen */
+  max-height: 100px; /* Establece la altura máxima para la imagen */
 }

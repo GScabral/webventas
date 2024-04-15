@@ -37,8 +37,8 @@ router.post("/NewAdmin", async (req, res) => {
 
 router.post('/confirmacionPedido',async (req,res)=>{
   try{
-    const { numeroPedido, infoPedido, correo } = req.body;
-    await enviarCorreo (numeroPedido,infoPedido,correo)
+    const {idPedido, infoPedido, correo } = req.body;
+    await enviarCorreo (idPedido,infoPedido,correo)
     res.status(200).send('Correo electrónico enviado con éxito');
   }catch (error) {
     // Manejar errores

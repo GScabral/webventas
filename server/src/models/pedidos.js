@@ -11,7 +11,7 @@ module.exports = (sequelize) => {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW,
     },
-   
+
   });
 
   return Pedido;

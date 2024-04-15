@@ -3,7 +3,7 @@
   justify-content: flex-end;
   align-items: center;
   padding: 10px;
-  background-color: #f8cdb0;
+  background-color: #ffffff;
   color: white;
   z-index: 2;
 }
@@ -16,7 +16,7 @@
   color: #000000;
   cursor: pointer;
 z-index: 2;
-
+border: solid 1px  #b97431;
 }
 
 .superior:hover {

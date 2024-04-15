@@ -36,9 +36,9 @@ const Nav = ({ onSearch }) => {
                 <Link to="/">
                     <button className="superior">Inicio</button>
                 </Link>
-                {/* <Link>
-                    <button className="superior">Productos</button>
-                </Link> */}
+                <Link to="/DevolucionCambio">
+                    <button className="superior">Cambio/Devolucion</button>
+                </Link> 
                 <Link to="/comoPagar">
                     <button className="superior">Venta por mayor</button>
                 </Link>
