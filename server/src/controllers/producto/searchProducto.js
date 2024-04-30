@@ -21,29 +21,31 @@ const buscar = async (nombre) => {
     const productos = findProductos.map((producto) => {
       let imagenUrls = [];
 
-      // Manejo de imágenes
-      if (producto.imagenes) {
-        // Si hay una sola imagen, la agregamos al array de URLs
-        if (typeof producto.imagenes === 'string') {
-          imagenUrls.push(`/uploads/${producto.imagenes}`);
-        }
-        // Si hay varias imágenes, las añadimos al array de URLs
-        else if (Array.isArray(producto.imagenes) && producto.imagenes.length > 0) {
-          imagenUrls = producto.imagenes.map(imagen => `/uploads/${imagen}`);
-        }
-        // Si el formato de imágenes no es reconocido, mostramos un error
-        else {
-          console.error('Formato de imagen no reconocido:', producto.imagenes);
-        }
-      }
-
       // Mapea las variantes de cada producto
-      const variantesProducto = producto.variantesproductos.map((variante) => ({
-        idVariante: variante.id_variante,
-        talla: variante.talla,
-        color: variante.color,
-        cantidad_disponible: variante.cantidad_disponible
-      }));
+      const variantesProducto = producto.variantesproductos.map((variante) => {
+        // Manejo de imágenes
+        if (variante.imagenes) {
+          // Si hay una sola imagen, la agregamos al array de URLs
+          if (typeof variante.imagenes === 'string') {
+            imagenUrls.push(`/uploads/${variante.imagenes}`);
+          }
+          // Si hay varias imágenes, las añadimos al array de URLs
+          else if (Array.isArray(variante.imagenes) && variante.imagenes.length > 0) {
+            imagenUrls = variante.imagenes.map(imagen => `/uploads/${imagen}`);
+          }
+          // Si el formato de imágenes no es reconocido, mostramos un error
+          else {
+            console.error('Formato de imagen no reconocido:', variante.imagenes);
+          }
+        }
+
+        return {
+          idVariante: variante.id_variante,
+          talla: variante.talla,
+          color: variante.color,
+          cantidad_disponible: variante.cantidad_disponible
+        };
+      });
 
       return {
         nombre: producto.nombre_producto,
@@ -69,3 +71,4 @@ const buscar = async (nombre) => {
 };
 
 module.exports = buscar;
+

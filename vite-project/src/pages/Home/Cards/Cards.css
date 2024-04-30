@@ -1,0 +1,7 @@
+.cards-container {
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .cards-container:hover {
+    transform: translateY(-5px); 
+  }

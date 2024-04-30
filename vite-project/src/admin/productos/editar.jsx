@@ -38,56 +38,54 @@ const EditProductModal = ({ show, handleClose, product, handleSaveChanges }) => 
   };
 
   return (
-    <div className='container-Modal-editar'>
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header className='cerrar-modal' closeButton>
-          <Modal.Title className="modal-title-editar">Editar Producto</Modal.Title>
-        </Modal.Header>
-        <Modal.Body className='editar-admin'>
-          <form>
-            {editedProduct.variantes.map((variante, index) => (
-              <div key={index}>
-                <div className="form-group-editar">
-                  <label className="form-label-editar">Talle</label>
-                  <input
-                    type="text"
-                    className="form-control-editar"
-                    value={variante.talla}
-                    onChange={(e) => handleVariantInputChange(e, index, 'talle')}
-                  />
-                </div>
-                <div className="form-group-editar">
-                  <label className="form-label-editar">Color</label>
-                  <input
-                    type="text"
-                    className="form-control-editar"
-                    value={variante.color}
-                    onChange={(e) => handleVariantInputChange(e, index, 'color')}
-                  />
-                </div>
-                <div className="form-group-editar">
-                  <label className="form-label-editar">Cantidad Disponible</label>
-                  <input
-                    type="number"
-                    className="form-control-editar"
-                    value={variante.cantidad_disponible}
-                    onChange={(e) => handleVariantInputChange(e, index, 'cantidad_disponible')}
-                  />
-                </div>
+    <Modal show={show} onHide={handleClose} className="edit-product-modal">
+      <Modal.Header closeButton>
+        <Modal.Title>Editar Producto</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <form>
+          {editedProduct.variantes.map((variante, index) => (
+            <div key={index} className="variant-form-group">
+              <div className="form-group">
+                <label className="form-label">Talle</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  value={variante.talla}
+                  onChange={(e) => handleVariantInputChange(e, index, 'talle')}
+                />
               </div>
-            ))}
-          </form>
-        </Modal.Body>
-        <Modal.Footer className='footer-modal-editar'>
-          <Button variant="secondary" onClick={handleClose} className="btn-secondary-editar">
-            Cerrar
-          </Button>
-          <Button variant="primary" onClick={handleSaveChangesLocal} className="btn-primary-editar">
-            Guardar Cambios
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </div>
+              <div className="form-group">
+                <label className="form-label">Color</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  value={variante.color}
+                  onChange={(e) => handleVariantInputChange(e, index, 'color')}
+                />
+              </div>
+              <div className="form-group">
+                <label className="form-label">Cantidad Disponible</label>
+                <input
+                  type="number"
+                  className="form-control"
+                  value={variante.cantidad_disponible}
+                  onChange={(e) => handleVariantInputChange(e, index, 'cantidad_disponible')}
+                />
+              </div>
+            </div>
+          ))}
+        </form>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={handleClose}>
+          Cerrar
+        </Button>
+        <Button variant="primary" onClick={handleSaveChangesLocal}>
+          Guardar Cambios
+        </Button>
+      </Modal.Footer>
+    </Modal>
   );
 };
 

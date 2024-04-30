@@ -2,6 +2,9 @@ const { variantesproductos } = require('../../db');
 
 const actualizarCantidadDisponibleVariante = async (idVariante, cantidad) => {
 
+
+  
+
   try {
     const variante = await variantesproductos.findByPk(idVariante);
 

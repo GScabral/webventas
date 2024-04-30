@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { filterProduc, orderProducto } from "../../../redux/action";
 import { categoria } from "./categorias";
-// import CerrarSesion from "../../../IS/cerrarSesion";
 import './barra.css';
 
 const FiltrosSidebar = () => {
@@ -11,25 +10,29 @@ const FiltrosSidebar = () => {
     const [precio, setPrecio] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState("");
     const [selectedPriceOrder, setSelectedPriceOrder] = useState("");
-    const [lastSelectedPriceOrder, setLastSelectedPriceOrder] = useState("");
-    // const cliente = useSelector((state) => state.cliente);
+    const [selectedSubcategory, setSelectedSubcategory] = useState("");
+    const [showSubcategories, setShowSubcategories] = useState(true); // Ajuste aquí
+
+    const allProductos = useSelector((state) => state.allProductos);
     const dispatch = useDispatch();
 
     const toggleFiltros = () => {
         setMostrarF(!mostrarF);
+        // Mostrar las subcategorías al abrir la sección de filtros
+        setShowSubcategories(true); // Ajuste aquí
     };
 
     const toggleOrden = () => {
         setMostrarO(!mostrarO);
     };
 
-    const handleFilter = (category) => {
+    const handleFilter = (category, subcategory) => {
         setSelectedCategory(category === selectedCategory ? "" : category);
-        dispatch(filterProduc({ categoria: category === selectedCategory ? "" : category }));
+        setSelectedSubcategory(subcategory || "");
+        dispatch(filterProduc({ categoria: category === selectedCategory ? "" : category, subcategoria: subcategory, allProductos }));
     };
 
     const handleOrder = (orderType) => {
-        // Si el mismo orden ya está seleccionado, deselecciónalo
         if (orderType === selectedPriceOrder) {
             unselectOrder();
         } else {
@@ -39,51 +42,70 @@ const FiltrosSidebar = () => {
     };
 
     const unselectOrder = () => {
-        console.log("Deseleccionando orden...");
-        setSelectedPriceOrder(""); // Desseleccionar el orden estableciendo el estado en una cadena vacía
-        dispatch(orderProducto("")); // Enviar una acción para eliminar el orden actual
+        setSelectedPriceOrder("");
+        dispatch(orderProducto(""));
     };
-
-    // const handleCerrarSesion = () => {
-    //     dispatch(cerrarSesion());
-    // };
 
     return (
         <div className="sidebar">
-            {/* <h1 className="letra-titulo">Amore mio</h1> */}
-            {/* {cliente && (
-                <>
-                    <h1 className="sidebar-h1">
-                        {cliente && `Hola, ${cliente.nombre}! Bienvenido de nuevo.`}
-                    </h1>
-                    <CerrarSesion />
-                </>
-            )} */}
-            <button className="button-filtros" onClick={toggleFiltros}>FILTRAR POR:</button>
+            <button className="button-filtros" onClick={toggleFiltros}>
+                FILTRAR POR:
+            </button>
             {mostrarF && (
                 <div>
                     <ul className="ul-filtros">
-                        {Object.keys(categoria).map((categoria) => (
-                            <button key={categoria} className={selectedCategory === categoria ? "button-selected" : "button-talles"}
-                                onClick={() => handleFilter(categoria)}>
-                                {categoria}
-                            </button>
+                        {Object.entries(categoria).map(([categoriaPrincipal, subcategorias]) => (
+                            <div key={categoriaPrincipal}>
+                                <button
+                                    className={selectedCategory === categoriaPrincipal ? "button-selected" : "button-talles"}
+                                    onClick={() => handleFilter(categoriaPrincipal, "")}
+                                >
+                                    {categoriaPrincipal}
+                                </button>
+                                {/* Mostrar subcategorías si existen y si showSubcategories es verdadero */}
+                                {showSubcategories && selectedCategory === categoriaPrincipal && subcategorias.length > 0 && (
+                                    <ul>
+                                        {subcategorias.map((subcategoria) => (
+                                            <li key={subcategoria}>
+                                                <button
+                                                    className={selectedSubcategory === subcategoria ? "button-selected" : "button-sub-categoria"}
+                                                    onClick={() => handleFilter(categoriaPrincipal, subcategoria)}
+                                                >
+                                                    {subcategoria}
+                                                </button>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                )}
+                            </div>
                         ))}
                     </ul>
                 </div>
             )}
             <hr className="divider" />
-            <button className="button-filtros" onClick={toggleOrden}>ORDENAR POR:</button>
+            <button className="button-filtros" onClick={toggleOrden}>
+                ORDENAR POR:
+            </button>
             {mostrarO && (
                 <div>
                     <ul className="ul-filtros">
-                        <button className="button-filtros" onClick={() => setPrecio(!precio)}>Precio</button>
+                        <button className="button-filtros" onClick={() => setPrecio(!precio)}>
+                            Precio
+                        </button>
                         {precio && (
                             <div>
-                                <button className={selectedPriceOrder === "precioAsc" ? "button-selected" : "button-talles"}
-                                    onClick={() => handleOrder("precioAsc")}>Menor a Mayor</button>
-                                <button className={selectedPriceOrder === "precioDesc" ? "button-selected" : "button-talles"}
-                                    onClick={() => handleOrder("precioDesc")}>Mayor a Menor</button>
+                                <button
+                                    className={selectedPriceOrder === "precioAsc" ? "button-selected" : "button-talles"}
+                                    onClick={() => handleOrder("precioAsc")}
+                                >
+                                    Menor a Mayor
+                                </button>
+                                <button
+                                    className={selectedPriceOrder === "precioDesc" ? "button-selected" : "button-talles"}
+                                    onClick={() => handleOrder("precioDesc")}
+                                >
+                                    Mayor a Menor
+                                </button>
                             </div>
                         )}
                     </ul>

@@ -1,67 +1,72 @@
-.product-table button {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 5px;
-  margin-right: 5px;
+.edit-product-modal .modal-dialog {
+  max-width: 800px; /* Ancho máximo del modal */
 }
 
-/* Estilos para el modal */
-.modal-dialog {
-  max-width: 600px; /* Ancho máximo del modal */
-  margin: 20px auto; /* Margen en la parte superior e inferior y centrado horizontalmente */
+.edit-product-modal .modal-content {
+  overflow-y: auto; /* Permitir desplazamiento vertical si el contenido es más largo que el modal */
+  max-height: 80vh; /* Altura máxima del modal para que sea adaptable */
 }
 
-.cerrar-modal {
-  background-color: #f2f2f2; /* Color de fondo para el encabezado del modal */
+.variant-form-group {
+  margin-bottom: 20px;
 }
 
-.modal-title-editar {
-  font-size: 20px; /* Tamaño de fuente del título del modal */
-  font-weight: bold; /* Peso de la fuente del título del modal */
+.form-group {
+  margin-bottom: 10px;
 }
 
-.editar-admin {
-  padding: 20px; /* Espaciado interior del cuerpo del modal */
+.form-label {
+  font-weight: bold;
 }
 
-.form-group-editar {
-  margin-bottom: 20px; /* Espaciado inferior entre grupos de formulario */
+.form-control {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
 }
 
-.form-label-editar {
-  font-weight: bold; /* Peso de la fuente para etiquetas de formulario */
+.modal-header {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
 }
 
-.form-control-editar {
-  width: 100%; /* Ancho completo para campos de formulario */
-  padding: 8px; /* Espaciado interior */
-  border: 1px solid #ccc; /* Borde del campo de formulario */
-  border-radius: 4px; /* Radio del borde */
+.modal-title {
+  font-size: 1.25rem;
 }
 
-.footer-modal-editar {
-  justify-content: space-between; /* Distribuir botones en el pie del modal */
+.modal-body {
+  padding: 20px;
 }
 
-.btn-secondary-editar,
-.btn-primary-editar {
-  padding: 10px 20px; /* Espaciado interior de los botones */
+.modal-footer {
+  border-top: 1px solid #dee2e6;
+  padding: 20px;
 }
 
 .btn-secondary-editar {
-  background-color: #6c757d; /* Color de fondo del botón Cerrar */
-  border-color: #6c757d; /* Color del borde del botón Cerrar */
+  background-color: #6c757d;
+  color: #fff;
 }
 
 .btn-primary-editar {
-  background-color: #007bff; /* Color de fondo del botón Guardar Cambios */
-  border-color: #007bff; /* Color del borde del botón Guardar Cambios */
+  background-color: #007bff;
+  color: #fff;
 }
 
 .btn-secondary-editar:hover,
 .btn-primary-editar:hover {
-  background-color: #5a6268; /* Color de fondo del botón Cerrar y Guardar Cambios al pasar el mouse */
-  border-color: #5a6268; /* Color del borde del botón Cerrar y Guardar Cambios al pasar el mouse */
-  color: #fff; /* Color del texto al pasar el mouse */
+  opacity: 0.8;
+}
+
+.cerrar-modal {
+  color: #000;
+}
+
+.cerrar-modal:hover {
+  color: #000;
+}
+
+.container-Modal-editar {
+  padding: 20px;
 }

@@ -48,66 +48,64 @@ const ProductList = () => {
 
   return (
     <div className="product-list-container">
-      <h2>Listado de Productos</h2>
-      <table className="product-table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Categoría</th>
-            <th>Precio</th>
-            <th>Talles</th>
-            <th>Colores</th>
-            <th>Cantidad Disponible</th>
-            <th>Acciones</th>
+    <h2>Listado de Productos</h2>
+    <table className="product-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Categoría</th>
+          <th>Precio</th>
+          <th>Talles</th>
+          <th>Colores</th>
+          <th>Cantidad Disponible</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {allProductos.map((producto) => (
+          <tr key={producto.id}>
+            <td>{producto.id}</td>
+            <td>{producto.nombre}</td>
+            <td>{producto.categoria}</td>
+            <td>{producto.precio}</td>
+            <td>
+              {producto.variantes.map((variante, index) => (
+                <div key={`${producto.id}-${index}-talla`}>{variante.talla}</div>
+              ))}
+            </td>
+            <td>
+              {producto.variantes.map((variante, index) => (
+                <div key={`${producto.id}-${index}-color`}>{variante.color}</div>
+              ))}
+            </td>
+            <td>
+              {producto.variantes.map((variante, index) => (
+                <div key={`${producto.id}-${index}-cantidad`}>{variante.cantidad_disponible}</div>
+              ))}
+            </td>
+            <td>
+              <button className="action-button" onClick={() => handleEdit(producto.id)}>
+                Editar
+              </button>
+              <button className="action-button" onClick={() => handleDelete(producto.id)}>
+                Eliminar
+              </button>
+            </td>
           </tr>
-        </thead>
-        <tbody>
-          {allProductos.map((producto) => (
-            <tr key={producto.id}>
-              <td>{producto.id}</td>
-              <td>{producto.nombre}</td>
-              <td>{producto.categoria}</td>
-              <td>{producto.precio}</td>
-              <td>
-                {producto.variantes.map((variante, index) => (
-                  <div key={`${producto.id}-${index}-talla`}>{variante.talla}</div>
-                ))}
-              </td>
-              <td>
-                {producto.variantes.map((variante, index) => (
-                  <div key={`${producto.id}-${index}-color`}>{variante.color}</div>
-                ))}
-              </td>
-              <td>
-                {producto.variantes.map((variante, index) => (
-                  <div key={`${producto.id}-${index}-cantidad`}>{variante.cantidad_disponible}</div>
-                ))}
-              </td>
-             
-              <td>
-                <button onClick={() => handleEdit(producto.id)}>
-                  <FontAwesomeIcon icon={faPencilAlt} />
-                </button>
-                <button onClick={() => handleDelete(producto.id)}>
-                  <FontAwesomeIcon icon={faTrash} />
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    
-      <Modal className="modal-dialog" show={showEditModal} onHide={handleClose}>
-        <EditProductModal
-          show={showEditModal}
-          handleClose={handleClose}
-          product={selectedProduct}
-          handleSaveChanges={handleSaveChanges}
-        />
-      </Modal>
-    
-    </div>
+        ))}
+      </tbody>
+    </table>
+  
+    <Modal className="modal-dialog" show={showEditModal} onHide={handleClose}>
+      <EditProductModal
+        show={showEditModal}
+        handleClose={handleClose}
+        product={selectedProduct}
+        handleSaveChanges={handleSaveChanges}
+      />
+    </Modal>
+  </div>
   );
 };
 

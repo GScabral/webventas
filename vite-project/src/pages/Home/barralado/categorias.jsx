@@ -12,7 +12,7 @@ export const categoria={
     "Polleras":[],
     "Sweaters":[],
     "Camperas":[],
-    "Bestidos":[],
+    "vestidos":[],
     "Calzas":[],
     "Tops deportivos":[],
     "Sudaderas":[],

@@ -4,8 +4,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
-import { agregarAlCarrito, agregarFav } from '../../../redux/action'; // Asegúrate de importar actualizarVariante
-
+import { agregarFav, agregarAlCarrito } from '../../../redux/action';
 
 const Card = ({ id, nombre, descripcion, categoria, precio, imagenes, variantes }) => {
   const dispatch = useDispatch();
@@ -19,87 +18,48 @@ const Card = ({ id, nombre, descripcion, categoria, precio, imagenes, variantes 
   const [botonHabilitado, setBotonHabilitado] = useState(true);
   const [coloresDisponibles, setColoresDisponibles] = useState([]);
 
-
-  const carrito = useSelector(state => state.carrito);
-  const allProductos = useSelector(state => state.allProductos);
   const variantesDisponibles = variantes || [];
 
 
   
-console.log(allProductos)
 
-  const handleAgregarAlCarrito = () => {
-    setShowModal(true);
-  };
-
-  const handleAgregarFav = () => {
-
+  const handleAgregarAlCarritoLocal = () => {
+    if (!talleSeleccionado || !colorSeleccionado) {
+      alert('Por favor, selecciona un talle y un color antes de agregar al carrito.');
+      return;
+    }
+  
+    const varianteSeleccionada = variantesDisponibles.find(
+      (variante) => variante.talla.toLowerCase() === talleSeleccionado.toLowerCase() && variante.color === colorSeleccionado
+    );
+  
+    if (!varianteSeleccionada) {
+      alert('No se encontró una variante disponible con el talle y color seleccionados.');
+      return;
+    }
+  
     const producto = {
       id,
       nombre,
       precio,
       descripcion,
+      cantidad_elegida: cantidad, // Incluye la cantidad seleccionada en el objeto del producto
       variantes: [
         {
-          idVariante: variantes.idVariante, // Suponiendo que solo hay una variante por producto
+          idVariante: varianteSeleccionada.idVariante,
           talla: talleSeleccionado,
           color: colorSeleccionado,
-          cantidad_disponible: variantes.cantidad_disponible,
-          imagenes:variantes.imagenes,
+          cantidad_disponible: varianteSeleccionada.cantidad_disponible,
+          imagenes: varianteSeleccionada.imagenes, // Usar las imágenes de la variante seleccionada
         }
       ],
     };
-
-    dispatch(agregarFav(producto));
-    setConfirmacionFav(true);
-    setTimeout(() => setConfirmacionFav(false), 3000);
-  };
-
-  const confirmarAgregarAlCarrito = () => {
-    if (!talleSeleccionado || !colorSeleccionado) {
-      alert('Por favor, selecciona un talle y un color antes de agregar al carrito.');
-      return;
-    }
-
-    const varianteSeleccionada = variantesDisponibles.find(
-      (variante) => variante.talla.toLowerCase() === talleSeleccionado.toLowerCase() && variante.color === colorSeleccionado
-    );
-
-    if (!varianteSeleccionada) {
-      console.error('No se encontró la variante seleccionada. Por favor, intenta nuevamente.');
-      return;
-    }
-
-    if (cantidad <= 0 || cantidad > varianteSeleccionada.cantidad_disponible) {
-      alert('La cantidad seleccionada excede el stock disponible para este producto o es inválida.');
-      return;
-    }
-
-    const productoConVariantes = {
-      id,
-      nombre,
-      descripcion,
-      categoria,
-      precio,
-      variantes: [
-        {
-          idVariante: variantes[0].idVariante, // Suponiendo que solo hay una variante por producto
-          talla: talleSeleccionado,
-          color: colorSeleccionado,
-          cantidad_disponible: variantes[0].cantidad_disponible,
-          imagenes:variantes[0].imagenes,
-        }
-      ],
-      cantidad_elegida:cantidad,
-    };
-
-    
-
-    dispatch(agregarAlCarrito(productoConVariantes));
-    setShowModal(false);
+  
+    dispatch(agregarAlCarrito(producto));
     setConfirmacionCarrito(true);
     setTimeout(() => setConfirmacionCarrito(false), 3000);
   };
+  
 
   const handleTalleChange = (e) => {
     const talleSeleccionado = e.target.value;
@@ -137,6 +97,7 @@ console.log(allProductos)
       setBotonHabilitado(cantidadDisponible > 0);
     }
   };
+
   const incrementarCantidad = () => {
     if (!talleSeleccionado || !colorSeleccionado) {
       console.error('Error: Talle o color no definidos.');
@@ -169,11 +130,11 @@ console.log(allProductos)
       console.error('Error: Talle o color no definidos.');
       return;
     }
-  
+
     const varianteSeleccionada = variantesDisponibles.find(
       (variante) => variante.talla.toLowerCase() === talleSeleccionado.toLowerCase() && variante.color === colorSeleccionado
     );
-  
+
     if (varianteSeleccionada && cantidad > 1) {
       const nuevaCantidad = cantidad - 1;
       setCantidad(nuevaCantidad);
@@ -189,54 +150,53 @@ console.log(allProductos)
 
   const tallesDisponibles = [...new Set(variantesDisponibles.map((variante) => variante.talla))];
 
-
   return (
     <div className="card-container">
       {confirmacionCarrito && <div className="confirmation-message">¡Producto agregado al carrito!</div>}
       {confirmacionFav && <div className="confirmation-message">¡Producto agregado a favoritos!</div>}
       {showModal && (
         <div className="modal-card">
+          <span className="close" onClick={() => setShowModal(false)}>
+            &times;
+          </span>
           <div className="modal-content-card">
-            <span className="close" onClick={() => setShowModal(false)}>
-              &times;
-            </span>
             <h2>Agregar al Carrito</h2>
-            <label htmlFor="talle">Talle:</label>
+            <label htmlFor="talle" className="label-card">Talle:</label>
             <select
               id="talle"
               value={talleSeleccionado}
               onChange={handleTalleChange}
-              className='clases-card'
+              className="select-card"
             >
-              <option className='option-card' value="">Selecciona un talle</option>
+              <option value="">Selecciona un talle</option>
               {tallesDisponibles.map((talle, idx) => (
-                <option className='option-card' key={`talle-${idx}`} value={talle}>
+                <option key={`talle-${idx}`} value={talle}>
                   {talle}
                 </option>
               ))}
             </select>
-            <label htmlFor="color">Color:</label>
+            <label htmlFor="color" className="label-card">Color:</label>
             <select
               id="color"
               value={colorSeleccionado}
               onChange={handleColorChange}
-              className='clases-card'
+              className="select-card"
             >
               <option value="">Selecciona un color</option>
               {coloresDisponibles.map((color, idx) => (
-                <option className='option-card' key={`color-${idx}`} value={color}>
+                <option key={`color-${idx}`} value={color}>
                   {color}
                 </option>
               ))}
             </select>
-            <button onClick={incrementarCantidad} disabled={!botonHabilitado}>
+            <button onClick={incrementarCantidad} className="button-card" disabled={!botonHabilitado}>
               +
             </button>
             <input
               type="number"
               id="cantidad"
               value={cantidad}
-              className='clases-card'
+              className="input-card"
               onChange={(e) => {
                 const nuevaCantidad = parseInt(e.target.value, 10) || 1;
                 if (nuevaCantidad <= cantidadMaxima) {
@@ -244,10 +204,10 @@ console.log(allProductos)
                 }
               }}
             />
-            <button onClick={decrementarCantidad} >
+            <button onClick={decrementarCantidad} className="button-card">
               -
             </button>
-            <button onClick={confirmarAgregarAlCarrito} disabled={!botonHabilitado}>
+            <button onClick={handleAgregarAlCarritoLocal} className="button-card" disabled={!botonHabilitado}>
               Agregar al Carrito
             </button>
           </div>
@@ -255,15 +215,15 @@ console.log(allProductos)
       )}
       <Link to={`/detail/${id}`} className="card-link">
         <div className="card-content">
-        <img className="card-imagen"src={`http://localhost:3004/${variantes && variantes[0] && variantes[0].imagenes && variantes[0].imagenes[0]}`}/>
+          <img className="card-imagen" src={`http://localhost:3004/${variantes && variantes[0] && variantes[0].imagenes && variantes[0].imagenes[0]}`} />
           <span className="card-categoria">{categoria}</span>
           <p className="card-inf">{descripcion}</p>
           <h3 className="card-precio">${precio}</h3>
         </div>
       </Link>
       <div className="card-buttons">
-        <button className="card-detail" onClick={handleAgregarAlCarrito}>
-        añadir al carrito
+        <button className="card-detail" onClick={() => setShowModal(true)}>
+          añadir al carrito
         </button>
       </div>
     </div>

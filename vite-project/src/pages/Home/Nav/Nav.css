@@ -3,7 +3,7 @@
   justify-content: flex-end;
   align-items: center;
   padding: 10px;
-  background-color: #ffffff;
+ background-color: #ffffff;
   color: white;
   z-index: 2;
 }
@@ -13,10 +13,13 @@
   border: none;
   border-radius: 5px;
   background-color: transparent;
-  color: #000000;
+  color:#b97431;
   cursor: pointer;
 z-index: 2;
 border: solid 1px  #b97431;
+font-family: "Cedarville Cursive", cursive;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .superior:hover {

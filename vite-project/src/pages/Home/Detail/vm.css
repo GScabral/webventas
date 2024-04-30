@@ -1,52 +1,50 @@
 .container-vm {
     max-width: 800px;
     margin: 0 auto;
-    padding: 150px;
-    border: solid black 1px;
-}
-
-.vm-h1 {
-    font-size: 24px;
-    font-weight: bold;
+    padding: 50px; /* Reducido el padding para hacerlo más compacto */
+    border: solid 1px #ccc;
+    border-radius: 10px;
+    background-color: #fff; /* Fondo blanco */
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    font-family: "Cedarville Cursive", cursive;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .vm-h1 {
+    font-size: 1.5em;
     margin-bottom: 20px;
 }
 
 .vm-p {
-    font-size: 18px;
     margin-bottom: 20px;
 }
 
-.logo-vm {
-    width: 30px;
-    height: 30px;
+.social-links {
+    margin-bottom: 20px;
+}
+
+.social-logo {
+    width: 40px;
+    height: 40px;
     margin-right: 10px;
 }
 
-.bonton-vm {
-    background-color: #007bff;
-    color: #fff;
+.vm-button {
     padding: 10px 20px;
+    background-color: #d4773a;
+    color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
 }
 
-.bonton-vm:hover {
-    background-color: #0056b3;
+.contact-info {
+    margin-top: 20px;
 }
 
-.contacto-vm {
-    margin-top: 50px;
-    font-size: 16px;
-}
-
-.contacto-vm a {
-    text-decoration: none;
-    color: #007bff;
+.map-logo {
+    width: 40px;
+    height: 40px;
     margin-left: 10px;
-}
-
-.contacto-vm a:hover {
-    text-decoration: underline;
 }

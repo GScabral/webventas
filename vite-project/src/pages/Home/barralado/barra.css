@@ -1,100 +1,109 @@
 .sidebar {
     display: flex;
     flex-direction: column;
-    background-color: transparent; 
+     background-color: #ffffff; 
+   
     padding: 20px;
-    /* border-radius: 5px; */
-    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
     max-width: 400px;
     margin: 20px;
     max-height: 500px;
-    top: 40px;
     overflow-y: auto;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    position: relative; /* Cambio de posición */
+    position: relative;
     top: 60px;
-    
-    
-}
-.sidebar::-webkit-scrollbar {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+  
+  .sidebar::-webkit-scrollbar {
     display: none;
-}
-
-.sidebar-h1 {
+  }
+  
+  .sidebar-h1 {
     font-size: 1.5rem;
     margin-bottom: 20px;
-}
-
-/* Estilos de los botones de filtro */
-.button-filtros {
+    color: #333;
+  }
+  
+  .button-filtros {
     display: block;
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
-    background-color: #ffffff;
-    color: #dfb1a2;
-   border-radius: 0px;
+    background-color: #f6c1c1;
+    color: #d4773a;
+    border: solid 1px #d4773a;
+    border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    -webkit-transition: 0,5s linear;
-    transition:0,5s linear;
-}
-
-
-
-/* Estilos de los elementos de lista */
-.ul-filtros {
+  }
+  
+  .button-filtros:hover {
+    background-color: #d18d7b;
+    color: black;
+  }
+  
+  .ul-filtros {
     list-style-type: none;
     padding: 0;
-}
-
-.li-filtros {
-    padding: 8px 0;
-    cursor: pointer;
-    transition: color 0.3s ease;
-}
-
-.li-filtros:hover {
-    color: #2facbf;
-}
-
-/* Estilos para los filtros desplegables */
-.button-talles, .button-precio {
+  }
+  
+  .button-talles,
+  .button-precio {
     display: block;
     width: 100%;
     padding: 8px;
     margin-bottom: 5px;
-    background-color: #ecbdad;
+    background-color: #db8f93;
+    color: #e7e7e7;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: "Permanent Marker", cursive;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  .button-sub-categoria{
+    display: block;
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 5px;
+    background-color: #f1dad3;
     color: #555353;
     border: none;
     border-radius: 3px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-}
-
-.button-selected {
-    /* Estilos para resaltar la selección, como un color de fondo diferente */
+    font-family: "Permanent Marker", cursive;
+  font-weight: 400;
+  font-style: normal;
+  }
+  
+  .button-selected {
     display: block;
     width: 100%;
     padding: 8px;
     margin-bottom: 5px;
-    background-color: #4f1371;
+    background-color: #db6d72;
     color: #ffffff;
     border: solid 1px black;
     border-radius: 3px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    /* Otros estilos para indicar la selección */
-}
-
-.button-talles:hover, .button-precio:hover {
-    background-color: #c69e86;
-}
-
-.divider {
-    margin: 10px 0; /* Margen para separar visualmente las secciones */
-    border: none; /* Sin borde */
-    border-top: 1px solid #000000; /* Borde superior de color gris claro */
+  }
+  
+  .button-talles:hover,
+  .button-precio:hover {
+    background-color: #db6d72;
+  }
+  
+  .divider {
+    margin: 10px 0;
+    border: none;
+    border-top: 1px solid #ccc;
   }
 
+ 

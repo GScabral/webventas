@@ -156,14 +156,14 @@ const reducer = (state = initialState, action) => {
     case FILTER:
       const { categoria, talles } = action.payload;
       let filteredProducts = state.allProductosBackUp;
-
+    
       if (categoria) {
         const categoriaFiltrada = categoria.toLowerCase();
         filteredProducts = filteredProducts.filter(
           (producto) => producto.categoria.toLowerCase() === categoriaFiltrada
         );
       }
-
+    
       if (talles) {
         const tallesFiltrados = talles.toLowerCase();
         filteredProducts = filteredProducts.filter((producto) =>
@@ -173,20 +173,20 @@ const reducer = (state = initialState, action) => {
           )
         );
       }
-
+    
+      // Calcula el total de productos filtrados y las páginas
       const totalFilteredItems = filteredProducts.length;
       const totalPages = Math.ceil(totalFilteredItems / ITEMS_PER_PAGE);
-
+    
+      // Aplica la paginación a los productos filtrados
       const startIndex = (state.currentPage - 1) * ITEMS_PER_PAGE;
       const endIndex = startIndex + ITEMS_PER_PAGE;
-
       const paginatedFilteredProducts = filteredProducts.slice(startIndex, endIndex);
-
-      
+    
       return {
         ...state,
         allProductos: paginatedFilteredProducts,
-        filtered: filteredProducts, // Cambia "filterProductos" a "filtered"
+        filtered: paginatedFilteredProducts, // Usa los productos paginados como productos filtrados
         filter: true,
         totalPages: totalPages,
         filters: { ...state.filters, categoria: categoria, talles: talles },

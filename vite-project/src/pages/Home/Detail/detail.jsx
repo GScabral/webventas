@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getById } from "../../../redux/action";
 import { useDispatch, useSelector } from "react-redux";
-import { agregarAlCarrito, agregarFav } from "../../../redux/action";
+import { agregarAlCarrito } from "../../../redux/action";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { Link } from "react-router-dom";
 import './detail.css';
 
@@ -21,7 +21,7 @@ const Detail = () => {
   const [showModal, setShowModal] = useState(false);
 
 
-  console.log("detail", info)
+
 
   const handleTalleChange = (event) => {
     const talleSeleccionado = event.target.value;
@@ -76,8 +76,6 @@ const Detail = () => {
     setCantidad(cantidad);
   };
 
-
-
   const handleImageChange = (index) => {
     setImagenActual(index);
   };
@@ -95,7 +93,7 @@ const Detail = () => {
       id: info.id,
       nombre: info.nombre,
       precio: info.precio,
-      imagenes: info.imagenes,
+      imagenes: info.variantes[imagenActual].imagenes, // Acceder a las imágenes de la variante seleccionada
       descripcion: info.descripcion,
       categoria: info.categoria,
       talle: talleSeleccionado,
@@ -104,17 +102,6 @@ const Detail = () => {
     };
     dispatch(agregarAlCarrito(producto));
     setShowModal(false);
-  };
-
-  const handleAgregarFav = () => {
-    const producto = {
-      id: info.id,
-      nombre: info.nombre,
-      precio: info.precio,
-      imagenes: info.imagenes,
-      descripcion: info.descripcion,
-    };
-    dispatch(agregarFav(producto));
   };
 
   useEffect(() => {
@@ -129,111 +116,81 @@ const Detail = () => {
         <div className="detail-container">
           <div className="detail-imagen-container">
             {info && info.variantes && info.variantes.length > 0 && (
-              <img
-                className="detail-imagen"
-                src={`http://localhost:3004/${info.variantes[0].imagenes[imagenActual]}`}
-                alt=""
-              />
-            )}
-            {info && info.variantes && info.variantes.length > 0 && (
-              <div className="imagen-buttons">
-                {Array.from(new Set(info.variantes[0].imagenes)).map((imagen, index) => (
-                  <button
-                    key={index}
-                    className={`imagen-button ${index === imagenActual ? 'active' : ''}`}
-                    onClick={() => handleImageChange(index)}
-                  >
-                    {index + 1}
-                  </button>
-                ))}
+              <div className="detail-imagen-container">
+                <img
+                  className="detail-imagen"
+                  src={`http://localhost:3004/${info.variantes[imagenActual].imagenes[0]}`}
+                  alt=""
+                />
+                <div className="imagen-buttons">
+                  {info.variantes
+                    .reduce((acc, variante) => {
+                      variante.imagenes.forEach((imagen) => {
+                        if (!acc.includes(imagen)) {
+                          acc.push(imagen);
+                        }
+                      });
+                      return acc;
+                    }, [])
+                    .map((imagen, index) => (
+                      <button
+                        key={index}
+                        className={`imagen-button ${index === imagenActual ? 'active' : ''}`}
+                        onClick={() => handleImageChange(index)}
+                      >
+                        {index + 1}
+                      </button>
+                    ))}
+                </div>
               </div>
             )}
           </div>
           <div className="detail-content">
-            <p className="detail-title">Prenda: {info.nombre}</p>
+            <p className="detail-title">{info.nombre}</p>
             <p className="detail-description">{info.descripcion}</p>
-            <p className="detail-details">Categoría: {info.categoria}</p>
-            <p className="detail-details">Precio: {info.precio}</p>
-            {info.variantes && info.variantes.length > 0 && (
-              <div className="variantes-container">
-                <h4>Variantes:</h4>
-                <ul>
-                  {info.variantes.reduce((accumulator, variante) => {
-                    // Buscar si ya se ha agregado la talla al acumulador
-                    const existingIndex = accumulator.findIndex(item => item.talla === variante.talla);
-
-                    if (existingIndex !== -1) {
-                      // Si la talla ya existe, agregar el color a esa talla
-                      accumulator[existingIndex].colores.push(variante.color);
-                    } else {
-                      // Si la talla no existe, agregar la talla con su color correspondiente
-                      accumulator.push({ talla: variante.talla, colores: [variante.color] });
-                    }
-
-                    return accumulator;
-                  }, []).map((variante, index) => (
-                    <li key={index}>
-                      <p>Talle: {variante.talla}</p>
-                      <p>Colores: {variante.colores.join(', ')}</p>
-                    </li>
+            <p className="detail-details">Precio: ${info.precio}</p>
+            <div className="selecion-detail">
+              <div className="selecion-content-detail">
+                <label htmlFor="talle">Talle:</label>
+                <select id="talle" value={talleSeleccionado} onChange={handleTalleChange}>
+                  <option value="">Selecciona un talle</option>
+                  {info.variantes &&
+                    info.variantes.map((variante, index) => (
+                      <option key={index} value={variante.talla}>
+                        {variante.talla}
+                      </option>
+                    ))}
+                </select>
+                <label htmlFor="color">Color:</label>
+                <select id="color" value={colorSeleccionado} onChange={handleColorChange}>
+                  <option value="">Selecciona un color</option>
+                  {coloresDisponibles.map((color, index) => (
+                    <option key={index} value={color}>
+                      {color}
+                    </option>
                   ))}
-                </ul>
+                </select>
+                <label htmlFor="cantidad">Cantidad:</label>
+                <input
+                  type="number"
+                  id="cantidad"
+                  value={cantidad}
+                  min="1"
+                  max={cantidadDisponible}
+                  onChange={handleCantidadChange}
+                />
+                <button onClick={handleAgregarAlCarrito}>Agregar al Carrito</button>
               </div>
-            )}
-
-            <div className="card-buttons">
-              <button className='card-detail' onClick={() => setShowModal(true)}>
-                <FontAwesomeIcon icon={faShoppingCart} />
-              </button>
-              {/*<button className='card-favorite' onClick={handleAgregarFav}>
-                <FontAwesomeIcon icon={faHeart} />
-              </button>*/}
             </div>
           </div>
         </div>
       )}
-
       <Link className="volver" to={"/"}>
         Volver
       </Link>
-
-      {/* Ventana emergente */}
-      {showModal && (
-        <div className="modal-detail">
-          <div className="modal-content-detail">
-            <span className="close-detail" onClick={() => setShowModal(false)}>
-              &times;
-            </span>
-            <h2>Selecciona la variante</h2>
-            <label htmlFor="talle">Talle:</label>
-            <select id="talle" value={talleSeleccionado} onChange={handleTalleChange}>
-              <option value="">Selecciona un talle</option>
-              {info.variantes && info.variantes.map((variante, index) => (
-                <option key={index} value={variante.talla}>{variante.talla}</option>
-              ))}
-            </select>
-            <label htmlFor="color">Color:</label>
-            <select id="color" value={colorSeleccionado} onChange={handleColorChange}>
-              <option value="">Selecciona un color</option>
-              {coloresDisponibles.map((color, index) => (
-                <option key={index} value={color}>{color}</option>
-              ))}
-            </select>
-            <label htmlFor="cantidad">Cantidad:</label>
-            <input
-              type="number"
-              id="cantidad"
-              value={cantidad}
-              min="1" // Establecer mínimo en 1
-              max={cantidadDisponible} // Establecer máximo según la cantidad disponible
-              onChange={handleCantidadChange}
-            />
-            <button onClick={handleAgregarAlCarrito}>Agregar al Carrito</button>
-          </div>
-        </div>
-      )}
     </div>
   );
+  
 };
 
 export default Detail;

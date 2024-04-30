@@ -5,7 +5,7 @@
 }
 
 .image-container-carrusel {
-  border:  solid 1px black;
+  border:  solid 3px #f6c1c1;
   position: relative;
   width: 100%; /* Asegura que la imagen ocupe todo el ancho */
   max-width: 700px; /* Establece un ancho máximo mayor para el contenedor */
@@ -32,6 +32,7 @@
   font-size: 30px;
   border: none;
   transition: transform 0.2s;
+  color: #f6c1c1;
 }
 
 
@@ -48,6 +49,7 @@
   font-size: 30px;
   border: none;
   transition: transform 0.2s;
+  color: #f6c1c1;
 }
 
 .buton-carousel-right:hover{
@@ -74,9 +76,9 @@
   border-radius: 50%;
   margin: 0 5px;
   cursor: pointer;
-  border: solid 1px black;
+  border: solid 1px #f6c1c1;
 }
 
 .dot.active {
-  background-color: #333;
+  background-color: #f6c1c1;
 }

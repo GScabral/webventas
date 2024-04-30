@@ -19,7 +19,15 @@ const DevolucionCambio = () => {
         por prendas de valor inferior.
       </p>
       <p className="cambio-texto">
-        ¿Tienes alguna duda? No dudes en escribirnos por WhatsApp.
+        ¿Tienes alguna duda? No dudes en escribirnos por{" "} 
+        <a
+          href="https://wa.me/1234567890" /* Reemplaza con tu enlace de WhatsApp */
+          className="cambio-whatsapp"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          WhatsApp
+        </a>
       </p>
     </div>
   );

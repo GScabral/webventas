@@ -44,7 +44,7 @@
 }
 
 .boton-cantidad {
-  background-color: #007bff;
+  background-color: #f6c1c1;
   color: #fff;
   border: none;
   border-radius: 3px;
@@ -73,15 +73,7 @@
   margin-top: 20px;
 }
 
-.boton-carrito {
-  background-color: #88a790;
-  color: #fff;
-  border: none;
-  border-radius: 3px;
-  padding: 10px 20px;
-  cursor: pointer;
-  margin-top: 10px;
-}
+
 
 .enlace-home {
   text-decoration: none;
@@ -89,44 +81,98 @@
   margin-left: 10px;
 }
 
-.boton-volver {
-  background-color: #dcca94;
-}
-
-.boton-vaciar {
-  background-color: #cc8d93;
-}
 
 .modal-compra {
-  background-color: rgba(0, 0, 0, 0.5);
+
   position: fixed;
-  top: 0;
+  z-index: 9999;
   left: 0;
+  top: 0;
   width: 100%;
   height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .modal-content-compra {
-  background-color: #fff;
-  border-radius: 5px;
+  background-color: #fefefe;
+  margin: 15% auto;
   padding: 20px;
+  border: 1px solid #ccc;
+  width: 80%;
+  max-width: 600px;
   position: relative;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .close-compra {
+  color: #aaa;
   position: absolute;
-  top: 5px;
+  top: 10px;
   right: 10px;
+  font-size: 24px;
   cursor: pointer;
 }
 
-.formulario-correo {
-  margin-top: 20px;
+.close-compra:hover {
+  color: #333;
 }
 
-#total {
-  font-weight: bold;
+.formulario-correo label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.formulario-correo input[type="email"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 16px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.formulario-correo input[type="email"]:focus {
+  outline: none;
+  border-color: #f6c1c1;
+}
+
+
+.boton-carrito {
+  background-color: #f6c1c1;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 16px;
+  margin-right: 10px; /* Ajusta el margen derecho según sea necesario */
+  margin-left: 10px;
+  font-family: "Cedarville Cursive", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.boton-carrito:hover {
+  background-color: #f6c1c1;
+}
+
+.carrito-nPedido {
+  margin-top: 16px;
+  font-size: 18px;
+}
+
+.carrito-indicaciones {
+  margin-top: 12px;
+  font-size: 14px;
+}
+
+.carrito-indicaciones a {
+  color: #f6c1c1;
+  text-decoration: none;
+}
+
+.carrito-indicaciones a:hover {
+  text-decoration: underline;
 }

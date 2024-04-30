@@ -12,7 +12,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import "./carrito.css";
-import jsPDF from "jspdf"
+
 
 const Carrito = () => {
   const carrito = useSelector((state) => state.carrito);
@@ -22,13 +22,9 @@ const Carrito = () => {
   const [mostrarModal, setMostrarModal] = useState(false);
   const [numeroPedido, setNumeroPedido] = useState(null);
   const [infoPedidoCorreo, setInfoPedidoCorreo] = useState(null);
-  const [correoEnviado, setCorreoEnviado] = useState(false); 
+  const [correoEnviado, setCorreoEnviado] = useState(false);
+  const [pedidoEnviado, setPedidoEnviado] = useState(false);
   const dispatch = useDispatch();
-
-
-
-
-
 
 
   const eliminarDeCarrito = (index) => {
@@ -51,16 +47,15 @@ const Carrito = () => {
 
     const cantidadDisponible = producto.variantes[0].cantidad_disponible;
 
-    console.log('Cantidad elegida antes de incrementar:', producto.cantidad_elegida); // Agregar este log
 
     if (producto.cantidad_elegida < cantidadDisponible) {
       producto.cantidad_elegida++;
       dispatch(actualizarCarrito(nuevoCarrito));
-      console.log('Cantidad elegida después de incrementar:', producto.cantidad_elegida); // Agregar este log
+      console.log('Cantidad elegida después de incrementar:', producto.cantidad_elegida);
     } else {
       console.warn('La cantidad máxima disponible ya ha sido alcanzada.');
     }
-  }
+  };
 
   const decrementarCantidad = (index) => {
     const nuevoCarrito = [...carrito];
@@ -76,11 +71,11 @@ const Carrito = () => {
       return;
     }
 
-    console.log('Cantidad elegida antes de decrementar:', producto.cantidad_elegida); // Agregar este log
+
 
     producto.cantidad_elegida--;
     dispatch(actualizarCarrito(nuevoCarrito));
-    console.log('Cantidad elegida después de decrementar:', producto.cantidad_elegida); // Agregar este log
+
   };
 
   const calcularTotal = () => {
@@ -114,19 +109,24 @@ const Carrito = () => {
         cantidad: producto.cantidad_elegida,
         color: producto.variantes[0].color,
         talla: producto.variantes[0].talla,
-        total:total
+        total: total
       }));
 
-      // Realiza la acción addPedido con los datos del pedido
+      console.log('Pedido a enviar al servidor:', pedido);
+      console.log(pedido.id)
+      console.log(pedido.cantidad)
       const response = await dispatch(addPedido(pedido));
 
       if (response) {
         const numeroPedido = response.data.id_pedido;
         setNumeroPedido(numeroPedido);
-        setInfoPedidoCorreo(pedido); // Almacena la información del pedido
-        dispatch(actualizarVariante(pedido)); // Corregir esta línea
+        setInfoPedidoCorreo(pedido);
+        pedido.forEach(producto => {
+          dispatch(actualizarVariante(producto.id, producto.cantidad));
+        });
         setMostrarFormularioCorreo(true);
         setMostrarModal(true);
+        setPedidoEnviado(true);
         dispatch(vaciarCarrito());
       } else {
         throw new Error('Error al agregar el pedido');
@@ -141,17 +141,17 @@ const Carrito = () => {
       const infoPedido = infoPedidoCorreo;
       await dispatch(enviarCorreo(numeroPedido, infoPedido, correo));
       console.log("Correo enviado correctamente");
-      setCorreoEnviado(true); 
+      setCorreoEnviado(true);
       setMostrarFormularioCorreo(false);
     } catch (error) {
       console.error("Error al enviar el correo", error);
     }
   };
-  
+
   const handleSubmitCorreo = async (event) => {
     event.preventDefault();
     const correo = event.target.correo.value;
-    
+
     if (numeroPedido) {
       enviarCorreoConPedido(correo);
     } else {
@@ -185,19 +185,20 @@ const Carrito = () => {
               {carrito.map((producto, index) => (
                 <tr key={index}>
                   <td className="carrito-td">
-                    {producto.variantes[0].imagenes.length > 0 && (
+                    {producto.variantes.length > 0 && producto.variantes[0].imagenes.length > 0 && (
                       <img className="producto-imagen" src={`http://localhost:3004/${producto.variantes[0].imagenes[0]}`} alt="" />
                     )}
                   </td>
                   <td className="carrito-td">{producto.descripcion}</td>
-                  <td className="carrito-td">{producto.variantes[0].color}</td>
-                  <td className="carrito-td">{producto.variantes[0].talla}</td>
+                  <td className="carrito-td">{producto.variantes.length > 0 ? producto.variantes[0].color : ''}</td>
+                  <td className="carrito-td">{producto.variantes.length > 0 ? producto.variantes[0].talla : ''}</td>
                   <td className="carrito-td">
                     <div className="cantidad-acciones">
-                      <span className="cantidad-carrito">{producto.cantidad_elegida}</span>
+
                       <div className="boton-cantidad-div">
                         <button className="boton-cantidad" onClick={() => decrementarCantidad(index)}>-</button>
                       </div>
+                      <span className="cantidad-carrito">{producto.cantidad}</span>
                       <div className="boton-cantidad-div">
                         <button className="boton-cantidad" onClick={() => incrementarCantidad(index)}>+</button>
                       </div>
@@ -216,17 +217,21 @@ const Carrito = () => {
           <p className="mensaje-vacio">No hay productos en el carrito</p>
         )}
         <p className="total">Total: <span id="total">{calcularTotal()}</span></p>
-        <button className="boton-carrito boton-vaciar" onClick={() => dispatch(vaciarCarrito())}>
+        <button className="boton-carrito" onClick={() => dispatch(vaciarCarrito())}>
           Vaciar Carrito
         </button>
         <Link to="/" className="enlace-home">
-          <button className="boton-carrito boton-volver">Volver a la tienda</button>
+          <button className="boton-carrito">Volver a la tienda</button>
         </Link>
-        <button className="boton-carrito pedido-carrito" onClick={handleRealizarPedido}>
-          comprar
+        <button className="boton-carrito" onClick={handleRealizarPedido}>
+          Comprar
         </button>
-
- 
+        {pedidoEnviado && (
+          <div className="pedido-enviado">
+            <p>Tu pedido ha sido enviado correctamente.</p>
+            <p>Se te enviará un correo electrónico con los detalles del pedido.</p>
+          </div>
+        )}
         {mostrarModal && (
           <div className="modal-compra">
             <div className="modal-content-compra">
@@ -235,30 +240,23 @@ const Carrito = () => {
                 <label htmlFor="correo">Ingresa tu correo electrónico:</label>
                 <input type="email" id="correo" name="correo" required />
                 <button type="submit" className="boton-carrito">Enviar</button>
-            
               </form>
-              <h2>Número de pedido: {numeroPedido}</h2>
-              <p>
-                Por faor guarde este numero para retirar su producto o para coordinar el envio con el proveedor
+              <h2 className="carrito-nPedido">Número de pedido: {numeroPedido}</h2>
+              <p className="carrito-indicaciones">
+                Por favor guarde este número para retirar su producto o para coordinar el envío con el proveedor.
               </p>
-              <p>
+              <p className="carrito-indicaciones">
                 Si deseas recibir el producto en tu casa, comunícate{" "}
                 <a href={"https://wa.me/message/CTLCYWOO7XTML1"}>aquí</a>.
               </p>
-              en caso de que quiera pagar mediante trasferencia puedo hacerlo aca
-              .
-              .
-              .
-              .
-              un vez realizado el pago puede enviarlo aca para confirmar
-              <a href={"https://wa.me/message/CTLCYWOO7XTML1"}>aquí</a>.
-              o muestre el comprobante en el local en caso que lo retire personalmente
+              <p className="carrito-indicaciones">
+                En caso de que quiera pagar mediante transferencia, puede hacerlo a este número de cuenta:
+                XXXX-XXXX-XXXX-XXXX. Una vez realizado el pago, puede enviarlo <a href={"https://wa.me/message/CTLCYWOO7XTML1"}>aquí</a> para confirmar.
+                También puede mostrar el comprobante en el local en caso de que lo retire personalmente.
+              </p>
             </div>
-            
           </div>
         )}
- 
-
       </div>
     </div>
   );
