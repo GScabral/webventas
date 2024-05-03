@@ -7,7 +7,7 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { buscar, getProductos } from "../../../redux/action";
 import Carousel from "../carrusel/carrusel";
 import { useDispatch, useSelector } from "react-redux";
-// import { faSync } from '@fortawesome/free-solid-svg-icons';
+// import './Navresponsive.css'
 import './Nav.css';
 
 

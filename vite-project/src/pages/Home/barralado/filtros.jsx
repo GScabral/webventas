@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { filterProduc, orderProducto } from "../../../redux/action";
 import { categoria } from "./categorias";
 import './barra.css';
+// import './barraresponsive.css';
 
 const FiltrosSidebar = () => {
     const [mostrarF, setMostrarF] = useState(false);
@@ -26,12 +27,25 @@ const FiltrosSidebar = () => {
         setMostrarO(!mostrarO);
     };
 
-    const handleFilter = (category, subcategory) => {
-        setSelectedCategory(category === selectedCategory ? "" : category);
-        setSelectedSubcategory(subcategory || "");
-        dispatch(filterProduc({ categoria: category === selectedCategory ? "" : category, subcategoria: subcategory, allProductos }));
-    };
-
+  const handleFilter = (category, subcategory) => {
+    // Si se hace clic en una categoría principal, aplicar el filtro
+    if (!subcategory && selectedCategory !== category) {
+        setSelectedCategory(category);
+        setSelectedSubcategory("");
+        dispatch(filterProduc({ categoria: category, subcategoria: "", allProductos }));
+    } else if (!subcategory && selectedCategory === category) {
+        // Si se hace clic nuevamente en una categoría principal ya seleccionada, desmarcarla
+        setSelectedCategory("");
+        setSelectedSubcategory("");
+        dispatch(filterProduc({ categoria: "", subcategoria: "", allProductos }));
+    } else if (subcategory) {
+        // Si se hace clic en una subcategoría, aplicar el filtro con la categoría principal y la subcategoría
+        setSelectedCategory(category);
+        setSelectedSubcategory(subcategory);
+        dispatch(filterProduc({ categoria: category, subcategoria: subcategory, allProductos }));
+    }
+};
+    
     const handleOrder = (orderType) => {
         if (orderType === selectedPriceOrder) {
             unselectOrder();
@@ -62,7 +76,7 @@ const FiltrosSidebar = () => {
                                 >
                                     {categoriaPrincipal}
                                 </button>
-                                {/* Mostrar subcategorías si existen y si showSubcategories es verdadero */}
+                              
                                 {showSubcategories && selectedCategory === categoriaPrincipal && subcategorias.length > 0 && (
                                     <ul>
                                         {subcategorias.map((subcategoria) => (

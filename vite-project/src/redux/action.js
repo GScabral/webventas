@@ -30,6 +30,9 @@ export const GET_PEDIDOS='GET_PEDIDOS';
 export const GET_CLIENTES='GET_CLIENTES';
 export const ENVIAR_ESTADO='ENVIAR_ESTADO';
 export const DESPACHAR_PRODUCTO = 'DESPACHAR_PRODUCTO';
+export const ADMIN_LOGIN_SUCCESS="ADMIN_LOGIN_SUCCESS";
+
+
 
 export const getProductos = () => {
     return async function (dispatch) {
@@ -381,8 +384,6 @@ export const addPedido = (productos) => {
         productos: productos,
       });
 
-   
-
       return response; // Devuelve la respuesta del servidor
     } catch (error) {
       console.error(error);
@@ -494,3 +495,21 @@ export const enviarCorreo = (idPedido,infoPedido,correo) => {
     }
   };
 };
+
+
+export const LoginAdmin = (password) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post('http://localhost:3004/Nadmin/loginc', {
+        password: password,
+      });
+      dispatch({ type: 'ADMIN_LOGIN_SUCCESS' });
+      return response;
+    } catch (error) {
+      console.error(error);
+      dispatch({ type: 'ADMIN_LOGIN_FAILURE', payload: { error: error.message } });
+      throw error;
+    }
+  };
+};
+

@@ -1,4 +1,6 @@
-const {Router}=require("express")
+const {Router}=require("express");
+require('dotenv').config();
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 const createAdmin = require("../controllers/admin/admin")
 const actualizarStock=require("../controllers/admin/patchAdminProduc");
 const enviarCorreo = require("../controllers/correo/correo");
@@ -48,5 +50,14 @@ router.post('/confirmacionPedido',async (req,res)=>{
 
 })
 
+
+router.post('/loginc', (req, res) => {
+  const { password } = req.body;
+  if (password === ADMIN_PASSWORD) {
+    res.status(200).json({ message: 'Autenticación exitosa' });
+  } else {
+    res.status(401).json({ message: 'Autenticación fallida' });
+  }
+});
 
 module.exports = router;

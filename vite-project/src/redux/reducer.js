@@ -29,6 +29,7 @@ import {
   GET_CLIENTES,
   ENVIAR_ESTADO,
   DESPACHAR_PRODUCTO,
+  ADMIN_LOGIN_SUCCESS,
 } from "./action"
 
 const initialState = {
@@ -53,6 +54,7 @@ const initialState = {
   isLoggedIn: false, 
   estado: null,
   productosDespuesPedido: [],
+  isLoggedInAd: false,
 }
 
 const ITEMS_PER_PAGE = 12;
@@ -467,6 +469,14 @@ const reducer = (state = initialState, action) => {
           })
         };
     
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
+
+case 'ADMIN_LOGIN_SUCCESS':
+  return {
+    ...state,
+    isLoggedInAd: true,
+    error: null,
+  };
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
 
        default:

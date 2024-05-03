@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { getProductos, paginado } from "../../redux/action";
 import './home.css'
-import './homeresponsive.css'
+// import './homeresponsive.css'
 import Nav from "./Nav/Nav";
 import Cards from "./Cards/Cards";
 import FiltrosSidebar from "./barralado/filtros";

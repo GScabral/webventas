@@ -3,7 +3,7 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-image: url("../../../public/WhatsApp\ Image\ 2023-12-22\ at\ 16.58.55.jpeg");
+  background-image: url("/logo.jpeg");
   background-repeat: no-repeat;
   background-size: cover; /* Para cubrir todo el contenedor */
   background-position: center; /* Para centrar la imagen */

@@ -1,0 +1,55 @@
+.sidebar {
+  width: 100%;
+  max-width: 300px; /* Ancho máximo para pantallas grandes */
+}
+
+.ul-filtros {
+  list-style-type: none;
+  padding: 0;
+}
+
+.button-filtros {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.divider {
+  width: 100%;
+  margin: 10px 0;
+}
+
+.button-talles {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 5px;
+  text-align: left;
+}
+
+.button-selected {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 5px;
+  text-align: left;
+  background-color: #007bff;
+  color: #fff;
+}
+
+@media only screen and (min-width: 768px) {
+  .sidebar {
+      max-width: 400px; /* Ancho máximo para tabletas */
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .sidebar {
+      max-width: 500px; /* Ancho máximo para pantallas medianas */
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .sidebar {
+      max-width: 600px; /* Ancho máximo para pantallas grandes */
+  }
+}

@@ -1,6 +1,7 @@
 export const categoria={
     "Remeras":[
         "Remeritas",
+        "musculosa"
     ],
     "Tops y bustiers":[],
     "Blusas":[],
@@ -15,7 +16,6 @@ export const categoria={
     "vestidos":[],
     "Calzas":[],
     "Tops deportivos":[],
-    "Sudaderas":[],
     "Bikinis":[
         "Bikinis dama",
         "Bikinis niñas",
