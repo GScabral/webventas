@@ -4,9 +4,8 @@
 }
 
 .detail-container {
-  display: flex;
+  display:flex;
   justify-content: space-between;
-  align-items: center;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -38,17 +37,15 @@
 }
 
 .detail-imagen-container {
-  position: relative;
-  overflow: hidden;
+
+    max-width: 50%; /* Ancho máximo del 50% del contenedor padre */
+    height: auto; /* Mantener proporción de aspecto */
+    margin-right: 10px; /* Reducir el margen derecho a 10px (o el valor que desees) */
+  
 }
 
 .detail-imagen {
-  max-width: 50%;
-  height: auto;
-}
-
-.detail-imagen:hover {
-  transform: scale(1.5);
+  width: 190%; /* Asegura que la imagen ocupe todo el ancho del contenedor */
 }
 
 .volver {
@@ -173,3 +170,110 @@
 .selecion-content-detail button:hover {
   background-color: #ecb8ea;
 }
+
+@media screen and (max-width: 800px){
+  .detail-background {
+    background-color: #f8f9fa; /* Color de fondo */
+    padding: 20px; /* Espaciado interno */
+  }
+  
+  .detail-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 800px; /* Ancho máximo del contenedor */
+    margin: 0 auto; /* Centrar el contenedor en la página */
+    background-color: #e4cac9; /* Color de fondo del contenedor */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra */
+    padding: 20px; /* Espaciado interno */
+    font-family: "Cedarville Cursive", cursive;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 20px;
+  }
+  
+  .detail-imagen-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column; /* Cambia la dirección de los elementos */
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .detail-imagen {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .imagen-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  
+  .imagen-button {
+    margin: 0 5px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+  }
+  
+  .imagen-button.active {
+    font-weight: bold;
+  }
+  
+  .detail-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-family: "Sedan SC", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .detail-description {
+    margin-bottom: 10px;
+    font-family: "Sedan SC", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .detail-details {
+    margin-bottom: 10px;
+    font-family: "Sedan SC", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .selecion-detail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: "Sedan SC", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .selecion-content-detail {
+    margin-bottom: 20px;
+  }
+  
+  .selecion-content-detail select,
+  .selecion-content-detail input,
+  .selecion-content-detail button {
+    margin-bottom: 10px;
+  }
+  
+  .volver {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+  }
+}
+
+
+  

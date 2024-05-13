@@ -82,9 +82,9 @@ const NewProduct = ({ addProduct }) => {
       setVariantesData(updatedVariantes);
       
       // Agrega un console.log para ver las URLs de las imágenes
-      console.log("Imágenes seleccionadas:", files.map(file => URL.createObjectURL(file)));
     }
   };
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -188,10 +188,11 @@ const NewProduct = ({ addProduct }) => {
             value={variante.color}
             onChange={(e) => handleColorChange(e, index)}
           />
-          {variante.imagenFiles.map((url, imgIndex) => (
-            <img key={imgIndex} src={url} alt={`Imagen ${imgIndex}`} className="img-preview" />
-          ))}
-          <input type="file" onChange={(e) => handleFileChange(e, index)} multiple  name="variantesData[index][imagenFiles][]" /> 
+          {variantesData[index].imagenFiles && variantesData[index].imagenFiles.length > 0 && (
+  <img src={URL.createObjectURL(variantesData[index].imagenFiles[0])} alt={`Imagen ${index}`} className="img-preview" />
+)}
+
+<input type="file" onChange={(e) => handleFileChange(e, index)} multiple name="variantesData[index][imagenFiles][]" />
 
           <button
             className="button-imagen-adm"

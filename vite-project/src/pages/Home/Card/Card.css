@@ -184,3 +184,23 @@
 }
 
 
+@media screen and (max-width: 800px) {
+  .Home-container {
+    margin-left: 0px; /* Reducir el margen izquierdo */
+  }
+
+  .card-container {
+    width: calc(100% - 1px); /* Calcula el ancho para mostrar dos tarjetas por fila */
+    margin-right: 20px; /* Agrega un margen a la derecha para separar las tarjetas */
+    margin-bottom: 20px; /* Agrega un margen inferior para separar las filas */
+    border: 1px solid #d4773a;
+    padding: 5px;
+    text-decoration: none;
+    position: relative;
+    -webkit-transition: 1s linear;
+    transition: 1s linear;
+    box-shadow: #f1c40f;
+  }
+}
+
+

@@ -36,6 +36,7 @@ function App() {
         <Route path='/carrito'element={<Carrito/>}/>
         <Route path='/Favorito'element={<Fav/>}/>
       </Routes>
+      
     </div>
   )
   

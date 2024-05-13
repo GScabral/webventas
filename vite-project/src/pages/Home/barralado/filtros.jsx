@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { filterProduc, orderProducto } from "../../../redux/action";
 import { categoria } from "./categorias";
+import { Link } from "react-router-dom";
 import './barra.css';
 // import './barraresponsive.css';
 
@@ -12,40 +13,36 @@ const FiltrosSidebar = () => {
     const [selectedCategory, setSelectedCategory] = useState("");
     const [selectedPriceOrder, setSelectedPriceOrder] = useState("");
     const [selectedSubcategory, setSelectedSubcategory] = useState("");
-    const [showSubcategories, setShowSubcategories] = useState(true); // Ajuste aquí
-
+    const [showSubcategories, setShowSubcategories] = useState(true); 
     const allProductos = useSelector((state) => state.allProductos);
     const dispatch = useDispatch();
 
     const toggleFiltros = () => {
         setMostrarF(!mostrarF);
-        // Mostrar las subcategorías al abrir la sección de filtros
-        setShowSubcategories(true); // Ajuste aquí
+     
+        setShowSubcategories(true); 
     };
 
     const toggleOrden = () => {
         setMostrarO(!mostrarO);
     };
 
-  const handleFilter = (category, subcategory) => {
-    // Si se hace clic en una categoría principal, aplicar el filtro
-    if (!subcategory && selectedCategory !== category) {
-        setSelectedCategory(category);
-        setSelectedSubcategory("");
-        dispatch(filterProduc({ categoria: category, subcategoria: "", allProductos }));
-    } else if (!subcategory && selectedCategory === category) {
-        // Si se hace clic nuevamente en una categoría principal ya seleccionada, desmarcarla
-        setSelectedCategory("");
-        setSelectedSubcategory("");
-        dispatch(filterProduc({ categoria: "", subcategoria: "", allProductos }));
-    } else if (subcategory) {
-        // Si se hace clic en una subcategoría, aplicar el filtro con la categoría principal y la subcategoría
-        setSelectedCategory(category);
-        setSelectedSubcategory(subcategory);
-        dispatch(filterProduc({ categoria: category, subcategoria: subcategory, allProductos }));
-    }
-};
-    
+    const handleFilter = (category, subcategory) => {
+        if (!subcategory && selectedCategory !== category) {
+            setSelectedCategory(category);
+            setSelectedSubcategory("");
+            dispatch(filterProduc({ categoria: category, subcategoria: "", allProductos }));
+        } else if (!subcategory && selectedCategory === category) {
+            setSelectedCategory("");
+            setSelectedSubcategory("");
+            dispatch(filterProduc({ categoria: "", subcategoria: "", allProductos }));
+        } else if (subcategory) {
+            setSelectedCategory(category);
+            setSelectedSubcategory(subcategory);
+            dispatch(filterProduc({ categoria: category, subcategoria: subcategory, allProductos }));
+        }
+    };
+
     const handleOrder = (orderType) => {
         if (orderType === selectedPriceOrder) {
             unselectOrder();
@@ -76,7 +73,6 @@ const FiltrosSidebar = () => {
                                 >
                                     {categoriaPrincipal}
                                 </button>
-                              
                                 {showSubcategories && selectedCategory === categoriaPrincipal && subcategorias.length > 0 && (
                                     <ul>
                                         {subcategorias.map((subcategoria) => (
@@ -123,6 +119,19 @@ const FiltrosSidebar = () => {
                             </div>
                         )}
                     </ul>
+                </div>
+            )}
+            {window.innerWidth < 800 && (
+                <div className="links-container">
+                    <Link to="/">
+                        <button className="superior-barra">Inicio</button>
+                    </Link>
+                    <Link to="/DevolucionCambio">
+                        <button className="superior-barra">Cambio/Devolucion</button>
+                    </Link> 
+                    <Link to="/comoPagar">
+                        <button className="superior-barra">Venta por mayor</button>
+                    </Link>
                 </div>
             )}
         </div>

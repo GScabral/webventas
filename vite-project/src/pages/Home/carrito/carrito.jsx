@@ -27,6 +27,9 @@ const Carrito = () => {
   const dispatch = useDispatch();
 
 
+
+
+
   const eliminarDeCarrito = (index) => {
     dispatch(eliminarProductoCarrito(index));
   };
@@ -85,19 +88,20 @@ const Carrito = () => {
       const precioNumerico = parseFloat(item.precio);
       const cantidad = item.cantidad_elegida || 1;
 
-      total += precioNumerico * cantidad || 0;
+      // Calcular el descuento por prenda
+      let descuentoPorPrenda = 0;
+      if (precioNumerico * cantidad >= 5000 && precioNumerico * cantidad < 10000) {
+        descuentoPorPrenda = 3000;
+      } else if (precioNumerico * cantidad >= 10000 && precioNumerico * cantidad < 15000) {
+        descuentoPorPrenda = 3000;
+      }
+
+      // Restar el descuento por prenda del total
+      total += (precioNumerico * cantidad) - descuentoPorPrenda;
     });
 
-    if (total >= 50000 && total < 100000) {
-      const descuento = total * 0.1;
-      total -= descuento;
-    } else if (total >= 100000 && total < 150000) {
-      const descuento = total * 0.2;
-      total -= descuento;
-    }
-
     return total.toFixed(2);
-  };
+  }
 
 
   const handleRealizarPedido = async () => {
@@ -174,9 +178,8 @@ const Carrito = () => {
             <thead>
               <tr>
                 <th className="carrito-th">Producto</th>
-                <th className="carrito-th">Descripción</th>
-                <th className="carrito-th">Color</th>
-                <th className="carrito-th">Talle</th>
+                <th className="carrito-th-des">Descripción</th>
+                <th className="carrito-th">Precio</th>
                 <th className="carrito-th">Cantidad</th>
                 <th className="carrito-th">Eliminar</th>
               </tr>
@@ -188,17 +191,20 @@ const Carrito = () => {
                     {producto.variantes.length > 0 && producto.variantes[0].imagenes.length > 0 && (
                       <img className="producto-imagen" src={`http://localhost:3004/${producto.variantes[0].imagenes[0]}`} alt="" />
                     )}
+                    <div>
+                      <span>Color: {producto.variantes.length > 0 ? producto.variantes[0].color : ''}</span>
+                      <br />
+                      <span>Talle: {producto.variantes.length > 0 ? producto.variantes[0].talla : ''}</span>
+                    </div>
                   </td>
-                  <td className="carrito-td">{producto.descripcion}</td>
-                  <td className="carrito-td">{producto.variantes.length > 0 ? producto.variantes[0].color : ''}</td>
-                  <td className="carrito-td">{producto.variantes.length > 0 ? producto.variantes[0].talla : ''}</td>
+                  <td className="carrito-td-des">{producto.descripcion}</td>
+                  <td className="carrito-td">${producto.precio}</td>
                   <td className="carrito-td">
                     <div className="cantidad-acciones">
-
                       <div className="boton-cantidad-div">
                         <button className="boton-cantidad" onClick={() => decrementarCantidad(index)}>-</button>
                       </div>
-                      <span className="cantidad-carrito">{producto.cantidad}</span>
+                      <span className="cantidad-carrito">{producto.cantidad_elegida}</span>
                       <div className="boton-cantidad-div">
                         <button className="boton-cantidad" onClick={() => incrementarCantidad(index)}>+</button>
                       </div>
@@ -251,7 +257,7 @@ const Carrito = () => {
               </p>
               <p className="carrito-indicaciones">
                 En caso de que quiera pagar mediante transferencia, puede hacerlo a este número de cuenta:
-                XXXX-XXXX-XXXX-XXXX. Una vez realizado el pago, puede enviarlo <a href={"https://wa.me/message/CTLCYWOO7XTML1"}>aquí</a> para confirmar.
+                0000003100096222137376. ALIAS:amoremio.showroom. Titular: Celeste Maricel Molina. Una vez realizado el pago, puede enviarlo <a href={"https://wa.me/message/CTLCYWOO7XTML1"}>WhatsApp</a> para confirmar.
                 También puede mostrar el comprobante en el local en caso de que lo retire personalmente.
               </p>
             </div>
@@ -260,6 +266,7 @@ const Carrito = () => {
       </div>
     </div>
   );
+  
 }
 
 export default Carrito;

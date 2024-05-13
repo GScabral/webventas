@@ -42,6 +42,7 @@ const getProductos = async () => {
       };
     });
     return productos;
+ 
   } catch (error) {
     console.error("Error al obtener la información de los productos:", error.message);
 

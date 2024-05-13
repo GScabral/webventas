@@ -15,6 +15,8 @@
   border-collapse: collapse;
 }
 
+
+
 .carrito-th,
 .carrito-td {
   padding: 10px;
@@ -175,4 +177,67 @@
 
 .carrito-indicaciones a:hover {
   text-decoration: underline;
+}
+
+
+@media screen and (max-width: 800px) {
+  .carrito-table {
+    font-size: 14px;
+  }
+
+  .producto-imagen {
+    width: 40px;
+  }
+
+  .boton-cantidad,
+  .boton-eliminar,
+  .boton-carrito {
+    font-size: 12px;
+    padding: 4px 8px;
+  }
+}
+
+/* Estilos específicos para pantallas muy pequeñas */
+@media only screen and (max-width: 800px) {
+  .carrito-th-des {
+    display: none; /* Ocultar la columna de descripción en dispositivos móviles */
+  }
+  .carrito-td-des{
+    display: none;
+  }
+
+  .carrito-td {
+    padding: 8px; /* Ajustar el espacio entre las celdas */
+  }
+
+  .producto-imagen {
+    width: 100%;
+    max-width: 100px;
+    height: auto;
+  }
+
+  .cantidad-acciones {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .boton-carrito {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .mensaje-vacio,
+  .total {
+    text-align: center;
+  }
+
+  /* Estilos para colocar "Color" y "Talle" debajo de "Producto" */
+  .carrito-td > div {
+    margin-top: 5px;
+  }
+
+  .carrito-td > div > span {
+    display: block;
+  }
 }

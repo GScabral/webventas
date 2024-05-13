@@ -38,46 +38,28 @@ const Nav = ({ onSearch }) => {
                 </Link>
                 <Link to="/DevolucionCambio">
                     <button className="superior">Cambio/Devolucion</button>
-                </Link> 
+                </Link>
                 <Link to="/comoPagar">
                     <button className="superior">Venta por mayor</button>
                 </Link>
-                {/* <Link to="/newUser">
-                    <button className="superior">Crear Cuenta</button>
-                </Link>
-                 <Link to="/iniciar">
-                    <button className="superior">Iniciar sesión</button>
-                </Link>  */}
-                {/* <Link to="/Favorito">
-                    <button className="superior">
-                        <FontAwesomeIcon icon={faHeart} />
-                    </button>
-                </Link> */}
-                <SearchBar
-                    className="barra-buscar"
-                    onSearch={handleSearch}
-                    onClearSearch={handleClearSearch}
-                    value={searchText}  // Pasa el valor actual del texto del buscador
-                />
                 <Link to="/carrito">
-                    <button className="superior">
+                    <button className="carrito-nav">
                         <FontAwesomeIcon icon={faShoppingCart} />
                     </button>
                 </Link>
+                <h2 className="titulo-respon">AMORE MIO</h2>
+                {window.location.pathname !== '/carrito' && (
+                    <SearchBar
+                        className="barra-buscar"
+                        onSearch={handleSearch}
+                        onClearSearch={handleClearSearch}
+                        value={searchText}
+                    />
+                )}
 
 
             </div>
 
-            {/* <div className="Nav-dos">
-
-                <Link>
-            <button  className="inferior">QUIENES SOMOS</button>
-            </Link>
-                 <Link>
-            <button  className="inferior">CONTACTO</button>
-            </Link>
-            </div>
-            <Carousel/> */}
         </div>
 
 

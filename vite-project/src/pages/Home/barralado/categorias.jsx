@@ -1,27 +1,35 @@
 export const categoria={
-    "Remeras":[
-        "Remeritas",
-        "musculosa"
-    ],
-    "Tops y bustiers":[],
-    "Blusas":[],
+    "Remeras/Blusas >":[
+        "Mangas largas",
+        "musculosa",
+        "c/mangas",
+    ], 
+    "Tops,bustiers y Bodies":[],
     "Camisas":[],
-    "Bodies":[],
     "Blazer":[],
     "Pantalones":[],
     "Shorts":[],
+    "Abrigos":[
+        "Tapados",
+        "Camperas",
+        "Sweaters",
+    ],
+    "Conjuntos otoño invierno":[],
     "Polleras":[],
-    "Sweaters":[],
-    "Camperas":[],
-    "vestidos":[],
-    "Calzas":[],
-    "Tops deportivos":[],
+    "Ropa Deportiva":[],
+    "vestido":[],
     "Bikinis":[
         "Bikinis dama",
         "Bikinis niñas",
     ],
-    "Lenceria":[],
-    "Boxer niños":[],
+    "Lenceria":[
+        "cancan",
+        "conjuntos",
+        "Bombis sueltas",
+        "Boxer niños"
+    ],
     "accesorios":[],
-    "Tapados":[],
+   
 }
+
+//poner mayus

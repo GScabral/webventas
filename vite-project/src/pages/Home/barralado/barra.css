@@ -1,12 +1,11 @@
 .sidebar {
     display: flex;
     flex-direction: column;
-     background-color: #ffffff; 
-   
+    background-color: #ffffff; 
     padding: 20px;
     max-width: 400px;
     margin: 20px;
-    max-height: 500px;
+    max-height: 200px;
     overflow-y: auto;
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -60,8 +59,8 @@
     border: none;
     border-radius: 3px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-    font-family: "Permanent Marker", cursive;
+    font-family: "Dancing Script", cursive;
+    font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
   }
@@ -106,4 +105,62 @@
     border-top: 1px solid #ccc;
   }
 
- 
+
+
+  @media screen and (max-width: 1000px){
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff; 
+    padding: 20px;
+    max-width: 400px;
+    margin: 20px;
+    max-height: 300px;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    position: relative;
+    top: 60px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+
+  .button-filtros {
+    /* Ajusta el tamaño del botón de filtros */
+    padding: 8px;
+  }
+
+  .button-talles,
+  .button-precio,
+  .button-sub-categoria,
+  .button-selected {
+    /* Ajusta el tamaño y el espaciado de los botones de categorías y subcategorías */
+    padding: 6px;
+    margin-bottom: 3px;
+  }
+
+  .sidebar-h1 {
+    /* Ajusta el tamaño del título */
+    font-size: 1.2rem;
+  }
+
+  .links-container {
+    /* Ajusta el espaciado entre los enlaces de navegación */
+    margin-top: 10px;
+  }
+  .superior-barra{
+    margin-right: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: transparent;
+    color: #b97431;
+    cursor: pointer;
+    z-index: 2;
+    border: solid 1px #b97431;
+    font-family: "Cedarville Cursive", cursive;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+
+}

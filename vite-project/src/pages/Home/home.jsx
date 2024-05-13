@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faBars,faArrowLeft,faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { getProductos, paginado } from "../../redux/action";
 import './home.css'
 // import './homeresponsive.css'
@@ -12,8 +12,6 @@ import Carrito from "./carrito/carrito";
 import Carousel from "./carrusel/carrusel";
 import { Link } from "react-router-dom";
 
-
-
 const Home = () => {
   const dispatch = useDispatch();
   const allProductos = useSelector((state) => state.allProductos);
@@ -22,21 +20,29 @@ const Home = () => {
   const [sidebarVisible, setSidebarVisible] = useState(false);
   const [productosEnCarrito, setProductosEnCarrito] = useState([]); // Estado para almacenar los productos del carrito
   const [productosEnFav, setProductosEnFav] = useState([]);
-
-
+  const [isResponsive, setIsResponsive] = useState(false);
 
   useEffect(() => {
     dispatch(getProductos());
   }, [dispatch]);
 
-  const paginate = (event) => {
-    dispatch(paginado(event.target.name));
-  };
+  useEffect(() => {
+    const handleResize = () => {
+      setIsResponsive(window.innerWidth <= 1000); // Ajusta el valor según el ancho de tu breakpoint
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   const toggleSidebar = () => {
-    setSidebarVisible(!sidebarVisible);
+    if (!isResponsive) {
+      setSidebarVisible(!sidebarVisible);
+    }
   };
-
 
   const agregarAlCarrito = (producto, precio) => {
     // Lógica para agregar producto al carrito
@@ -46,7 +52,6 @@ const Home = () => {
     };
     setProductosEnCarrito([...productosEnCarrito, nuevoProducto]);
   };
-
 
   const agregarFav = (producto, precio) => {
     // Lógica para agregar producto al carrito
@@ -59,15 +64,16 @@ const Home = () => {
 
   return (
     <div className="home-fondo">
-      <div className={`sidebar-container ${sidebarVisible ? 'show' : ''}`}>
-        <Link to="/admin/principal">
-          <img className="logo-tienda" src="public\logo.jpeg" alt="logo" />
-        </Link>
-        <FiltrosSidebar />
-      </div>
-      {/* <Carousel /> */}
-      <div className={`main-content ${sidebarVisible ? 'sidebar-open' : ''}`}>
-        <div className="Home-container">
+    <button className={`toggle-sidebar ${isResponsive ? 'responsive' : ''}`} onClick={toggleSidebar}>
+      <FontAwesomeIcon icon={sidebarVisible ?  faBars  : faBars } />
+    </button>
+    <div className={`sidebar-container ${sidebarVisible ? 'show' : 'hide'}`}>
+      <img className="logo-tienda" src="public\logo.jpeg" alt="logo" />
+      <FiltrosSidebar />
+    </div>
+
+    <div className={`main-content ${sidebarVisible ? 'sidebar-open' : ''}`}>
+      <div className="Home-container">
           {allProductos.map((producto) => (
             <Cards key={producto.id} producto={producto} agregarAlCarrito={agregarAlCarrito} agregarFav={agregarFav} />
           ))}
@@ -82,7 +88,7 @@ const Home = () => {
             <FontAwesomeIcon icon={faArrowLeft} />
           </button>
           <div>
-            <ul className="paginado"> {/* Asegúrate de que la clase sea "paginado" */}
+            <ul className="paginado">
               {Array.from({ length: totalPages }, (_, index) => (
                 <li key={index}><a href="#">{index + 1}</a></li>
               ))}
@@ -97,7 +103,6 @@ const Home = () => {
             <FontAwesomeIcon icon={faArrowRight} />
           </button>
         </div>
-
       </div>
       <footer className="contacto-home">
         <p>Encontranos en Ontiveros 1069 entre Gabriela Mistral y Gregorio de la Ferrere
@@ -115,8 +120,6 @@ const Home = () => {
         </div>
       </footer>
     </div>
-
-
   );
 };
 

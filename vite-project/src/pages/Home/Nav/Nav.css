@@ -3,7 +3,7 @@
   justify-content: flex-end;
   align-items: center;
   padding: 10px;
- background-color: #ffffff;
+  background-color: #ffffff;
   color: white;
   z-index: 2;
 }
@@ -13,11 +13,11 @@
   border: none;
   border-radius: 5px;
   background-color: transparent;
-  color:#b97431;
+  color: #b97431;
   cursor: pointer;
-z-index: 2;
-border: solid 1px  #b97431;
-font-family: "Cedarville Cursive", cursive;
+  z-index: 2;
+  border: solid 1px #b97431;
+  font-family: "Cedarville Cursive", cursive;
   font-weight: 400;
   font-style: normal;
 }
@@ -26,14 +26,34 @@ font-family: "Cedarville Cursive", cursive;
   background-color: #dc7430
 }
 
-.Nav-dos {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  padding: 20px;
-  background-color: #f5f5f5;
+.carrito-nav {
+  margin-right: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: transparent;
+  color: #b97431;
+  cursor: pointer;
+  z-index: 2;
+  border: solid 1px #b97431;
+  font-family: "Cedarville Cursive", cursive;
+  font-weight: 400;
+  font-style: normal;
 }
+
+.links-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.barra-buscar {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+
+
 
 .inferior {
   border: none;
@@ -49,4 +69,52 @@ font-family: "Cedarville Cursive", cursive;
   background-color: #ddd;
 }
 
+.titulo-respon {
+  display: none;
+  /* Por defecto oculto */
+}
 
+
+@media screen and (max-width: 1000px) {
+  .back-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+
+  .links-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+
+  .carrito-nav {
+    margin-left: 300px;
+    /* Coloca el carrito en la esquina superior derecha */
+    margin-top: 10px;
+  }
+
+  .barra-buscar {
+    width: calc(100% - 20px);
+    margin-bottom: 10px;
+    padding: 0 10px;
+  }
+
+  .titulo-respon {
+    display: block;
+    background: linear-gradient(to right, #d2b48c, #bc8f8f, #cd853f);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-top: 1px;
+    font-size: 35px;
+    font-family: "Sedan SC", serif;
+    font-weight: 800;
+    font-style: normal;
+  }
+
+  .superior {
+    display: none;
+  }
+}

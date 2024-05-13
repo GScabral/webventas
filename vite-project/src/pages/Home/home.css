@@ -13,13 +13,15 @@ body {
   background-attachment: fixed;
   background-position: center;
   width: 100%;
-  min-height: 100vh; /* Asegura que el contenedor principal ocupe al menos toda la altura de la ventana del navegador */
+  min-height: 100vh;
+  /* Asegura que el contenedor principal ocupe al menos toda la altura de la ventana del navegador */
   z-index: 1;
 }
 
 /* Estilos para la rejilla de los elementos del contenido */
 .Home-container {
-  margin-left: 200px; /* Considera el ancho de la barra lateral */
+  margin-left: 200px;
+  /* Considera el ancho de la barra lateral */
   padding: 20px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -33,7 +35,8 @@ body {
   width: 100%;
   background-color: black;
   color: white;
-  padding: 20px; /* Agregado para dar espacio al contenido del footer */
+  padding: 20px;
+  /* Agregado para dar espacio al contenido del footer */
 }
 
 /* Estilo del botón lateral */
@@ -67,7 +70,8 @@ body {
 }
 
 .paginado li {
-  margin-right: 0px; /* Espacio entre los elementos de paginación */
+  margin-right: 0px;
+  /* Espacio entre los elementos de paginación */
 }
 
 .paginado a {
@@ -78,10 +82,12 @@ body {
   border: 1px solid #ccc;
   text-decoration: none;
   border-radius: 5px;
-  transition: background-color 0.3s ease, color 0.3s ease; /* Agrega la transición */
+  transition: background-color 0.3s ease, color 0.3s ease;
+  /* Agrega la transición */
 }
-.arrow-paginado{
-  background-color:#d4773a;
+
+.arrow-paginado {
+  background-color: #d4773a;
   border: none;
   padding: 10px 10px;
   color: #d7d8b2;
@@ -99,27 +105,37 @@ body {
 }
 
 .flachas-paginado {
-  background-color: transparent; /* Color de fondo */
-  color: rgb(0, 0, 0); /* Color del texto */
-  border: none; /* Quita el borde */
-  padding: 8px 12px; /* Espacio interno */
-  border-radius: 4px; /* Borde redondeado */
-  cursor: pointer; /* Cursor al pasar el mouse */
+  background-color: transparent;
+  /* Color de fondo */
+  color: rgb(0, 0, 0);
+  /* Color del texto */
+  border: none;
+  /* Quita el borde */
+  padding: 8px 12px;
+  /* Espacio interno */
+  border-radius: 4px;
+  /* Borde redondeado */
+  cursor: pointer;
+  /* Cursor al pasar el mouse */
 }
 
 .flachas-paginado:disabled {
-  opacity: 0.6; /* Opacidad reducida para indicar que está desactivado */
-  cursor: not-allowed; /* Cursor diferente cuando está desactivado */
+  opacity: 0.6;
+  /* Opacidad reducida para indicar que está desactivado */
+  cursor: not-allowed;
+  /* Cursor diferente cuando está desactivado */
 }
 
 /* Estilos adicionales si quieres hacer ajustes */
 .flachas-paginado:hover {
-  background-color: #f6c1c1; /* Cambio de color al pasar el mouse */
+  background-color: #f6c1c1;
+  /* Cambio de color al pasar el mouse */
 }
 
 /* Estilos para el icono */
 .flachas-paginado svg {
-  margin-right: 6px; /* Espacio entre el icono y el texto */
+  margin-right: 6px;
+  /* Espacio entre el icono y el texto */
 }
 
 /* Estilos cuando la barra lateral está abierta */
@@ -128,10 +144,11 @@ body {
   background-color: #fff9f9;
   height: 100vh;
   position: fixed;
-  top: 28px;
-  left: 0; /* Cambio aquí para mantener la barra lateral abierta */
+  top: 0px;
+  left: 0;
+  /* Cambio aquí para mantener la barra lateral abierta */
   transition: left 0.3s ease;
-  text-align: right; 
+  text-align: right;
   z-index: 1;
 
 }
@@ -157,13 +174,17 @@ body {
 }
 
 .logo {
-  width: 20px; /* Ajusta el tamaño de los logos según sea necesario */
-  margin: 0 10px; /* Espacio entre los logos */
-  transition: transform 0.3s ease; /* Efecto de transición al hacer hover */
+  width: 20px;
+  /* Ajusta el tamaño de los logos según sea necesario */
+  margin: 0 10px;
+  /* Espacio entre los logos */
+  transition: transform 0.3s ease;
+  /* Efecto de transición al hacer hover */
 }
 
 .logo:hover {
-  transform: scale(1.1); /* Aumenta ligeramente el tamaño al hacer hover */
+  transform: scale(1.1);
+  /* Aumenta ligeramente el tamaño al hacer hover */
 }
 
 .whatsapp-logo {
@@ -178,15 +199,88 @@ body {
 }
 
 
-.whatsapp-logo:hover{
-  -webkit-box-shadow:10px 10px 14px 2px rgba(0,0,0,0.47);
-  box-shadow: 10px 10px 14px 2px rgba(0,0,0,0.47);
+.whatsapp-logo:hover {
+  -webkit-box-shadow: 10px 10px 14px 2px rgba(0, 0, 0, 0.47);
+  box-shadow: 10px 10px 14px 2px rgba(0, 0, 0, 0.47);
 }
 
 
-.logo-tienda{
+.logo-tienda {
   width: 190px;
   margin-top: 80px;
   margin-right: 5px;
 }
 
+@media screen and (max-width:  800px) {
+  .Home-container {
+    margin-left: 100px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer {
+    padding: 10px;
+  }
+
+  .sidebar-container {
+    width: 200px;
+    background-color: #fff9f9;
+    z-index: 1;
+    top: 0px;
+    transition: left 0.3s ease; /* Agrega una transición suave */
+    position: fixed;
+  }
+  
+  .sidebar-container.show {
+    left: 0;
+  }
+  
+  .sidebar-container.hide {
+    left: -200px;
+  }
+  /* Estilos para la flecha de la barra lateral */
+  .toggle-sidebar {
+    color: #b97431;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 24px;
+    width: auto;
+    margin-right: 20px; /* Ajusta el margen para separar el icono de la barra lateral */
+    z-index: 2;
+    position: fixed; /* Asegura que el botón de la barra lateral esté siempre visible */
+    top: 20px; /* Ajusta la posición vertical del botón */
+    left: 20px; /* Ajusta la posición horizontal del botón */
+  }
+  
+  .toggle-sidebar:hover {
+    color: #dc7430; /* Cambia el color al pasar el mouse */
+    
+  }
+  .whatsapp-logo {
+    width: 25px;
+  }
+
+  .logo-tienda {
+    width: 100px;
+    margin-top: 80px;
+    margin-right: 50px;
+  }
+
+  .whatsapp-logo {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 30px;
+    -webkit-transition: 1s linear;
+    transition: 1s linear;
+    box-shadow: #f1c40f;
+    border-radius: 50%;
+  }
+  
+  
+  .whatsapp-logo:hover {
+    -webkit-box-shadow: 10px 10px 14px 2px rgba(0, 0, 0, 0.47);
+    box-shadow: 10px 10px 14px 2px rgba(0, 0, 0, 0.47);
+  }
+  
+}
