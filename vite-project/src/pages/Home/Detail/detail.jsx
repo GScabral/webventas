@@ -20,8 +20,8 @@ const Detail = () => {
   const [imagenActual, setImagenActual] = useState(0);
   const [showModal, setShowModal] = useState(false);
 
-
-
+  //  console.log("info:",info)
+  const variantesDisponibles = info.variantes;
 
   const handleTalleChange = (event) => {
     const talleSeleccionado = event.target.value;
@@ -81,24 +81,31 @@ const Detail = () => {
   };
 
   const handleAgregarAlCarrito = () => {
+   
+
     if (!talleSeleccionado || !colorSeleccionado) {
       alert('Por favor, selecciona un talle y un color antes de agregar al carrito.');
       return;
     }
+    const varianteSeleccionada = variantesDisponibles.find(
+      (variante) => variante.talla.toLowerCase() === talleSeleccionado.toLowerCase() && variante.color === colorSeleccionado
+    );
     if (cantidad <= 0 || cantidad > info.cantidad) {
       alert('La cantidad seleccionada excede el stock disponible para este producto o es inválida.');
       return;
     }
+
+    const variantes = [];
+
+    // Agregar la variante seleccionada al array de variantes
+    variantes.push(varianteSeleccionada);
     const producto = {
-      id: info.id,
-      nombre: info.nombre,
+      id,
+      nombre:info.nombre,
       precio: info.precio,
-      imagenes: info.variantes[imagenActual].imagenes, // Acceder a las imágenes de la variante seleccionada
-      descripcion: info.descripcion,
-      categoria: info.categoria,
-      talle: talleSeleccionado,
-      color: colorSeleccionado,
-      cantidad: cantidad,
+      descripcion:info.descripcion,
+      cantidad_elegida: cantidad, // Incluye la cantidad seleccionada en el objeto del producto
+      variantes: variantes,
     };
     dispatch(agregarAlCarrito(producto));
     setShowModal(false);

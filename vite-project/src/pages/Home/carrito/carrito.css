@@ -25,6 +25,12 @@
 
 .carrito-th {
   background-color: #f2f2f2;
+  padding: 10px;
+  text-align: left;
+}
+
+.carrito-th-des{
+  background-color: #f2f2f2;
 }
 
 .carrito-td {

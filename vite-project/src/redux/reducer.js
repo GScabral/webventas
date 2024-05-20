@@ -49,9 +49,9 @@ const initialState = {
   loading: false,
   errorMessage: '',
   emailExists: false,
-  allPedidos:[],
-  allPedidosBackup:[],
-  isLoggedIn: false, 
+  allPedidos: [],
+  allPedidosBackup: [],
+  isLoggedIn: false,
   estado: null,
   productosDespuesPedido: [],
   isLoggedInAd: false,
@@ -120,49 +120,56 @@ const reducer = (state = initialState, action) => {
 
       return {
         ...state,
-        isLoggedIn:true,
+        isLoggedIn: true,
         cliente: userInfo, // Puedes incluir más propiedades del usuario si las recibes del servidor
       }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
     case ORDER:
       const newSortOrder = action.payload;
-    
+
       // Verificar si el nuevo tipo de orden es una cadena vacía
       const isClearOrder = newSortOrder === "";
-    
+
       // Si el nuevo tipo de orden es una cadena vacía, restablecer al estado original sin orden aplicado
       if (isClearOrder) {
-          return {
-              ...state,
-              allProductos: state.allProductosBackUp.slice(0, ITEMS_PER_PAGE), // Restaurar al estado original sin orden aplicado
-              sortOrder: "", // Limpiar el tipo de orden
-          };
+        return {
+          ...state,
+          allProductos: state.allProductosBackUp.slice(0, ITEMS_PER_PAGE), // Restaurar al estado original sin orden aplicado
+          sortOrder: "", // Limpiar el tipo de orden
+        };
       }
-    
+
       // Si el nuevo tipo de orden no es una cadena vacía, aplicar el orden seleccionado
       let ordenarProducto = [];
-    
+
       if (newSortOrder === "precioAsc") {
-          ordenarProducto = [...state.allProductosBackUp].sort((prev, next) => prev.precio - next.precio);
+        ordenarProducto = [...state.allProductosBackUp].sort((prev, next) => prev.precio - next.precio);
       } else if (newSortOrder === "precioDesc") {
-          ordenarProducto = [...state.allProductosBackUp].sort((prev, next) => next.precio - prev.precio);
+        ordenarProducto = [...state.allProductosBackUp].sort((prev, next) => next.precio - prev.precio);
       }
-    
+
       return {
-          ...state,
-          allProductos: ordenarProducto.slice(0, ITEMS_PER_PAGE), // Aplicar el nuevo orden a la primera página
-          allProductosBackUp: ordenarProducto,
-          sortOrder: newSortOrder,
-    };
+        ...state,
+        allProductos: ordenarProducto.slice(0, ITEMS_PER_PAGE), // Aplicar el nuevo orden a la primera página
+        allProductosBackUp: ordenarProducto,
+        sortOrder: newSortOrder,
+      };
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
     case FILTER:
-      const { categoria, talles } = action.payload;
+      const { categoria, subcategoria, talles } = action.payload;
       let filteredProducts = state.allProductosBackUp;
     
       if (categoria) {
         const categoriaFiltrada = categoria.toLowerCase();
         filteredProducts = filteredProducts.filter(
-          (producto) => producto.categoria.toLowerCase() === categoriaFiltrada
+          (producto) => producto.categoria && producto.categoria.toLowerCase() === categoriaFiltrada
+        );
+      }
+    
+      if (subcategoria) {
+        const subcategoriaFiltrada = subcategoria.toLowerCase();
+        filteredProducts = filteredProducts.filter(
+          (producto) => producto.subcategoria && producto.subcategoria.toLowerCase() === subcategoriaFiltrada
         );
       }
     
@@ -171,7 +178,7 @@ const reducer = (state = initialState, action) => {
         filteredProducts = filteredProducts.filter((producto) =>
           Array.isArray(producto.talles) &&
           producto.talles.some(
-            (talle) => talle.toLowerCase() === tallesFiltrados
+            (talle) => talle && talle.toLowerCase() === tallesFiltrados
           )
         );
       }
@@ -191,8 +198,9 @@ const reducer = (state = initialState, action) => {
         filtered: paginatedFilteredProducts, // Usa los productos paginados como productos filtrados
         filter: true,
         totalPages: totalPages,
-        filters: { ...state.filters, categoria: categoria, talles: talles },
+        filters: { ...state.filters, categoria: categoria, subcategoria: subcategoria, talles: talles },
       };
+    
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
 
     case CARGAR_CLIENTE:
@@ -281,7 +289,7 @@ const reducer = (state = initialState, action) => {
         }
         return producto;
       });
-    
+
       return {
         ...state,
         allProductosBackUp: productosActualizados, // Actualiza el array completo de productos con las variantes modificadas
@@ -313,7 +321,7 @@ const reducer = (state = initialState, action) => {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     case PEDIDO:
       const productosEnCarrito = state.carrito;
-  
+
       // Actualizar la cantidad disponible de los productos en base a lo que se ha comprado en el carrito
       const productosActualizadosCompra = state.allProductosBackUp.map(producto => {
         const cantidadEnCarrito = productosEnCarrito.filter(item => item.id === producto.id).length;
@@ -322,8 +330,8 @@ const reducer = (state = initialState, action) => {
           cantidad_disponible: producto.cantidad_disponible - cantidadEnCarrito,
         };
       });
-    
-  console.log("Productos actualizados después del pedido:", productosActualizadosCompra); // Agrega console.log aquí
+
+      console.log("Productos actualizados después del pedido:", productosActualizadosCompra); // Agrega console.log aquí
 
       return {
         ...state,
@@ -335,15 +343,15 @@ const reducer = (state = initialState, action) => {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     case ACTUALIZAR_VARIANTES:
       const { id, cantidad_disponible } = action.payload;
-    
+
       const variantesIndex = state.carrito.findIndex((producto) => producto.id === id);
-    
+
       if (variantesIndex !== -1) {
         const carritoActualizado = [...state.carrito];
         carritoActualizado[variantesIndex] = {
           ...carritoActualizado[variantesIndex], cantidad_disponible
         };
-    
+
         const allProductosActualizados = state.allProductos.map(producto => {
           if (producto.id === id) {
             return {
@@ -361,7 +369,7 @@ const reducer = (state = initialState, action) => {
           }
           return producto;
         });
-    
+
         return {
           ...state,
           carrito: carritoActualizado,
@@ -391,14 +399,14 @@ const reducer = (state = initialState, action) => {
 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
+
     case CHECK_EMAIL_EXISTENCE_REQUEST:
       return {
         ...state,
         loading: true,
         errorMessage: '', // Limpiar el mensaje de error
         emailExists: false
-    };
+      };
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
     case CHECK_EMAIL_EXISTENCE_SUCCESS:
       return {
@@ -406,15 +414,15 @@ const reducer = (state = initialState, action) => {
         loading: false,
         errorMessage: '',
         emailExists: action.payload.emailExists // Usar el resultado recibido del servidor
-    };
-     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
-      case CHECK_EMAIL_EXISTENCE_FAILURE:
-        return {
-          ...state,
-          loading: false,
-          errorMessage: action.error,
-          emailExists: false
-        };
+      };
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
+    case CHECK_EMAIL_EXISTENCE_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        errorMessage: action.error,
+        emailExists: false
+      };
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     case ADD_USUARIO:
       const nuevoUsuario = action.payload; // Obtener los datos del nuevo usuario agregado desde la respuesta del servidor
@@ -425,61 +433,61 @@ const reducer = (state = initialState, action) => {
       };
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     case GET_PEDIDOS: // Nuevo caso para manejar la acción GET_PEDIDOS
-    return {
-      ...state,
-      allPedidos: action.payload, // Almacena todos los pedidos recibidos del servidor
-      allPedidosBackUp: action.payload, // También establece la copia de seguridad de todos los pedidos
-    };
+      return {
+        ...state,
+        allPedidos: action.payload, // Almacena todos los pedidos recibidos del servidor
+        allPedidosBackUp: action.payload, // También establece la copia de seguridad de todos los pedidos
+      };
 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     case GET_CLIENTES:
       return {
         ...state,
-      allClientes:action.payload,
-      allClientesBackUp:action.payload,
+        allClientes: action.payload,
+        allClientesBackUp: action.payload,
       };
-     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      case ENVIAR_ESTADO:
-        return {
-          ...state,
-          estado: action.payload,
-        };
-       ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
-       case DESPACHAR_PRODUCTO:
-        const { pedidoId, detalleId } = action.payload;
-        return {
-          ...state,
-          allPedidos: state.allPedidos.map((pedido) => {
-            if (pedido.id === pedidoId) {
-              return {
-                ...pedido,
-                detalles: pedido.detalles.map((detalle) => {
-                  if (detalle.idDetalle === detalleId) {
-                    return {
-                      ...detalle,
-                      despachado: true
-                    };
-                  }
-                  return detalle;
-                })
-              };
-            }
-            return pedido;
-          })
-        };
-    
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    case ENVIAR_ESTADO:
+      return {
+        ...state,
+        estado: action.payload,
+      };
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
+    case DESPACHAR_PRODUCTO:
+      const { pedidoId, detalleId } = action.payload;
+      return {
+        ...state,
+        allPedidos: state.allPedidos.map((pedido) => {
+          if (pedido.id === pedidoId) {
+            return {
+              ...pedido,
+              detalles: pedido.detalles.map((detalle) => {
+                if (detalle.idDetalle === detalleId) {
+                  return {
+                    ...detalle,
+                    despachado: true
+                  };
+                }
+                return detalle;
+              })
+            };
+          }
+          return pedido;
+        })
+      };
 
-case 'ADMIN_LOGIN_SUCCESS':
-  return {
-    ...state,
-    isLoggedInAd: true,
-    error: null,
-  };
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
 
-       default:
+    case 'ADMIN_LOGIN_SUCCESS':
+      return {
+        ...state,
+        isLoggedInAd: true,
+        error: null,
+      };
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
+
+    default:
       return state;
 
   }

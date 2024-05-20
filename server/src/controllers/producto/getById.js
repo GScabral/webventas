@@ -5,9 +5,12 @@ const productoId = async (id) => {
   try {
     const infoProducto = await Productos.findByPk(id, { include: [{ model: variantesproductos }] });
 
+
+
     if (!infoProducto) {
       throw new Error("Producto no encontrado");
     }
+
 
     let variantesProducto = [];
 

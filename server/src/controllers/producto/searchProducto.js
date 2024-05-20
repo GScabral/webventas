@@ -4,7 +4,6 @@ const { variantesproductos } = require('../../db');
 
 const buscar = async (nombre) => {
   try {
-    console.log('Nombre recibido en la búsqueda:', nombre);
     if (!nombre) {
       throw new Error("Ingrese un nombre válido");
     }
@@ -31,7 +30,7 @@ const buscar = async (nombre) => {
           }
           // Si hay varias imágenes, las añadimos al array de URLs
           else if (Array.isArray(variante.imagenes) && variante.imagenes.length > 0) {
-            imagenUrls = variante.imagenes.map(imagen => `/uploads/${imagen}`);
+            imagenUrls = variante.imagenes.map(imagen => `${imagen.replace(/\\/g, '/')}`);
           }
           // Si el formato de imágenes no es reconocido, mostramos un error
           else {
@@ -43,7 +42,8 @@ const buscar = async (nombre) => {
           idVariante: variante.id_variante,
           talla: variante.talla,
           color: variante.color,
-          cantidad_disponible: variante.cantidad_disponible
+          cantidad_disponible: variante.cantidad_disponible,
+          imagenes: imagenUrls,
         };
       });
 
@@ -52,13 +52,12 @@ const buscar = async (nombre) => {
         id: producto.id_producto,
         descripcion: producto.descripcion,
         categoria: producto.categoria,
+        subcategoria:producto. subcategoria,
         precio: producto.precio,
-        imagenes: imagenUrls,
         variantes: variantesProducto
       };
     });
 
-    console.log("Productos encontrados:", productos);
     return productos;
   } catch (error) {
     console.error("Error al buscar productos:", error.message);

@@ -8,6 +8,7 @@ const NewProduct = ({ addProduct }) => {
   const [productPrice, setProductPrice] = useState('');
   const [productDescrip, setProductDescrip] = useState('');
   const [productCategoria, setProductCategoria] = useState('');
+  const [productSubCategoria, setProductSubCategoria] = useState('');
   const [variantesData, setVariantesData] = useState([]);
   const [showAddTallaForm, setShowAddTallaForm] = useState(false);
   const [newTalla, setNewTalla] = useState('');
@@ -29,6 +30,10 @@ const NewProduct = ({ addProduct }) => {
     setProductCategoria(event.target.value);
   };
 
+  const handleProductSubCategoria = (event) => {
+    setProductSubCategoria(event.target.value);
+  }
+
   const handleAddVariante = () => {
     setVariantesData([...variantesData, { color: '', imagenFiles: [], tallas: [] }]);
   };
@@ -37,13 +42,13 @@ const NewProduct = ({ addProduct }) => {
     setShowAddTallaForm(true);
     // No necesitas inicializar la talla aquí
   };
-  
+
   const handleSaveTalla = (index) => {
     if (!newTalla || newCantidad <= 0) {
       console.error('Tanto la talla como la cantidad deben ser llenadas y la cantidad debe ser mayor que cero');
       return;
     }
-  
+
     const cantidad = parseInt(newCantidad, 10);
     const updatedVariantes = [...variantesData];
     const existingTalla = updatedVariantes[index].tallas.find(talla => talla.talla === newTalla);
@@ -51,7 +56,7 @@ const NewProduct = ({ addProduct }) => {
       console.error('Ya existe una talla con ese nombre');
       return;
     }
-  
+
     updatedVariantes[index].tallas.push({ talla: newTalla, cantidad });
     setVariantesData(updatedVariantes);
     setShowAddTallaForm(false);
@@ -80,7 +85,7 @@ const NewProduct = ({ addProduct }) => {
       const updatedVariantes = [...variantesData];
       updatedVariantes[index].imagenFiles = files;
       setVariantesData(updatedVariantes);
-      
+
       // Agrega un console.log para ver las URLs de las imágenes
     }
   };
@@ -88,18 +93,19 @@ const NewProduct = ({ addProduct }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (!productName || !productPrice || !productDescrip || !productCategoria || variantesData.length === 0) {
+    if (!productName || !productPrice || !productDescrip || !productCategoria || !productSubCategoria || variantesData.length === 0) {
       console.error('Todos los campos obligatorios deben ser llenados, y al menos una variante debe ser agregada');
       return;
     }
-  
+
     try {
       const formData = new FormData();
       formData.append('nombre_producto', productName);
       formData.append('descripcion', productDescrip);
       formData.append('precio', productPrice);
       formData.append('categoria', productCategoria);
-  
+      formData.append('subcategoria', productSubCategoria)
+
       variantesData.forEach((variante, index) => {
         formData.append(`variantesData[${index}][color]`, variante.color);
         variante.imagenFiles.forEach((file, fileIndex) => {
@@ -112,124 +118,134 @@ const NewProduct = ({ addProduct }) => {
       });
 
       await addProduct(formData);
-  
+
       // Limpiar campos después de enviar el formulario
       setProductName('');
       setProductPrice('');
       setProductDescrip('');
       setProductCategoria('');
+      setProductSubCategoria('');
       setVariantesData([]);
-  
+
     } catch (error) {
       console.error('Error al agregar el producto', error);
     }
   };
-  
+
   return (
     <div className="admin-panel">
-  <div>
-    <h1 className="h1-panel">Ingresar Producto</h1>
-  </div>
-  <form onSubmit={handleSubmit} encType="multipart/form-data">
-    <fieldset>
-      <legend>Detalles del Producto</legend>
-      <label className="label-admin" htmlFor="productName">Nombre del Producto:</label>
-      <input
-        type="text"
-        id="productName"
-        value={productName}
-        onChange={handleProductNameChange}
-        required
-      /><br /><br />
-
-      <label className="label-admin" htmlFor="productPrice">Precio del Producto:</label>
-      <input
-        type="number"
-        id="productPrice"
-        value={productPrice}
-        onChange={handleProductPriceChange}
-        required
-      /><br /><br />
-
-      <label className="label-admin" htmlFor="productDescrip">Descripción del Producto:</label>
-      <input
-        type="text"
-        id="productDescrip"
-        value={productDescrip}
-        onChange={handleProductDescrip}
-        required
-      /><br /><br />
-
-      <label className="label-admin" htmlFor="productCategoria">Categoría:</label>
-      <input
-        type="text"
-        id="productCategoria"
-        value={productCategoria}
-        onChange={handleProductCategoria}
-        required
-      /><br /><br />
-    </fieldset>
-
-    <div>
-      <button
-        className="button-newproduc-adm"
-        type="button"
-        onClick={handleAddVariante}
-      >
-        Agregar Variante
-      </button>
-
-      {variantesData.map((variante, index) => (
-        <div key={index}>
-          <label>Variante {index + 1}:</label>
-          <label>Color:</label>
+      <div>
+        <h1 className="h1-panel">Ingresar Producto</h1>
+      </div>
+      <form onSubmit={handleSubmit} encType="multipart/form-data">
+        <fieldset>
+          <legend>Detalles del Producto</legend>
+          <label className="label-admin" htmlFor="productName">Nombre del Producto:</label>
           <input
             type="text"
-            value={variante.color}
-            onChange={(e) => handleColorChange(e, index)}
-          />
-          {variantesData[index].imagenFiles && variantesData[index].imagenFiles.length > 0 && (
-  <img src={URL.createObjectURL(variantesData[index].imagenFiles[0])} alt={`Imagen ${index}`} className="img-preview" />
-)}
+            id="productName"
+            value={productName}
+            onChange={handleProductNameChange}
+            required
+          /><br /><br />
 
-<input type="file" onChange={(e) => handleFileChange(e, index)} multiple name="variantesData[index][imagenFiles][]" />
+          <label className="label-admin" htmlFor="productPrice">Precio del Producto:</label>
+          <input
+            type="number"
+            id="productPrice"
+            value={productPrice}
+            onChange={handleProductPriceChange}
+            required
+          /><br /><br />
 
+          <label className="label-admin" htmlFor="productDescrip">Descripción del Producto:</label>
+          <input
+            type="text"
+            id="productDescrip"
+            value={productDescrip}
+            onChange={handleProductDescrip}
+            required
+          /><br /><br />
+
+          <label className="label-admin" htmlFor="productCategoria">Categoría:</label>
+          <input
+            type="text"
+            id="productCategoria"
+            value={productCategoria}
+            onChange={handleProductCategoria}
+            required
+          /><br /><br />
+
+          <label className="label-admin" htmlFor=" productSubCategoria">Subcategoria:</label>
+          <input
+            type="text"
+            id=" productSubCategoria"
+            value={ productSubCategoria}
+            onChange={handleProductSubCategoria}
+            required
+          /><br /><br />
+        </fieldset>
+
+        <div>
           <button
-            className="button-imagen-adm"
+            className="button-newproduc-adm"
             type="button"
-            onClick={() => handleAddTalla(index)}
+            onClick={handleAddVariante}
           >
-            Agregar Talla
+            Agregar Variante
           </button>
-          {showAddTallaForm && (
-            <div className="newT-addProduc">
-              <label>Nueva Talla:</label>
+
+          {variantesData.map((variante, index) => (
+            <div key={index}>
+              <label>Variante {index + 1}:</label>
+              <label>Color:</label>
               <input
                 type="text"
-                value={newTalla}
-                onChange={handleTallaChange}
+                value={variante.color}
+                onChange={(e) => handleColorChange(e, index)}
               />
-              <label>Nueva Cantidad:</label>
-              <input
-                type="number"
-                value={newCantidad}
-                onChange={handleCantidadChange}
-              />
+              {variantesData[index].imagenFiles && variantesData[index].imagenFiles.length > 0 && (
+                <img src={URL.createObjectURL(variantesData[index].imagenFiles[0])} alt={`Imagen ${index}`} className="img-preview" />
+              )}
+
+              <input type="file" onChange={(e) => handleFileChange(e, index)} multiple name="variantesData[index][imagenFiles][]" />
+
               <button
                 className="button-imagen-adm"
                 type="button"
-                onClick={() => handleSaveTalla(index)}
+                onClick={() => handleAddTalla(index)}
               >
-                Guardar Talla
+                Agregar Talla
               </button>
+              {showAddTallaForm && (
+                <div className="newT-addProduc">
+                  <label>Nueva Talla:</label>
+                  <input
+                    type="text"
+                    value={newTalla}
+                    onChange={handleTallaChange}
+                  />
+                  <label>Nueva Cantidad:</label>
+                  <input
+                    type="number"
+                    value={newCantidad}
+                    onChange={handleCantidadChange}
+                  />
+                  <button
+                    className="button-imagen-adm"
+                    type="button"
+                    onClick={() => handleSaveTalla(index)}
+                  >
+                    Guardar Talla
+                  </button>
+                </div>
+              )}
             </div>
-          )}
+          ))}
         </div>
-      ))}
+        <button className="button-newproduc-adm" type="submit">Agregar Producto</button>
+      </form>
     </div>
-    <button className="button-newproduc-adm" type="submit">Agregar Producto</button>
-  </form>
-</div>
   );
 };
 

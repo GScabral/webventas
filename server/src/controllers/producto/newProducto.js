@@ -2,7 +2,7 @@ const { Productos } = require('../../db');
 const { variantesproductos } = require('../../db');
 
 const createNewProducto = async (bodyData, files) => {
-  const { nombre_producto, descripcion, precio, categoria, variantesData } = bodyData;
+  const { nombre_producto, descripcion, precio, categoria, subcategoria, variantesData } = bodyData;
 
 
   console.log("bodydata:",bodyData)
@@ -26,6 +26,7 @@ const createNewProducto = async (bodyData, files) => {
       descripcion,
       precio,
       categoria,
+      subcategoria,
     });
 
 

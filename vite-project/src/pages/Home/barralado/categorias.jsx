@@ -1,35 +1,33 @@
-export const categoria={
-    "Remeras/Blusas >":[
-        "Mangas largas",
-        "musculosa",
-        "c/mangas",
-    ], 
-    "Tops,bustiers y Bodies":[],
-    "Camisas":[],
-    "Blazer":[],
-    "Pantalones":[],
-    "Shorts":[],
-    "Abrigos":[
-        "Tapados",
+export const categoria = {
+    "Abrigos": [
         "Camperas",
         "Sweaters",
+        "Tapados"
     ],
-    "Conjuntos otoño invierno":[],
-    "Polleras":[],
-    "Ropa Deportiva":[],
-    "vestido":[],
-    "Bikinis":[
+    "Accesorios": [],
+    "Bikinis": [
         "Bikinis dama",
-        "Bikinis niñas",
+        "Bikinis niñas"
     ],
-    "Lenceria":[
-        "cancan",
-        "conjuntos",
+    "Blazer": [],
+    "Camisas": [],
+    "Conjuntos otoño invierno": [],
+    "Lenceria": [
         "Bombis sueltas",
-        "Boxer niños"
+        "Boxer niños",
+        "Cancan",
+        "Conjuntos"
     ],
-    "accesorios":[],
-   
-}
+    "Pantalones": [],
+    "Polleras": [],
+    "Remeras/Blusas >": [
+        "Mangas largas",
+        "c/mangas",
+        "musculosa"
+    ],
+    "Ropa Deportiva": [],
+    "Shorts": [],
+    "Tops,bustiers y Bodies": [],
+    "Vestido": []
+};
 
-//poner mayus

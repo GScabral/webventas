@@ -21,6 +21,9 @@ module.exports = (sequelize) => {
     categoria: {
       type: DataTypes.STRING(50)
     },
+    subcategoria:{
+      type:DataTypes.STRING(100),
+    }
  
     
   });

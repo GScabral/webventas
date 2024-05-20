@@ -1,2 +1,1 @@
-ALTER TABLE detalles_pedido
-ADD  total NUMERIC(10, 2) DEFAULT 0;
+ALTER TABLE "Productos" ADD  subcategoria VARCHAR(255);

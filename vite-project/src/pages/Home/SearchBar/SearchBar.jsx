@@ -17,7 +17,6 @@ const SearchBar = ({ onSearch, onClearSearch, value }) => {
 
     const handleSearch = () => {
         if (name.trim() !== "") {
-            console.log("Información de búsqueda:", name);
             onSearch(name);
         }
     };

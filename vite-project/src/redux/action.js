@@ -422,10 +422,10 @@ export const buscar=(name)=>{
   return async function (dispatch){
     try{
 
-      console.log("esto se busca",name)
       const response = await axios.get(`http://localhost:3004/producto/name/${name}`);
 
-
+      // Log the data to the console
+      // console.log("Resultados de la búsqueda:",response);
 
       if(response.data.length > 0){
         dispatch({

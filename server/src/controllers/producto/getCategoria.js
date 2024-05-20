@@ -1,9 +1,9 @@
 const { Productos } = require('../../db');
 
-const getCat = async (categoria) => {
+const getCat = async (categoria, subcategoria) => {
   try {
     // Obtener todos los productos con la categoría proporcionada
-    const exist = await Productos.findAll({ where: { categoria } });
+    const exist = await Productos.findAll({ where: { categoria , subcategoria} });
 
     // Filtrar las nuevas categorías que no existen en la base de datos
     const newCategories = categoria.filter(cat => !exist.find(product => product.categoria === cat));

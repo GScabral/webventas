@@ -17,6 +17,8 @@ const FiltrosSidebar = () => {
     const allProductos = useSelector((state) => state.allProductos);
     const dispatch = useDispatch();
 
+
+
     const toggleFiltros = () => {
         setMostrarF(!mostrarF);
      
@@ -28,21 +30,35 @@ const FiltrosSidebar = () => {
     };
 
     const handleFilter = (category, subcategory) => {
+        let filteredProducts = allProductos;
+    
         if (!subcategory && selectedCategory !== category) {
+            // Filtrar por categoría principal
             setSelectedCategory(category);
             setSelectedSubcategory("");
-            dispatch(filterProduc({ categoria: category, subcategoria: "", allProductos }));
+            dispatch(filterProduc({ categoria: category, subcategoria: "", allProductos: filteredProducts }));
         } else if (!subcategory && selectedCategory === category) {
+            // Deseleccionar categoría principal
             setSelectedCategory("");
             setSelectedSubcategory("");
             dispatch(filterProduc({ categoria: "", subcategoria: "", allProductos }));
         } else if (subcategory) {
+            // Filtrar por categoría principal
+            filteredProducts = filteredProducts.filter(producto =>
+                producto.categoria && producto.categoria.toLowerCase() === category.toLowerCase()
+            );
+    
+            // Filtrar por subcategoría dentro de la categoría principal
+            filteredProducts = filteredProducts.filter(producto =>
+                producto.subcategoria && producto.subcategoria.toLowerCase() === subcategory.toLowerCase()
+            );
+    
             setSelectedCategory(category);
             setSelectedSubcategory(subcategory);
-            dispatch(filterProduc({ categoria: category, subcategoria: subcategory, allProductos }));
+            dispatch(filterProduc({ categoria: category, subcategoria: subcategory, allProductos: filteredProducts }));
         }
     };
-
+    
     const handleOrder = (orderType) => {
         if (orderType === selectedPriceOrder) {
             unselectOrder();

@@ -38,7 +38,7 @@
 
 .detail-imagen-container {
 
-    max-width: 50%; /* Ancho máximo del 50% del contenedor padre */
+    max-width: 40%; /* Ancho máximo del 50% del contenedor padre */
     height: auto; /* Mantener proporción de aspecto */
     margin-right: 10px; /* Reducir el margen derecho a 10px (o el valor que desees) */
   
@@ -164,6 +164,7 @@
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  border: 0.5px black solid ;
   
 }
 

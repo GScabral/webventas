@@ -27,7 +27,7 @@ const Carrito = () => {
   const dispatch = useDispatch();
 
 
-
+console.log("carrito:",carrito)
 
 
   const eliminarDeCarrito = (index) => {

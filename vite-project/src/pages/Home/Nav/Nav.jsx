@@ -18,8 +18,8 @@ const Nav = ({ onSearch }) => {
     const [searchText, setSearchText] = useState("");
 
     const handleSearch = (nombre) => {
-        console.log("esto se busca", nombre);
         dispatch(buscar(nombre));
+        
     };
 
 
