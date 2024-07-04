@@ -29,6 +29,9 @@ import {
   GET_CLIENTES,
   ENVIAR_ESTADO,
   DESPACHAR_PRODUCTO,
+  OFERTA,
+  GET_OFERTAS,
+  BORRAR_OFERTA,
   ADMIN_LOGIN_SUCCESS,
 } from "./action"
 
@@ -55,6 +58,8 @@ const initialState = {
   estado: null,
   productosDespuesPedido: [],
   isLoggedInAd: false,
+  cantidadOferta: {},
+  ofertasActivas: [],
 }
 
 const ITEMS_PER_PAGE = 12;
@@ -115,7 +120,6 @@ const reducer = (state = initialState, action) => {
       }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
     case INI_USUARIO:
-      console.log("Datos del usuario que se cargan en el estado:", action.payload);
       const userInfo = action.payload; // Ajusta esta línea según la estructura de datos que recibes
 
       return {
@@ -158,21 +162,21 @@ const reducer = (state = initialState, action) => {
     case FILTER:
       const { categoria, subcategoria, talles } = action.payload;
       let filteredProducts = state.allProductosBackUp;
-    
+
       if (categoria) {
         const categoriaFiltrada = categoria.toLowerCase();
         filteredProducts = filteredProducts.filter(
           (producto) => producto.categoria && producto.categoria.toLowerCase() === categoriaFiltrada
         );
       }
-    
+
       if (subcategoria) {
         const subcategoriaFiltrada = subcategoria.toLowerCase();
         filteredProducts = filteredProducts.filter(
           (producto) => producto.subcategoria && producto.subcategoria.toLowerCase() === subcategoriaFiltrada
         );
       }
-    
+
       if (talles) {
         const tallesFiltrados = talles.toLowerCase();
         filteredProducts = filteredProducts.filter((producto) =>
@@ -182,16 +186,16 @@ const reducer = (state = initialState, action) => {
           )
         );
       }
-    
+
       // Calcula el total de productos filtrados y las páginas
       const totalFilteredItems = filteredProducts.length;
       const totalPages = Math.ceil(totalFilteredItems / ITEMS_PER_PAGE);
-    
+
       // Aplica la paginación a los productos filtrados
       const startIndex = (state.currentPage - 1) * ITEMS_PER_PAGE;
       const endIndex = startIndex + ITEMS_PER_PAGE;
       const paginatedFilteredProducts = filteredProducts.slice(startIndex, endIndex);
-    
+
       return {
         ...state,
         allProductos: paginatedFilteredProducts,
@@ -200,7 +204,7 @@ const reducer = (state = initialState, action) => {
         totalPages: totalPages,
         filters: { ...state.filters, categoria: categoria, subcategoria: subcategoria, talles: talles },
       };
-    
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
 
     case CARGAR_CLIENTE:
@@ -331,7 +335,6 @@ const reducer = (state = initialState, action) => {
         };
       });
 
-      console.log("Productos actualizados después del pedido:", productosActualizadosCompra); // Agrega console.log aquí
 
       return {
         ...state,
@@ -487,6 +490,61 @@ const reducer = (state = initialState, action) => {
       };
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
 
+    case OFERTA:
+      if (action.payload.error) {
+        return {
+          ...state,
+          error: action.payload.error,
+        };
+      }
+
+      const { producto_id, descuento, inicio, fin } = action.payload;
+      console.log(`Se recibió una oferta para el producto con ID: ${producto_id}`);
+      console.log('Detalles de la oferta:', { descuento, inicio, fin });
+
+      const newState = {
+        ...state,
+        cantidadOferta: {
+          ...state.cantidadOferta,
+          [producto_id]: {
+            descuento,
+            inicio,
+            fin,
+          },
+        },
+        error: null,
+      };
+      console.log('Estado actualizado:', newState);
+      return newState;
+
+    ///////////////////////////////////////////////////////////////////////////  
+    case GET_OFERTAS:
+      const ofertasActivas= action.payload
+      return {
+        ...state,
+        ofertasActivas: ofertasActivas// Almacena las ofertas activas recibidas del servidor
+      };
+
+    ///////////////////////////////////////////////////////////////////////////  
+    case BORRAR_OFERTA:
+      const productoIdParaBorrar = action.payload;
+    
+      // Actualizar `cantidadOferta` eliminando la oferta del producto correspondiente
+      const nuevaCantidadOferta = { ...state.cantidadOferta };
+      delete nuevaCantidadOferta[productoIdParaBorrar];
+    
+      // Filtrar las ofertas activas para eliminar la oferta del producto correspondiente
+      const nuevasOfertasActivas = state.ofertasActivas.filter(
+        (oferta) => oferta.producto_id !== productoIdParaBorrar
+      );
+    
+      return {
+        ...state,
+        cantidadOferta: nuevaCantidadOferta, // Actualizar `cantidadOferta` sin la oferta borrada
+        ofertasActivas: nuevasOfertasActivas, // Actualizar `ofertasActivas` sin la oferta borrada
+      };
+    ///////////////////////////////////////////////////////////////////////////  
+
     default:
       return state;
 
@@ -495,3 +553,4 @@ const reducer = (state = initialState, action) => {
 
 
 export default reducer;
+

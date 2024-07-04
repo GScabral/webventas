@@ -1,10 +1,15 @@
 .edit-product-modal .modal-dialog {
   max-width: 800px; /* Ancho máximo del modal */
+  margin: auto; /* Establece los márgenes automáticos para centrar horizontalmente */
+  top: 50%; /* Posiciona el modal en la mitad de la pantalla vertical */
+  position: absolute; /* Permite centrar verticalmente */
+  left: 50%; /* Posiciona el modal en la mitad de la pantalla horizontal */
 }
 
 .edit-product-modal .modal-content {
   overflow-y: auto; /* Permitir desplazamiento vertical si el contenido es más largo que el modal */
   max-height: 80vh; /* Altura máxima del modal para que sea adaptable */
+  
 }
 
 .variant-form-group {

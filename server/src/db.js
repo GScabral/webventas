@@ -2,6 +2,7 @@ require('dotenv').config();
 const { Sequelize, DataTypes } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
+const oferta = require('./models/oferta');
 
 const {
     DB_USER,
@@ -33,10 +34,16 @@ const models = sequelize.models;
 
 // Definir las relaciones
 if (models) {
-    const { Productos, Pedido,Cliente,DetallesPedido,variantesproductos} = models;
+    const { Productos, Pedido,Cliente,DetallesPedido,variantesproductos,oferta} = models;
 
 Pedido.belongsToMany(Productos, { through: 'pedidoproductos' });
 Productos.belongsToMany(Pedido, { through: 'pedidoproductos' });
+
+oferta.belongsTo(Productos, {
+    foreignKey: 'producto_id', // Nombre de la columna en la tabla 'Oferta' que hace referencia al 'producto_id' en la tabla 'Producto'
+    onDelete: 'CASCADE', // Acción a tomar cuando se elimine el producto asociado
+    onUpdate: 'CASCADE', // Acción a tomar cuando se actualice el producto asociado
+  });
 
 Cliente.hasMany(Pedido); // Un cliente puede tener muchos pedidos
 Pedido.belongsTo(Cliente); // Un pedido pertenece a un cliente

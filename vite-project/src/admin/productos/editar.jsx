@@ -84,6 +84,7 @@ const EditProductModal = ({ show, handleClose, product, handleSaveChanges }) => 
         <Button variant="primary" onClick={handleSaveChangesLocal}>
           Guardar Cambios
         </Button>
+        
       </Modal.Footer>
     </Modal>
   );

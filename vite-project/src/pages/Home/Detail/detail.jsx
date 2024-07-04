@@ -21,6 +21,37 @@ const Detail = () => {
   const [showModal, setShowModal] = useState(false);
 
   //  console.log("info:",info)
+
+  const [oferta, setOferta] = useState(null)
+  const ofertas= useSelector(state=>state.ofertasActivas)
+
+  console.log("ofer detail:",ofertas)
+
+  useEffect(() => {
+    const obtenerOfertaParaProducto = () => {
+      // Buscar la oferta correspondiente al producto actual según su id
+      const ofertaProducto = ofertas.find(oferta => oferta.producto_id === info.id);
+
+      if (ofertaProducto) {
+        setOferta(ofertaProducto.descuento); // Establecer la oferta del producto
+      } else {
+        setOferta(null); // No hay oferta para este producto
+      }
+    };
+
+    obtenerOfertaParaProducto();
+  }, [ofertas, info.id]);
+
+  const calcularPrecioFinal = (precio, oferta) => {
+    if (oferta) {
+      const precioFinal =precio * (1 - oferta / 100);
+      return precioFinal.toFixed(2); // Redondear a 2 decimales
+    }
+    return precio;
+  };
+
+
+
   const variantesDisponibles = info.variantes;
 
   const handleTalleChange = (event) => {
@@ -96,13 +127,13 @@ const Detail = () => {
     }
 
     const variantes = [];
-
+    const precioFinal = calcularPrecioFinal(info.precio, oferta);
     // Agregar la variante seleccionada al array de variantes
     variantes.push(varianteSeleccionada);
     const producto = {
       id,
       nombre:info.nombre,
-      precio: info.precio,
+      precio: precioFinal,
       descripcion:info.descripcion,
       cantidad_elegida: cantidad, // Incluye la cantidad seleccionada en el objeto del producto
       variantes: variantes,
@@ -155,7 +186,7 @@ const Detail = () => {
           <div className="detail-content">
             <p className="detail-title">{info.nombre}</p>
             <p className="detail-description">{info.descripcion}</p>
-            <p className="detail-details">Precio: ${info.precio}</p>
+            <p className="detail-details">Precio: ${calcularPrecioFinal(info.precio, oferta)}</p>
             <div className="selecion-detail">
               <div className="selecion-content-detail">
                 <label htmlFor="talle">Talle:</label>

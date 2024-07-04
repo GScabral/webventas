@@ -81,6 +81,12 @@
   margin-top: 20px;
 }
 
+.correo-mensaje {
+  color: green; /* O rojo si es un mensaje de error */
+  font-weight: bold;
+  margin-top: 10px;
+}
+
 
 
 .enlace-home {

@@ -19,6 +19,9 @@ return (
           <Link to={"/admin/PedidosLista"}>
           <button className="barra-admin-button">pedidos</button>
           </Link>
+          <Link to={"/admin/ofertas"}>
+          <button className="barra-admin-button">ofertas</button>
+          </Link>
         </div>
     </div>
 );

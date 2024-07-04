@@ -31,7 +31,9 @@ export const GET_CLIENTES='GET_CLIENTES';
 export const ENVIAR_ESTADO='ENVIAR_ESTADO';
 export const DESPACHAR_PRODUCTO = 'DESPACHAR_PRODUCTO';
 export const ADMIN_LOGIN_SUCCESS="ADMIN_LOGIN_SUCCESS";
-
+export const OFERTA="OFERTA";
+export const GET_OFERTAS="GET_OFERTAS";
+export const BORRAR_OFERTA="BORRAR_OFERTA";
 
 
 export const getProductos = () => {
@@ -39,7 +41,6 @@ export const getProductos = () => {
         try {
             const response = await axios.get(`http://localhost:3004/producto/producto`);
 
-          // console.log("asi llega la info:",response)
             
 
              dispatch({
@@ -71,7 +72,6 @@ export const getProductos = () => {
   return async function(dispatch){
     try{
       const response = await axios.get(`http://localhost:3004/pedido/Lpedidos`)
-      console.log(response.data)
       dispatch({
         type:GET_PEDIDOS,
         payload:response.data,
@@ -84,16 +84,13 @@ export const getProductos = () => {
 
  export const addProduct = (formData) => {
   for (let pair of formData.entries()) {
-    console.log(pair[0], pair[1]);
   }
 
   return async function (dispatch) {
     try {
-      // Agregar el console.log aquí para mostrar los datos antes de enviar la solicitud
       
 
       const response = await axios.post(`http://localhost:3004/producto/nuevoProducto`, formData);
-      console.log("Respuesta del servidor:", response.data);
   
       dispatch({
           type: ADD_PRODUCT,
@@ -127,7 +124,6 @@ export const getProductos = () => {
             payload: response.data
           });
         } else {
-          console.log("No se encontraron resultados");
           dispatch({
             type: SEARCH_ID,
             payload: {}, // Establecer payload como un objeto vacío o null, no como una cadena vacía
@@ -332,7 +328,6 @@ export const eliminarFav= (index) => {
 export const cambios = (id,  datosProducto) => {
   return async function (dispatch) {
     try {
-      console.log('Datos que se envían para la actualización:', { id, datosProducto}); // Agrega este console.log para ver lo que se envía
       const response = await axios.patch(`http://localhost:3004/Nadmin/cambioAdmin/${id}`, datosProducto);
       dispatch({
         type: CAMBIO,
@@ -447,7 +442,6 @@ export const checkEmailExistence = (correo) => {
       const response = await axios.get('/check', { params: { correo } });
 
       // Si la solicitud fue exitosa, envía el resultado al reducer
-      console.log("Respuesta del servidor:", response.data);
       dispatch({
         type: CHECK_EMAIL_EXISTENCE_SUCCESS,
         payload: response.data // Esto debería ser el mensaje del servidor
@@ -484,10 +478,6 @@ export const enviarCorreo = (idPedido,infoPedido,correo) => {
         infoPedido: infoPedido,
         correo:correo
       });
-     console.log("datos que se mandan action",idPedido)
-     console.log("datos que se mandan action",infoPedido)
-     console.log("datos que se mandan action",correo)
-      console.log('Correo enviado exitosamente:', response.data);
     } catch (error) {
       // Manejo de errores
       console.error('Error al enviar el correo:', error);
@@ -512,4 +502,57 @@ export const LoginAdmin = (password) => {
     }
   };
 };
+
+export const ofertas = (oferta) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post('http://localhost:3004/oferta/nuevaOferta', {
+        oferta: oferta
+      });
+      dispatch({ type: OFERTA, payload: response.data }); // Dispara una acción de éxito con los datos devueltos por el servidor si es necesario
+      return response; // Devuelve la respuesta completa de Axios si es necesario
+    } catch (error) {
+      console.error('Error en la solicitud de oferta:', error);
+      dispatch({ type: 'OFERTA_FAILURE', payload: { error: error.message } }); // Dispara una acción de error con el mensaje de error
+      throw error; // Propaga el error para manejarlo en el contexto superior si es necesario
+    }
+  };
+};
+
+export const getOfertas = () => {
+  return async function(dispatch) {
+    try {
+      const response = await axios.get('http://localhost:3004/oferta/ofertas');
+
+      dispatch({
+        type: GET_OFERTAS,
+        payload: response.data,
+      });
+      
+    } catch (error) {
+      console.error('Error al obtener ofertas activas:', error); // Mostrar error específico
+    }
+  };
+};
+
+
+export const borrarOferta=async(id)=>{
+  try{
+
+    const borrar=await axios.delete(`http://localhost:3004/oferta/eliminar/${id}`)
+
+    if (borrar.status !== 200) {
+      throw new Error('Error al obtener el cliente por ID');
+    }
+
+    dispatch({
+      type:BORRAR_OFERTA, // Aquí usamos la acción 'CARGAR_CLIENTE' para cargar la información del cliente
+      payload: borrar.data,
+    });
+  } catch (error) {
+    console.error('Error :', error);
+  }
+};
+
+
 

@@ -1,0 +1,56 @@
+.ofertas-modal .modal-dialog {
+    max-width: 600px; /* Ancho máximo del modal */
+    margin: auto; /* Centra horizontalmente */
+    top: 50%; /* Centra verticalmente */
+    left: 50%;
+    transform: translate(-50%, -50%); /* Ajusta la posición */
+    position: fixed;
+  }
+  
+  .ofertas-modal-header {
+    background-color: #f7f7f7; /* Color de fondo del encabezado del modal */
+    border-bottom: 1px solid #dee2e6; /* Borde inferior del encabezado */
+    padding: 15px 20px; /* Espaciado dentro del encabezado */
+  }
+  
+  .ofertas-modal-body {
+    padding: 20px; /* Espaciado dentro del cuerpo del modal */
+  }
+  
+  .ofertas-input {
+    width: 100%; /* Ancho completo del input */
+    padding: 10px; /* Espaciado interno del input */
+    margin-top: 10px; /* Margen superior del input */
+    border: 1px solid #ced4da; /* Borde del input */
+    border-radius: 4px; /* Bordes redondeados del input */
+  }
+  
+  .ofertas-modal-footer {
+    background-color: #f7f7f7; /* Color de fondo del pie del modal */
+    border-top: 1px solid #dee2e6; /* Borde superior del pie */
+    padding: 15px 20px; /* Espaciado dentro del pie del modal */
+  }
+  
+  .ofertas-cancel-button {
+    background-color: #6c757d; /* Color de fondo del botón de cancelar */
+    color: white; /* Color del texto del botón de cancelar */
+    border: none; /* Sin borde */
+    padding: 10px 20px; /* Espaciado interno del botón */
+    border-radius: 4px; /* Bordes redondeados del botón */
+  }
+  
+  .ofertas-cancel-button:hover {
+    background-color: #5a6268; /* Color de fondo del botón de cancelar al pasar el ratón */
+  }
+  
+  .ofertas-submit-button {
+    background-color: #007bff; /* Color de fondo del botón de aplicar oferta */
+    color: white; /* Color del texto del botón de aplicar oferta */
+    border: none; /* Sin borde */
+    padding: 10px 20px; /* Espaciado interno del botón */
+    border-radius: 4px; /* Bordes redondeados del botón */
+  }
+  
+  .ofertas-submit-button:hover {
+    background-color: #0056b3; /* Color de fondo del botón de aplicar oferta al pasar el ratón */
+  }

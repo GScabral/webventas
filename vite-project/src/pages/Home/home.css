@@ -60,10 +60,11 @@ body {
   align-items: center;
   justify-content: center;
   margin-top: 20px;
+
 }
 
 .paginado {
-  display: flex;
+  display:inline-flex;
   list-style-type: none;
   padding: 0;
 
@@ -83,6 +84,7 @@ body {
   text-decoration: none;
   border-radius: 5px;
   transition: background-color 0.3s ease, color 0.3s ease;
+  margin-top: 12px;
   /* Agrega la transición */
 }
 
@@ -95,6 +97,7 @@ body {
 
 .paginado a:hover {
   background-color: #d4773a;
+  
   color: white;
 }
 

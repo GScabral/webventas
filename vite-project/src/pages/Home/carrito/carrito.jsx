@@ -10,8 +10,9 @@ import {
   enviarCorreo
 } from "../../../redux/action";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faL, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import "./carrito.css";
+import Table from "react-bootstrap/Table";
 
 
 const Carrito = () => {
@@ -24,10 +25,10 @@ const Carrito = () => {
   const [infoPedidoCorreo, setInfoPedidoCorreo] = useState(null);
   const [correoEnviado, setCorreoEnviado] = useState(false);
   const [pedidoEnviado, setPedidoEnviado] = useState(false);
+  const [mostrarNotificacion, setMostrarNotificacion] = useState(false)
   const dispatch = useDispatch();
 
 
-console.log("carrito:",carrito)
 
 
   const eliminarDeCarrito = (index) => {
@@ -54,7 +55,6 @@ console.log("carrito:",carrito)
     if (producto.cantidad_elegida < cantidadDisponible) {
       producto.cantidad_elegida++;
       dispatch(actualizarCarrito(nuevoCarrito));
-      console.log('Cantidad elegida después de incrementar:', producto.cantidad_elegida);
     } else {
       console.warn('La cantidad máxima disponible ya ha sido alcanzada.');
     }
@@ -84,6 +84,7 @@ console.log("carrito:",carrito)
   const calcularTotal = () => {
     let total = 0;
 
+    if(carrito.length >= 3){
     carrito.forEach((item) => {
       const precioNumerico = parseFloat(item.precio);
       const cantidad = item.cantidad_elegida || 1;
@@ -91,7 +92,7 @@ console.log("carrito:",carrito)
       // Calcular el descuento por prenda
       let descuentoPorPrenda = 0;
       if (precioNumerico * cantidad >= 5000 && precioNumerico * cantidad < 10000) {
-        descuentoPorPrenda = 3000;
+        descuentoPorPrenda = 1000;
       } else if (precioNumerico * cantidad >= 10000 && precioNumerico * cantidad < 15000) {
         descuentoPorPrenda = 3000;
       }
@@ -99,6 +100,14 @@ console.log("carrito:",carrito)
       // Restar el descuento por prenda del total
       total += (precioNumerico * cantidad) - descuentoPorPrenda;
     });
+  }else{
+    carrito.forEach((item)=>{
+      const precioNumerico = parseFloat(item.precio);
+      const cantida = item.cantidad_elegida || 1;
+
+      total += precioNumerico * cantida;
+    })
+  }
 
     return total.toFixed(2);
   }
@@ -116,9 +125,6 @@ console.log("carrito:",carrito)
         total: total
       }));
 
-      console.log('Pedido a enviar al servidor:', pedido);
-      console.log(pedido.id)
-      console.log(pedido.cantidad)
       const response = await dispatch(addPedido(pedido));
 
       if (response) {
@@ -144,9 +150,9 @@ console.log("carrito:",carrito)
     try {
       const infoPedido = infoPedidoCorreo;
       await dispatch(enviarCorreo(numeroPedido, infoPedido, correo));
-      console.log("Correo enviado correctamente");
       setCorreoEnviado(true);
       setMostrarFormularioCorreo(false);
+      setMostrarNotificacion(true)
     } catch (error) {
       console.error("Error al enviar el correo", error);
     }
@@ -174,7 +180,7 @@ console.log("carrito:",carrito)
     <div className="carrito-fondo">
       <div className="carrito">
         {carrito && carrito.length > 0 ? (
-          <table className="carrito-table">
+          <Table className="carrito-table">
             <thead>
               <tr>
                 <th className="carrito-th">Producto</th>
@@ -218,7 +224,7 @@ console.log("carrito:",carrito)
                 </tr>
               ))}
             </tbody>
-          </table>
+          </Table >
         ) : (
           <p className="mensaje-vacio">No hay productos en el carrito</p>
         )}
@@ -246,6 +252,12 @@ console.log("carrito:",carrito)
                 <label htmlFor="correo">Ingresa tu correo electrónico:</label>
                 <input type="email" id="correo" name="correo" required />
                 <button type="submit" className="boton-carrito">Enviar</button>
+                {mostrarNotificacion && (
+                  <div className="notificacion">
+                    <p>Correo enviado correctamente.</p>
+                    <button onClick={() => setMostrarNotificacion(false)}>Cerrar</button>
+                  </div>
+                )}
               </form>
               <h2 className="carrito-nPedido">Número de pedido: {numeroPedido}</h2>
               <p className="carrito-indicaciones">
@@ -266,7 +278,7 @@ console.log("carrito:",carrito)
       </div>
     </div>
   );
-  
+
 }
 
 export default Carrito;

@@ -6,6 +6,7 @@ import Principal from './inicio/principalAdmin';
 import ProductList from './productos/listadoProductos';
 import PedidoList from './pedidos/listadoPedidos';
 import ClienteList from './clientes/listadoClientes';
+import OfertasLista from './ofertas/listadoOFertas'
 import { useDispatch, useSelector } from 'react-redux';
 import { LoginAdmin } from '../redux/action';
 import './panelAdmin.css';
@@ -25,7 +26,6 @@ const PanelAdmin = () => {
       console.error(error);
     }
   };
-  console.log('isLoggedIn:', isLoggedIn);
   return (
     <div className="panel-admin-container">
       <div className="sidebar-container-admin">
@@ -49,6 +49,7 @@ const PanelAdmin = () => {
           <Route path="/lista" element={isLoggedIn ? <ProductList /> : <Navigate to="/admin/login" />} />
           <Route path="/PedidosLista" element={isLoggedIn ? <PedidoList /> : <Navigate to="/admin/login" />} />
           <Route path="/clientes" element={isLoggedIn ? <ClienteList /> : <Navigate to="/admin/login" />} />
+          <Route path="/ofertas" element={isLoggedIn ? <OfertasLista /> : <Navigate to="/admin/login" />} />
         </Routes>
       </div>
     </div>

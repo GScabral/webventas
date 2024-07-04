@@ -1,0 +1,19 @@
+.oferta-list-container{
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+
+.oferta-table{
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+
+.oferta-table th,
+.oferta-table td {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  text-align: left;
+}

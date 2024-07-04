@@ -2,13 +2,9 @@
   display: flex;
   flex-direction: column;
   width: 200px;
-  /* Ancho deseado del contenedor */
   border: 2px solid #d4773a;
-  /* Borde para el contenedor */
   border-radius: 5px;
-  /* Borde redondeado */
   padding: 10px;
-  /* Espaciado interior */
   text-decoration: none;
   background-color: #ffffff;
   position: relative;
@@ -16,11 +12,68 @@
   -webkit-transition: 1s linear;
   transition: 1s linear;
   box-shadow: #f1c40f;
+  overflow: hidden;
 }
 
 .card-container:hover{
   -webkit-box-shadow:10px 10px 14px 2px rgba(0,0,0,0.47);
   box-shadow: 10px 10px 14px 2px rgba(0,0,0,0.47);
+}
+
+
+.card-oferta {
+  background-color: red;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+@-webkit-keyframes tracking-out-contract-bck-top {
+  0% {
+    -webkit-transform: translateZ(0) translateY(0);
+            transform: translateZ(0) translateY(0);
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    letter-spacing: -0.5em;
+    -webkit-transform: translateZ(-500px) translateY(-300px);
+            transform: translateZ(-500px) translateY(-300px);
+    opacity: 0;
+  }
+}
+@keyframes tracking-out-contract-bck-top {
+  0% {
+    -webkit-transform: translateZ(0) translateY(0);
+            transform: translateZ(0) translateY(0);
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    letter-spacing: -0.5em;
+    -webkit-transform: translateZ(-500px) translateY(-300px);
+            transform: translateZ(-500px) translateY(-300px);
+    opacity: 0;
+  }
+}
+
+.animacion-text{
+  -webkit-animation: tracking-out-contract-bck-top 6.8s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+	        animation: tracking-out-contract-bck-top 6.8s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+}
+.confirmation-message{
+  z-index: 2000;
+  background-color: #ffffff;
+  color: #f6c1c1;
 }
 
 
@@ -72,24 +125,50 @@
   color: black;
 }
 
+@-webkit-keyframes flip-vertical-bck {
+  0% {
+    -webkit-transform: translateZ(0) rotateY(0);
+            transform: translateZ(0) rotateY(0);
+  }
+  100% {
+    -webkit-transform: translateZ(-260px);
+            transform: translateZ(-260px);
+  }
+}
+@keyframes flip-vertical-bck {
+  0% {
+    -webkit-transform: translateZ(0) rotateY(0);
+            transform: translateZ(0) rotateY(0);
+  }
+  100% {
+    -webkit-transform: translateZ(-260px);
+            transform: translateZ(-260px);
+  }
+}
 
-
+.rotate-animation {
+  -webkit-animation: flip-vertical-bck 0.4s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+  animation: flip-vertical-bck 0.4s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+  z-index: 1000;
+}
 .modal-card {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  bottom: 0%;
   background-color: #fff;
-  padding: 20px;
+  padding: 5px;
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   z-index: 1000;
-  max-width: 400px;
-  width: 100%;
+  width: 100%; /* Establece el ancho al 100% */
+  max-width: 100%; /* Ajusta el ancho máximo según sea necesario */
 }
 
 .modal-content-card {
   text-align: center;
+  max-height: 80vh; /* Limita la altura del contenido al 80% del alto de la ventana */
+  overflow-y: auto; /* Agrega una barra de desplazamiento vertical si el contenido excede el espacio disponible */
 }
 
 .close {
@@ -203,19 +282,25 @@
   }
 
   .modal-card {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    bottom: 0%;
     background-color: #fff;
-    padding: 20px;
+    padding: 5px;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     z-index: 1000;
-    max-width: 400px;
-    width: 100%;
+    width: 100%; /* Establece el ancho al 100% */
+    max-width: 100%; /* Ajusta el ancho máximo según sea necesario */
   }
-
+  
+  .modal-content-card {
+    text-align: center;
+    max-height: 80vh; /* Limita la altura del contenido al 80% del alto de la ventana */
+    overflow-y: auto; /* Agrega una barra de desplazamiento vertical si el contenido excede el espacio disponible */
+  }
+  
   .button-card {
     background-color: #f6c1c1;
     color: #fff;

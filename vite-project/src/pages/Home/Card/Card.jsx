@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
-import { agregarFav, agregarAlCarrito } from '../../../redux/action';
+import { agregarFav, agregarAlCarrito, getOfertas } from '../../../redux/action';
 
 const Card = ({ id, nombre, descripcion, categoria, precio, imagenes, variantes }) => {
   const dispatch = useDispatch();
@@ -17,31 +17,63 @@ const Card = ({ id, nombre, descripcion, categoria, precio, imagenes, variantes 
   const [confirmacionFav, setConfirmacionFav] = useState(false);
   const [botonHabilitado, setBotonHabilitado] = useState(true);
   const [coloresDisponibles, setColoresDisponibles] = useState([]);
-
   const variantesDisponibles = variantes || [];
 
+  const [oferta, setOferta] = useState(null)
+  const ofertas= useSelector(state=>state.ofertasActivas)
 
-  
+  useEffect(() => {
+    dispatch(getOfertas()); // Despachar la acción para obtener las ofertas activas
+  }, [dispatch]);
+// console.log("ofertas:",ofertas)
+ 
+  // Función para obtener la oferta del producto actual
+  useEffect(() => {
+    const obtenerOfertaParaProducto = () => {
+      // Buscar la oferta correspondiente al producto actual según su id
+      const ofertaProducto = ofertas.find(oferta => oferta.producto_id === id);
+
+      if (ofertaProducto) {
+        setOferta(ofertaProducto.descuento); // Establecer la oferta del producto
+      } else {
+        setOferta(null); // No hay oferta para este producto
+      }
+    };
+
+    obtenerOfertaParaProducto();
+  }, [ofertas, id]);
+
+  // Función para calcular el precio final considerando la oferta
+  const calcularPrecioFinal = (precio, oferta) => {
+    if (oferta) {
+      const precioFinal = precio * (1 - oferta / 100);
+      return precioFinal.toFixed(2); // Redondear a 2 decimales
+    }
+    return precio;
+  };
+
 
   const handleAgregarAlCarritoLocal = () => {
     if (!talleSeleccionado || !colorSeleccionado) {
       alert('Por favor, selecciona un talle y un color antes de agregar al carrito.');
       return;
     }
-  
+
     const varianteSeleccionada = variantesDisponibles.find(
       (variante) => variante.talla.toLowerCase() === talleSeleccionado.toLowerCase() && variante.color === colorSeleccionado
     );
-  
+
     if (!varianteSeleccionada) {
       alert('No se encontró una variante disponible con el talle y color seleccionados.');
       return;
     }
-  
+
+    const precioFinal = calcularPrecioFinal(precio, oferta);
+
     const producto = {
       id,
       nombre,
-      precio,
+      precio:precioFinal,
       descripcion,
       cantidad_elegida: cantidad, // Incluye la cantidad seleccionada en el objeto del producto
       variantes: [
@@ -54,12 +86,12 @@ const Card = ({ id, nombre, descripcion, categoria, precio, imagenes, variantes 
         }
       ],
     };
-  
+
     dispatch(agregarAlCarrito(producto));
     setConfirmacionCarrito(true);
     setTimeout(() => setConfirmacionCarrito(false), 3000);
   };
-  
+
 
   const handleTalleChange = (e) => {
     const talleSeleccionado = e.target.value;
@@ -152,10 +184,11 @@ const Card = ({ id, nombre, descripcion, categoria, precio, imagenes, variantes 
 
   return (
     <div className="card-container">
-      {confirmacionCarrito && <div className="confirmation-message">¡Producto agregado al carrito!</div>}
+      {confirmacionCarrito && <div className="confirmation-message animacion-text">¡Producto agregado al carrito!</div>}
       {confirmacionFav && <div className="confirmation-message">¡Producto agregado a favoritos!</div>}
       {showModal && (
-        <div className="modal-card">
+
+        <div className="modal-card  rotate-animation">
           <span className="close" onClick={() => setShowModal(false)}>
             &times;
           </span>
@@ -218,7 +251,23 @@ const Card = ({ id, nombre, descripcion, categoria, precio, imagenes, variantes 
           <img className="card-imagen" src={`http://localhost:3004/${variantes && variantes[0] && variantes[0].imagenes && variantes[0].imagenes[0]}`} />
           <span className="card-categoria">{categoria}</span>
           <p className="card-inf">{descripcion}</p>
-          <h3 className="card-precio">${precio}</h3>
+          {oferta > 0 ? ( // Mostrar el porcentaje de oferta y el precio final solo si hay oferta
+            <div>
+              <p>{oferta}% OFF</p>
+              <h3 className="card-precio">
+                <span style={{ textDecoration: 'line-through' }}>
+                  ${precio}
+                </span>
+                <span style={{ marginLeft: '10px' }}>
+                  ${calcularPrecioFinal(precio, oferta)}
+                </span>
+              </h3>
+            </div>
+          ) : (
+            <h3 className="card-precio">
+              ${precio}
+            </h3>
+          )}
         </div>
       </Link>
       <div className="card-buttons">

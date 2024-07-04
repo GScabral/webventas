@@ -11,8 +11,10 @@ const transporter = nodemailer.createTransport({
 
 
 const enviarCorreo = async (idPedido, infoPedido, destinatario) => {
+
     try {
         const mailOption = {
+
             from: 'amoremioshowroomok@gmail.com',
             to: destinatario,
             subject: 'Confirmación de Pedido',
@@ -74,6 +76,7 @@ const enviarCorreo = async (idPedido, infoPedido, destinatario) => {
                                 </li>
                             `).join('')}
                         </ul>
+                        <p><strong>TOTAL: $${infoPedido[0].total}</strong></p>
                         <div class="thanks">
                             <p>¡Gracias por confiar en nosotros!</p>
                             <p>Equipo de Amore mio</p>
