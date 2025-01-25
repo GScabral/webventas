@@ -50,22 +50,22 @@ router.get("/allClientes",async(req,res)=>{
   }
 })
 
-// router.get("/InfoUsuario", async (req, res) => {
-//   const { correo, contraseña } = req.body; // Obtener correo y contraseña del cuerpo de la solicitud
+router.get("/InfoUsuario", async (req, res) => {
+  const { correo, contraseña } = req.body; // Obtener correo y contraseña del cuerpo de la solicitud
 
-//   try {
-//     const { error, user } = await obtenerInfUsuario(correo, contraseña);
+  try {
+    const { error, user } = await obtenerInfUsuario(correo, contraseña);
 
-//     if (error) {
-//       return res.status(404).json({ error });
-//     }
+    if (error) {
+      return res.status(404).json({ error });
+    }
 
-//     return res.status(200).json({ user });
-//   } catch (error) {
-//     console.error("Error al verificar credenciales del usuario:", error);
-//     return res.status(500).json({ error: "Error interno del servidor" });
-//   }
-// });
+    return res.status(200).json({ user });
+  } catch (error) {
+    console.error("Error al verificar credenciales del usuario:", error);
+    return res.status(500).json({ error: "Error interno del servidor" });
+  }
+});
 
 
 

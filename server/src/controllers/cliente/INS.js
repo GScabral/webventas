@@ -31,9 +31,9 @@ const inicioSesion = async (correo, contraseña) => {
 
     // Generar un token JWT si las credenciales son válidas pero no son para el administrador
     const token = jwt.sign({ userId: user.id }, secretKey, { expiresIn: '12h' });
-
+    const idU=user.id
     // Retornar el token para que pueda ser utilizado por el cliente
-    return { token };
+    return { token,idU};
   } catch (error) {
     // Capturar errores específicos y devolver un mensaje genérico
     console.error('Error en el inicio de sesión:', error);

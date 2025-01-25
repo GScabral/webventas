@@ -5,8 +5,6 @@ const createNewProducto = async (bodyData, files) => {
   const { nombre_producto, descripcion, precio, categoria, subcategoria, variantesData } = bodyData;
 
 
-  console.log("bodydata:",bodyData)
-  console.log("files:",files)
 
 
   if (!Array.isArray(variantesData)) {
