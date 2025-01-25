@@ -17,8 +17,8 @@ import Table from "react-bootstrap/Table";
 
 const Carrito = () => {
   const carrito = useSelector((state) => state.carrito);
-  const allProductos = useSelector((state) => state.allProductos);
   const [mostrarFormularioCorreo, setMostrarFormularioCorreo] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const [errorStock, setErrorStock] = useState(false);
   const [mostrarModal, setMostrarModal] = useState(false);
   const [numeroPedido, setNumeroPedido] = useState(null);
@@ -84,30 +84,30 @@ const Carrito = () => {
   const calcularTotal = () => {
     let total = 0;
 
-    if(carrito.length >= 3){
-    carrito.forEach((item) => {
-      const precioNumerico = parseFloat(item.precio);
-      const cantidad = item.cantidad_elegida || 1;
+    if (carrito.length >= 3) {
+      carrito.forEach((item) => {
+        const precioNumerico = parseFloat(item.precio);
+        const cantidad = item.cantidad_elegida || 1;
 
-      // Calcular el descuento por prenda
-      let descuentoPorPrenda = 0;
-      if (precioNumerico * cantidad >= 5000 && precioNumerico * cantidad < 10000) {
-        descuentoPorPrenda = 1000;
-      } else if (precioNumerico * cantidad >= 10000 && precioNumerico * cantidad < 15000) {
-        descuentoPorPrenda = 3000;
-      }
+        // Calcular el descuento por prenda
+        let descuentoPorPrenda = 0;
+        if (precioNumerico * cantidad >= 5000 && precioNumerico * cantidad < 10000) {
+          descuentoPorPrenda = 1000;
+        } else if (precioNumerico * cantidad >= 10000 && precioNumerico * cantidad < 15000) {
+          descuentoPorPrenda = 3000;
+        }
 
-      // Restar el descuento por prenda del total
-      total += (precioNumerico * cantidad) - descuentoPorPrenda;
-    });
-  }else{
-    carrito.forEach((item)=>{
-      const precioNumerico = parseFloat(item.precio);
-      const cantida = item.cantidad_elegida || 1;
+        // Restar el descuento por prenda del total
+        total += (precioNumerico * cantidad) - descuentoPorPrenda;
+      });
+    } else {
+      carrito.forEach((item) => {
+        const precioNumerico = parseFloat(item.precio);
+        const cantida = item.cantidad_elegida || 1;
 
-      total += precioNumerico * cantida;
-    })
-  }
+        total += precioNumerico * cantida;
+      })
+    }
 
     return total.toFixed(2);
   }
@@ -255,8 +255,15 @@ const Carrito = () => {
                 {mostrarNotificacion && (
                   <div className="notificacion">
                     <p>Correo enviado correctamente.</p>
-                    <button onClick={() => setMostrarNotificacion(false)}>Cerrar</button>
-                  </div>
+                    <button
+                      onClick={() => {
+                        setMostrarNotificacion(false);
+                        setMostrarModal(false);
+                      }}
+                      className="boton-carrito-c"
+                    >
+                      Cerrar
+                    </button>                  </div>
                 )}
               </form>
               <h2 className="carrito-nPedido">Número de pedido: {numeroPedido}</h2>

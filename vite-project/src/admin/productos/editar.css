@@ -1,77 +1,47 @@
-.edit-product-modal .modal-dialog {
-  max-width: 800px; /* Ancho máximo del modal */
-  margin: auto; /* Establece los márgenes automáticos para centrar horizontalmente */
-  top: 50%; /* Posiciona el modal en la mitad de la pantalla vertical */
-  position: absolute; /* Permite centrar verticalmente */
-  left: 50%; /* Posiciona el modal en la mitad de la pantalla horizontal */
+/* CSS para modal de edición de productos */
+.edit-product-modal {
+  max-width: 500px;
+  margin: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-.edit-product-modal .modal-content {
-  overflow-y: auto; /* Permitir desplazamiento vertical si el contenido es más largo que el modal */
-  max-height: 80vh; /* Altura máxima del modal para que sea adaptable */
-  
+.edit-product-modal .modal-header {
+  background-color: #007bff;
+  color: white;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  padding: 15px;
+  font-size: 18px;
+}
+
+.edit-product-modal .modal-body {
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.edit-product-modal .modal-footer {
+  background-color: #f1f1f1;
+  padding: 15px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
 }
 
 .variant-form-group {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
-.form-group {
+.variant-form-group .form-group {
   margin-bottom: 10px;
 }
 
-.form-label {
+.variant-form-group .form-label {
   font-weight: bold;
 }
 
-.form-control {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ced4da;
+.variant-form-group .form-control {
+  border: 1px solid #ccc;
   border-radius: 4px;
-}
-
-.modal-header {
-  background-color: #f8f9fa;
-  border-bottom: 1px solid #dee2e6;
-}
-
-.modal-title {
-  font-size: 1.25rem;
-}
-
-.modal-body {
-  padding: 20px;
-}
-
-.modal-footer {
-  border-top: 1px solid #dee2e6;
-  padding: 20px;
-}
-
-.btn-secondary-editar {
-  background-color: #6c757d;
-  color: #fff;
-}
-
-.btn-primary-editar {
-  background-color: #007bff;
-  color: #fff;
-}
-
-.btn-secondary-editar:hover,
-.btn-primary-editar:hover {
-  opacity: 0.8;
-}
-
-.cerrar-modal {
-  color: #000;
-}
-
-.cerrar-modal:hover {
-  color: #000;
-}
-
-.container-Modal-editar {
-  padding: 20px;
+  padding: 10px;
 }

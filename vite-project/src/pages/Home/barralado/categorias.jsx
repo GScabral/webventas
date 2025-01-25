@@ -1,33 +1,21 @@
 export const categoria = {
-    "Abrigos": [
-        "Camperas",
-        "Sweaters",
-        "Tapados"
-    ],
+    "Abrigos": [],
+    "Camperas":[],
     "Accesorios": [],
-    "Bikinis": [
-        "Bikinis dama",
-        "Bikinis niñas"
-    ],
+    "Bikinis": [],
     "Blazer": [],
     "Camisas": [],
     "Conjuntos otoño invierno": [],
-    "Lenceria": [
-        "Bombis sueltas",
-        "Boxer niños",
-        "Cancan",
-        "Conjuntos"
-    ],
+    "Lenceria": [],
     "Pantalones": [],
     "Polleras": [],
-    "Remeras/Blusas >": [
-        "Mangas largas",
-        "c/mangas",
-        "musculosa"
-    ],
+    "Remeras": [],
+    "Blusas":[],
     "Ropa Deportiva": [],
     "Shorts": [],
     "Tops,bustiers y Bodies": [],
+    "bustiers": [],
+    "Bodies": [],
     "Vestido": []
 };
 

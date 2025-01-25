@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars,faArrowLeft,faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { getProductos, paginado } from "../../redux/action";
 import './home.css'
 // import './homeresponsive.css'
@@ -64,16 +64,12 @@ const Home = () => {
 
   return (
     <div className="home-fondo">
-    <button className={`toggle-sidebar ${isResponsive ? 'responsive' : ''}`} onClick={toggleSidebar}>
-      <FontAwesomeIcon icon={sidebarVisible ?  faBars  : faBars } />
-    </button>
-    <div className={`sidebar-container ${sidebarVisible ? 'show' : 'hide'}`}>
-      <img className="logo-tienda" src="public\logo.jpeg" alt="logo" />
-      <FiltrosSidebar />
-    </div>
-
-    <div className={`main-content ${sidebarVisible ? 'sidebar-open' : ''}`}>
-      <div className="Home-container">
+      {/* <button className={`toggle-sidebar ${isResponsive ? 'responsive' : ''}`} onClick={toggleSidebar}>
+        <FontAwesomeIcon icon={sidebarVisible ? faBars : faBars} />
+      </button> */}
+     
+      <div className={`main-content ${sidebarVisible ? 'sidebar-open' : ''}`}>
+        <div className="Home-container">
           {allProductos.map((producto) => (
             <Cards key={producto.id} producto={producto} agregarAlCarrito={agregarAlCarrito} agregarFav={agregarFav} />
           ))}
@@ -104,19 +100,45 @@ const Home = () => {
           </button>
         </div>
       </div>
-      <footer className="contacto-home">
-        <p>Encontranos en Ontiveros 1069 entre Gabriela Mistral y Gregorio de la Ferrere
-          <a href={"https://maps.app.goo.gl/s6qNmbvebfZF7XLo9"}>
-            <img className="logo" src="pngwing.com (9).png" alt="GoogleMaps" />
-          </a>
-          <a href={"https://www.instagram.com/amore_mio.showroom?igsh=MXBhdjRua3ltem44cQ=="}>
-            <img className="logo" src="\instagram.png" alt="Instagram" />
-          </a>
-        </p>
-        <div className="logos-container">
-          <a href={"https://wa.me/message/CTLCYWOO7XTML1"}>
-            <img className="whatsapp-logo " src="\whatssap.png" alt="WhatsApp" />
-          </a>
+      <footer className="footer">
+        <div className="footer-container">
+          <div className="footer-section">
+            <h3>Sobre Nosotros</h3>
+            <p>Somos una tienda dedicada a ofrecer ropa única y de alta calidad. Nuestro objetivo es combinar estilo y confort en cada producto.</p>
+          </div>
+
+          <div className="footer-section">
+            <h3>Enlaces Rápidos</h3>
+            <ul>
+              <li><a href="#">Inicio</a></li>
+              <li><a href="#">Tienda</a></li>
+              <li><a href="#">Ofertas</a></li>
+              <li><a href="#">Contacto</a></li>
+              <li><a href="#">Política de Privacidad</a></li>
+            </ul>
+          </div>
+
+          <div className="footer-section">
+            <h3>Síguenos</h3>
+            <div className="social-icons">
+              <a href="#"><img src="/icons8-facebook-nuevo-48.png" alt="Facebook"/></a>
+              <a href="#"><img src="/instagram.png" alt="Instagram"/></a>
+              <a href="#"><img src="/icons8-x-50.png" alt="Twitter"/></a>
+            </div>
+          </div>
+
+          <div className="footer-section">
+            <h3>Suscríbete</h3>
+            <p>Recibe nuestras últimas noticias y ofertas exclusivas.</p>
+            <form className="subscribe-form">
+              <input type="email" placeholder="Ingresa tu correo" required/>
+                <button type="submit">Suscribirse</button>
+            </form>
+          </div>
+        </div>
+
+        <div className="footer-bottom">
+          <p>&copy; 2024 Tienda de Ropa. Todos los derechos reservados.</p>
         </div>
       </footer>
     </div>

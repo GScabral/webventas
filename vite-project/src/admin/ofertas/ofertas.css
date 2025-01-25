@@ -1,56 +1,71 @@
-.ofertas-modal .modal-dialog {
-    max-width: 600px; /* Ancho máximo del modal */
-    margin: auto; /* Centra horizontalmente */
-    top: 50%; /* Centra verticalmente */
-    left: 50%;
-    transform: translate(-50%, -50%); /* Ajusta la posición */
-    position: fixed;
-  }
-  
-  .ofertas-modal-header {
-    background-color: #f7f7f7; /* Color de fondo del encabezado del modal */
-    border-bottom: 1px solid #dee2e6; /* Borde inferior del encabezado */
-    padding: 15px 20px; /* Espaciado dentro del encabezado */
-  }
-  
-  .ofertas-modal-body {
-    padding: 20px; /* Espaciado dentro del cuerpo del modal */
-  }
-  
-  .ofertas-input {
-    width: 100%; /* Ancho completo del input */
-    padding: 10px; /* Espaciado interno del input */
-    margin-top: 10px; /* Margen superior del input */
-    border: 1px solid #ced4da; /* Borde del input */
-    border-radius: 4px; /* Bordes redondeados del input */
-  }
-  
-  .ofertas-modal-footer {
-    background-color: #f7f7f7; /* Color de fondo del pie del modal */
-    border-top: 1px solid #dee2e6; /* Borde superior del pie */
-    padding: 15px 20px; /* Espaciado dentro del pie del modal */
-  }
-  
-  .ofertas-cancel-button {
-    background-color: #6c757d; /* Color de fondo del botón de cancelar */
-    color: white; /* Color del texto del botón de cancelar */
-    border: none; /* Sin borde */
-    padding: 10px 20px; /* Espaciado interno del botón */
-    border-radius: 4px; /* Bordes redondeados del botón */
-  }
-  
-  .ofertas-cancel-button:hover {
-    background-color: #5a6268; /* Color de fondo del botón de cancelar al pasar el ratón */
-  }
-  
-  .ofertas-submit-button {
-    background-color: #007bff; /* Color de fondo del botón de aplicar oferta */
-    color: white; /* Color del texto del botón de aplicar oferta */
-    border: none; /* Sin borde */
-    padding: 10px 20px; /* Espaciado interno del botón */
-    border-radius: 4px; /* Bordes redondeados del botón */
-  }
-  
-  .ofertas-submit-button:hover {
-    background-color: #0056b3; /* Color de fondo del botón de aplicar oferta al pasar el ratón */
-  }
+/* Modal de Ofertas */
+/* General Styling for OfertasModal */
+.ofertas-modal {
+  max-width: 500px;
+  margin: 10% auto; /* Asegura que se centre verticalmente */
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  overflow: visible; /* Asegura que no se corte */
+  z-index: 1050; /* Asegura que esté por encima de otros elementos */
+}
+
+.ofertas-modal-header {
+  background-color: #007bff; /* Azul Bootstrap */
+  color: white;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  padding: 15px;
+  font-size: 18px;
+}
+
+.ofertas-modal-body {
+  padding: 20px;
+  background-color: #f9f9f9; /* Fondo claro */
+}
+
+.ofertas-modal-footer {
+  background-color: #f1f1f1;
+  padding: 15px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* Input Styling */
+.ofertas-input {
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  width: 100%; /* Asegura que ocupe todo el espacio disponible */
+}
+
+/* Button Styling */
+.ofertas-cancel-button {
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+}
+
+.ofertas-submit-button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+}
+
+.ofertas-submit-button:hover {
+  background-color: #218838;
+}
+
+.ofertas-cancel-button {
+  background-color: #dc3545;
+  color: white;
+}
+
+.ofertas-cancel-button:hover {
+  background-color: #c82333;
+}

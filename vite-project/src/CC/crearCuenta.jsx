@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import {createUsuario, checkEmailExistence } from "../redux/action";
-// import "./crearCuenta.css";
+import "./crearCuenta.css";
 import { Link } from "react-router-dom";
 
 const NewUser = () => {
@@ -134,26 +134,26 @@ const NewUser = () => {
         <label className="form-label" htmlFor="nombre">
           NOMBRE:
         </label>
-        <input onChange={handleChange} value={state.nombre} type="text" name="nombre" autoComplete="off" />
+        <input className="input-is" onChange={handleChange} value={state.nombre} type="text" name="nombre" autoComplete="off" />
         {error.nombre && <p className="error-message">{error.nombre}</p>}
 
         <label className="form-label" htmlFor="apellido">
           APELLIDO:
         </label>
-        <input onChange={handleChange} value={state.apellido} type="text" name="apellido" autoComplete="off" />
+        <input className="input-is" onChange={handleChange} value={state.apellido} type="text" name="apellido" autoComplete="off" />
         {error.apellido && <p className="error-message">{error.apellido}</p>}
 
         <label className="form-label" htmlFor="correo">
           CORREO:
         </label>
-        <input onChange={handleChange} value={state.correo} type="text" name="correo" autoComplete="off" />
+        <input className="input-is" onChange={handleChange} value={state.correo} type="text" name="correo" autoComplete="off" />
         {error.correo && <p className="error-message">{error.correo}</p>}
 
         <label className="form-label" htmlFor="contraseña">
           CONTRASEÑA:
         </label>
-        <input onChange={handleChange} value={state.contraseña} type={shadowPassword ? "text" : "password"} name="contraseña" autoComplete="off" />
-        <button onClick={() => setShadowPassword(!shadowPassword)}>
+        <input className="input-is" onChange={handleChange} value={state.contraseña} type={shadowPassword ? "text" : "password"} name="contraseña" autoComplete="off" />
+        <button className="button-is " onClick={() => setShadowPassword(!shadowPassword)}>
           {shadowPassword ? "Ocultar" : "Mostrar"} contraseña
         </button>
         {error.contraseña && <p className="error-message">{error.contraseña}</p>}
@@ -161,13 +161,13 @@ const NewUser = () => {
         <label className="form-label" htmlFor="direccion">
           DIRECCIÓN:
         </label>
-        <input onChange={handleChange} value={state.direccion} type="text" name="direccion" autoComplete="off" />
+        <input className="input-is" onChange={handleChange} value={state.direccion} type="text" name="direccion" autoComplete="off" />
         {error.direccion && <p className="error-message">{error.direccion}</p>}
 
         <label className="form-label" htmlFor="info_contacto">
           INFO DE CONTACTO:
         </label>
-        <input onChange={handleChange} value={state.info_contacto} type="text" name="info_contacto" autoComplete="off" />
+        <input className="input-is" onChange={handleChange} value={state.info_contacto} type="text" name="info_contacto" autoComplete="off" />
         {error.info_contacto && <p className="error-message">{error.info_contacto}</p>}
 
         <button className={`form-button ${isValid ? "valid-button" : "invalid-button"}`} disabled={!isValid} onClick={handleSubmit} type="submit">

@@ -1,44 +1,45 @@
+/* Contenedor de la tabla */
 .cliente-list-container {
-    font-family: Arial, sans-serif;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  
-  /* Estilos para la tabla */
-  .cliente-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-  }
-  
-  /* Estilos para las celdas de la tabla */
-  .cliente-table-header,
-  .cliente-table-data {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-  }
-  
-  /* Estilos para el encabezado de la tabla */
-  .cliente-table-header {
-    background-color: #f2f2f2;
-  }
-  
-  /* Estilos para filas alternas */
-  .cliente-table-row:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-  
-  /* Estilos para las celdas cuando se pasa el ratón sobre ellas */
-  .cliente-table-row:hover {
-    background-color: #f2f2f2;
-  }
-  
-  /* Estilos para el modal */
-  .modal-dialog {
-    max-width: 75vw;
-    margin: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+  padding: 2rem;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.h2-listado-c{
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+/* Tabla de clientes */
+.cliente-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.cliente-table-header {
+  background-color: #ff6f61;
+  color: white;
+  text-align: left;
+  padding: 0.8rem;
+}
+
+.cliente-table-row {
+  transition: background-color 0.3s ease;
+}
+
+.cliente-table-row:hover {
+  background-color: #f1f1f1;
+}
+
+.cliente-table-data {
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+}
+
+.cliente-table-header, .cliente-table-data {
+  font-size: 1rem;
+}

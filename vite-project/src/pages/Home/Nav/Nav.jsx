@@ -7,6 +7,7 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { buscar, getProductos } from "../../../redux/action";
 import Carousel from "../carrusel/carrusel";
 import { useDispatch, useSelector } from "react-redux";
+import FiltrosSidebar from "../barralado/filtros";
 // import './Navresponsive.css'
 import './Nav.css';
 
@@ -14,12 +15,17 @@ import './Nav.css';
 
 const Nav = ({ onSearch }) => {
     const dispatch = useDispatch();
-    const currentPage = useSelector((state) => state.currentPage);
+    const isLoggedIn = useSelector((state) => state.isLoggedIn)
+    const cliente = useSelector((state) => state.cliente)
     const [searchText, setSearchText] = useState("");
+
+
+
+
 
     const handleSearch = (nombre) => {
         dispatch(buscar(nombre));
-        
+
     };
 
 
@@ -32,22 +38,24 @@ const Nav = ({ onSearch }) => {
 
     return (
         <div>
+            {/* Marquee */}
+            <div className="marquee-container">
+                <div className="marquee">
+                    🚨 ¡30% OFF en toda la tienda! 🚨 ¡6 cuotas sin interés o 10% extra por transferencia bancaria! 🚨
+                </div>
+            </div>
+
+            {/* Navbar */}
             <div className="back-nav">
+                <div className="nav-menu">
+                    <button className="menu-button">Categorías</button>
+                    <div className="dropdown-menu">
+                        <FiltrosSidebar />
+                    </div>
+                </div>
                 <Link to="/">
                     <button className="superior">Inicio</button>
                 </Link>
-                <Link to="/DevolucionCambio">
-                    <button className="superior">Cambio/Devolucion</button>
-                </Link>
-                <Link to="/comoPagar">
-                    <button className="superior">Venta por mayor</button>
-                </Link>
-                <Link to="/carrito">
-                    <button className="carrito-nav">
-                        <FontAwesomeIcon icon={faShoppingCart} />
-                    </button>
-                </Link>
-                <h2 className="titulo-respon">AMORE MIO</h2>
                 {window.location.pathname !== '/carrito' && (
                     <SearchBar
                         className="barra-buscar"
@@ -56,15 +64,17 @@ const Nav = ({ onSearch }) => {
                         value={searchText}
                     />
                 )}
-
-
+                {window.location.pathname !== '/carrito' && (
+                    <Link to="/carrito">
+                        <button className="carrito-nav">
+                            <FontAwesomeIcon icon={faShoppingCart} />
+                            <span className="cart-counter"></span> {/* Contador del carrito */}
+                        </button>
+                    </Link>
+                )}
             </div>
-
         </div>
-
-
-
-    )
+    );
 }
 
 export default Nav;

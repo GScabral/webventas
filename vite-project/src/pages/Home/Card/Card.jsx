@@ -20,13 +20,13 @@ const Card = ({ id, nombre, descripcion, categoria, precio, imagenes, variantes 
   const variantesDisponibles = variantes || [];
 
   const [oferta, setOferta] = useState(null)
-  const ofertas= useSelector(state=>state.ofertasActivas)
+  const ofertas = useSelector(state => state.ofertasActivas)
 
   useEffect(() => {
     dispatch(getOfertas()); // Despachar la acción para obtener las ofertas activas
   }, [dispatch]);
-// console.log("ofertas:",ofertas)
- 
+  // console.log("ofertas:",ofertas)
+
   // Función para obtener la oferta del producto actual
   useEffect(() => {
     const obtenerOfertaParaProducto = () => {
@@ -73,7 +73,7 @@ const Card = ({ id, nombre, descripcion, categoria, precio, imagenes, variantes 
     const producto = {
       id,
       nombre,
-      precio:precioFinal,
+      precio: precioFinal,
       descripcion,
       cantidad_elegida: cantidad, // Incluye la cantidad seleccionada en el objeto del producto
       variantes: [
@@ -183,12 +183,10 @@ const Card = ({ id, nombre, descripcion, categoria, precio, imagenes, variantes 
   const tallesDisponibles = [...new Set(variantesDisponibles.map((variante) => variante.talla))];
 
   return (
-    <div className="card-container">
-      {confirmacionCarrito && <div className="confirmation-message animacion-text">¡Producto agregado al carrito!</div>}
-      {confirmacionFav && <div className="confirmation-message">¡Producto agregado a favoritos!</div>}
+    <>
       {showModal && (
 
-        <div className="modal-card  rotate-animation">
+        <div className="modal-card">
           <span className="close" onClick={() => setShowModal(false)}>
             &times;
           </span>
@@ -246,36 +244,41 @@ const Card = ({ id, nombre, descripcion, categoria, precio, imagenes, variantes 
           </div>
         </div>
       )}
-      <Link to={`/detail/${id}`} className="card-link">
-        <div className="card-content">
-          <img className="card-imagen" src={`http://localhost:3004/${variantes && variantes[0] && variantes[0].imagenes && variantes[0].imagenes[0]}`} />
-          <span className="card-categoria">{categoria}</span>
-          <p className="card-inf">{descripcion}</p>
-          {oferta > 0 ? ( // Mostrar el porcentaje de oferta y el precio final solo si hay oferta
-            <div>
-              <p>{oferta}% OFF</p>
+      <div className="card-container">
+        {confirmacionCarrito && <div className="confirmation-message animacion-text">¡Producto agregado al carrito!</div>}
+        {confirmacionFav && <div className="confirmation-message">¡Producto agregado a favoritos!</div>}
+
+        <Link to={`/detail/${id}`} className="card-link">
+          <div className="card-content">
+            <img className="card-imagen" src={`http://localhost:3004/${variantes && variantes[0] && variantes[0].imagenes && variantes[0].imagenes[0]}`} />
+            <span className="card-categoria">{categoria}</span>
+            <p className="card-inf">{descripcion}</p>
+            {oferta > 0 ? ( // Mostrar el porcentaje de oferta y el precio final solo si hay oferta
+              <div>
+                <p>{oferta}% OFF</p>
+                <h3 className="card-precio">
+                  <span style={{ textDecoration: 'line-through' }}>
+                    ${precio}
+                  </span>
+                  <span style={{ marginLeft: '10px' }}>
+                    ${calcularPrecioFinal(precio, oferta)}
+                  </span>
+                </h3>
+              </div>
+            ) : (
               <h3 className="card-precio">
-                <span style={{ textDecoration: 'line-through' }}>
-                  ${precio}
-                </span>
-                <span style={{ marginLeft: '10px' }}>
-                  ${calcularPrecioFinal(precio, oferta)}
-                </span>
+                ${precio}
               </h3>
-            </div>
-          ) : (
-            <h3 className="card-precio">
-              ${precio}
-            </h3>
-          )}
+            )}
+          </div>
+        </Link>
+        <div className="card-buttons">
+          <button className="card-detail" onClick={() => setShowModal(true)}>
+            añadir al carrito
+          </button>
         </div>
-      </Link>
-      <div className="card-buttons">
-        <button className="card-detail" onClick={() => setShowModal(true)}>
-          añadir al carrito
-        </button>
       </div>
-    </div>
+    </>
   );
 };
 

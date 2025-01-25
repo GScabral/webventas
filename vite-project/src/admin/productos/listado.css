@@ -1,3 +1,4 @@
+/* CSS para listado de productos */
 .product-list-container {
   max-width: 800px;
   margin: 0 auto;
@@ -39,21 +40,34 @@
   background-color: #0056b3;
 }
 
+.botones-paginado-admin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
 
-  .modal-dialog {
-    
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: rgb(255, 255, 255);
-      z-index: 1000;
-      width: 400px; /* Ajusta el tamaño del modal según lo necesites */
-      max-height: 80vh; /* Establece la altura máxima del modal */
-      overflow-y: auto; /* Agrega un scroll vertical si el contenido excede la altura máxima */
-      overflow-x: hidden; /* Oculta el scroll horizontal */
-      border-radius: 10%;
- 
-  }
+.arrow-paginado-admin {
+  background-color: #d4773a;
+  border: none;
+  padding: 10px 10px;
+  color: #d7d8b2;
+}
 
-  
+.paginado-admin {
+  display: inline-flex;
+  list-style-type: none;
+  padding: 0;
+}
+
+.paginado-admin a {
+  display: inline-block;
+  padding: 8px 12px;
+  background-color: #ffffff;
+  color: #333;
+  border: 1px solid #ccc;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin-top: 12px;
+}

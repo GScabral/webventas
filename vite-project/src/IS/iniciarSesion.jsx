@@ -74,7 +74,7 @@ const Ingresar = () => {
   return (
     <div className="form-IS">
       <div>
-        <h1>INICIAR SESION</h1>
+        <h1 >INICIAR SESION</h1>
       </div>
       <div className="IS-container">
         <label className="form-labelIs" htmlFor="correo">

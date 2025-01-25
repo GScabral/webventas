@@ -1,53 +1,71 @@
 .admin-panel {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  padding: 2rem;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .h1-panel {
+  font-size: 2rem;
+  color: #333;
   text-align: center;
+  margin-bottom: 1.5rem;
 }
 
 .label-admin {
-  display: block;
-  margin-bottom: 5px;
+  font-weight: bold;
+  color: #555;
 }
 
-.input-admin {
+input[type="text"], input[type="number"], input[type="file"] {
   width: 100%;
-  padding: 8px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
+  padding: 0.8rem;
+  margin: 0.5rem 0;
+  border: 1px solid #ddd;
   border-radius: 5px;
+  font-size: 1rem;
 }
 
 .button-newproduc-adm {
-  display: block;
-  width: 100%;
-  padding: 10px;
-  margin-top: 20px;
-  background-color: #007bff;
-  color: #fff;
+  background-color: #28a745;
+  color: white;
+  padding: 0.8rem 1.5rem;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 1rem;
+  margin: 1rem 0;
+  transition: background-color 0.3s ease;
 }
 
-.button-imagen-adm {
-  display: block;
-  margin-top: 10px;
-  background-color: #28a745;
-  color: #fff;
-  border: none;
+.button-newproduc-adm:hover {
+  background-color: #218838;
+}
+
+.variantes-añadir {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: #fff;
+  border: 1px solid #ddd;
   border-radius: 5px;
-  cursor: pointer;
 }
 
 .img-preview {
-  max-width: 100px;
-  height: auto;
-  margin-top: 10px;
-  display: block;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin: 0.5rem 0;
+}
+
+.newT-addProduc input {
+  width: calc(50% - 10px);
+  margin-right: 10px;
+}
+
+.newT-addProduc label {
+  font-weight: bold;
+}
+
+.newT-addProduc {
+  margin: 1rem 0;
 }

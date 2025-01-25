@@ -196,11 +196,12 @@ const NewProduct = ({ addProduct }) => {
           </button>
 
           {variantesData.map((variante, index) => (
-            <div key={index}>
-              <label>Variante {index + 1}:</label>
-              <label>Color:</label>
+            <div className="variantes-añadir" key={index}>
+              <label >Variante {index + 1}:</label>
+              <label >Color:</label>
               <input
                 type="text"
+
                 value={variante.color}
                 onChange={(e) => handleColorChange(e, index)}
               />

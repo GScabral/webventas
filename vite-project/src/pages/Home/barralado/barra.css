@@ -1,166 +1,126 @@
+/* Estilo general para la barra lateral */
 .sidebar {
-    display: flex;
-    flex-direction: column;
-    background-color: #ffffff; 
-    padding: 20px;
-    max-width: 400px;
-    margin: 20px;
-    max-height: 200px;
-    overflow-y: auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    position: relative;
-    top: 60px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-  }
-  
-  .sidebar::-webkit-scrollbar {
-    display: none;
-  }
-  
-  .sidebar-h1 {
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-    color: #333;
-  }
-  
-  .button-filtros {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    background-color: #f6c1c1;
-    color: #d4773a;
-    border: solid 1px #d4773a;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .button-filtros:hover {
-    background-color: #d18d7b;
-    color: black;
-  }
-  
-  .ul-filtros {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .button-talles,
-  .button-precio {
-    display: block;
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 5px;
-    background-color: #db8f93;
-    color: #e7e7e7;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    font-family: "Dancing Script", cursive;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
-  }
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  z-index: 1000;
+  width: 250px;
+  padding: 10px;
+  display: none; /* Ocultar por defecto */
+}
 
-  .button-sub-categoria{
-    display: block;
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 5px;
-    background-color: #f1dad3;
-    color: #555353;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    font-family: "Permanent Marker", cursive;
-  font-weight: 400;
-  font-style: normal;
-  }
-  
-  .button-selected {
-    display: block;
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 5px;
-    background-color: #db6d72;
-    color: #ffffff;
-    border: solid 1px black;
-    border-radius: 3px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .button-talles:hover,
-  .button-precio:hover {
-    background-color: #db6d72;
-  }
-  
-  .divider {
-    margin: 10px 0;
-    border: none;
-    border-top: 1px solid #ccc;
-  }
+/* Mostrar la barra lateral cuando se activa */
+.nav-menu:hover .sidebar {
+  display: block;
+}
+
+/* Botón principal para activar filtros */
+.button-filtros {
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  margin-bottom: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.button-filtros:hover {
+  background-color: #555;
+}
+
+/* Botones de categorías principales */
+.button-talles {
+  background: none;
+  border: none;
+  color: #333;
+  padding: 8px;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.button-talles:hover {
+  background-color: #f4f4f4;
+}
+
+/* Botones seleccionados */
+.button-selected {
+  background-color: #d5d5d5;
+  font-weight: bold;
+}
+
+/* Subcategorías */
+.button-sub-categoria {
+  background: none;
+  border: none;
+  color: #666;
+  padding: 6px 10px;
+  width: 90%;
+  margin-left: 10%;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.button-sub-categoria:hover {
+  background-color: #eaeaea;
+}
+
+/* Divider */
+.divider {
+  border: 0;
+  height: 1px;
+  background-color: #ddd;
+  margin: 10px 0;
+}
+
+/* Links secundarios (para móviles) */
+.links-container {
+  margin-top: 20px;
+}
+
+.superior-barra {
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  margin: 5px 0;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  transition: background-color 0.3s ease;
+}
+
+.superior-barra:hover {
+  background-color: #555;
+}
 
 
-
-  @media screen and (max-width: 1000px){
+/* Responsividad para pantallas pequeñas */
+@media (max-width: 800px) {
   .sidebar {
-    display: flex;
-    flex-direction: column;
-    background-color: #ffffff; 
-    padding: 20px;
-    max-width: 400px;
-    margin: 20px;
-    max-height: 300px;
-    overflow-y: auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    position: relative;
-    top: 60px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
+    width: 100%;
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
   }
 
   .button-filtros {
-    /* Ajusta el tamaño del botón de filtros */
-    padding: 8px;
+    font-size: 14px;
   }
 
-  .button-talles,
-  .button-precio,
-  .button-sub-categoria,
-  .button-selected {
-    /* Ajusta el tamaño y el espaciado de los botones de categorías y subcategorías */
-    padding: 6px;
-    margin-bottom: 3px;
+  .superior-barra {
+    font-size: 12px;
   }
-
-  .sidebar-h1 {
-    /* Ajusta el tamaño del título */
-    font-size: 1.2rem;
-  }
-
-  .links-container {
-    /* Ajusta el espaciado entre los enlaces de navegación */
-    margin-top: 10px;
-  }
-  .superior-barra{
-    margin-right: 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: transparent;
-    color: #b97431;
-    cursor: pointer;
-    z-index: 2;
-    border: solid 1px #b97431;
-    font-family: "Cedarville Cursive", cursive;
-    font-weight: 400;
-    font-style: normal;
-  }
-  
-
 }

@@ -1,7 +1,13 @@
 .cards-container {
-    transition: transform 0.3s ease-in-out;
-  }
-  
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem;
+  justify-content: center;
+  align-items: center;
+  background-color: #f7f7f7;
+}
+/*   
   .cards-container:hover {
     transform: translateY(-5px); 
-  }
+  } */

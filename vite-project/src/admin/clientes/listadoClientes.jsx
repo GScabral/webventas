@@ -17,7 +17,7 @@ const ClienteList=()=>{
 
     return(
         <div className="cliente-list-container">
-            <h2>Listado de clientes</h2>
+            <h2 className="h2-listado-c">Listado de clientes</h2>
             <table className="cliente-table">
                 <thead>
                     <tr>

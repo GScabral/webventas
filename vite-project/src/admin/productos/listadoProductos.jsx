@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { cambios, getProductos, borrar, ofertas } from '../../redux/action'; // Suponiendo que getProductos es una acción para obtener los productos
+import { cambios, getProductos, borrar, ofertas,paginado } from '../../redux/action'; // Suponiendo que getProductos es una acción para obtener los productos
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencilAlt, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft,faArrowRight } from '@fortawesome/free-solid-svg-icons';
+
 import { Modal } from 'react-bootstrap'; // Importa los componentes necesarios de React Bootstrap
 import EditProductModal from './editar';
 import OfertasModal from '../ofertas/ofertas';
@@ -11,6 +13,9 @@ import './listado.css';
 const ProductList = () => {
   const dispatch = useDispatch();
   const allProductos = useSelector((state) => state.allProductos); // Suponiendo que 'productos' es la parte del estado que contiene la lista de productos
+  const currentPage = useSelector((state) => state.currentPage);
+  const totalPages = useSelector((state) => state.totalPages);
+
 
   const [showEditModal, setShowEditModal] = useState(false);
   const [showOfertaModal, setShowOfertaModal] = useState(false);
@@ -119,6 +124,34 @@ const ProductList = () => {
           ))}
         </tbody>
       </table>
+      <div >
+        
+        </div>
+        <div className="botones-paginado-admin">
+          <button
+            className="arrow-paginado-admin"
+            name="prev"
+            onClick={() => currentPage > 1 && dispatch(paginado("prev"))}
+            disabled={currentPage === 1}
+          >
+            <FontAwesomeIcon icon={faArrowLeft} />
+          </button>
+          <div>
+            <ul className="paginado-admin">
+              {Array.from({ length: totalPages }, (_, index) => (
+                <li key={index}><a href="#">{index + 1}</a></li>
+              ))}
+            </ul>
+          </div>
+          <button
+            className="arrow-paginado-admin"
+            name="next"
+            onClick={() => currentPage < totalPages && dispatch(paginado("next"))}
+            disabled={currentPage === totalPages}
+          >
+            <FontAwesomeIcon icon={faArrowRight} />
+          </button>
+        </div>
 
       <Modal className="modal-dialog" show={showEditModal} onHide={handleClose}>
         <EditProductModal

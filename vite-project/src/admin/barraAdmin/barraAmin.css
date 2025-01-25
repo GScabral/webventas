@@ -1,46 +1,44 @@
-.sidebar-admin{
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    max-width: 400px;
-    margin: 20px;
-    max-height: 500px;
-    overflow-y: auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    overflow-y: hidden; 
-}
-.sidebar-container-admin{
-    width: 200px;
-  background-color: #db9d60;
-  height: 100vh;
-  position: fixed;
+.sidebar-admin {
+  position: fixed; /* Fija la barra en su posición */
   top: 0;
-  left: 0; /* Cambio aquí para mantener la barra lateral abierta */
-  transition: left 0.3s ease;
-  overflow-y: hidden; 
+  left: 0;
+  width: 250px;
+  height: 100vh; /* Ocupa toda la altura de la ventana */
+  background-color: #333;
+  color: white;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1); /* Sombra para separarla visualmente */
+  z-index: 1000; /* Asegura que esté encima del contenido principal */
 }
 
 .Mi-Tienda {
-  font-size: 24px;
-  margin-bottom: 20px;
+  font-size: 1.8rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #ff6f61;
 }
 
-/* Estilos para los botones */
 .barra-admin-button {
-  display: block;
-  width: calc(100% ); /* Resta 40px para considerar el padding de la barra lateral */
-  margin-bottom: 10px;
-  padding: 10px;
+  background-color: #ff6f61;
+  color: white;
   border: none;
-  background-color: #ecbdad; /* Color de fondo de los botones */
-  color: rgb(0, 0, 0); /* Color del texto de los botones */
-  text-align: left;
-  text-decoration: none;
+  padding: 0.8rem;
+  border-radius: 5px;
+  font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.3s ease; /* Transición suave para el color de fondo */
+  text-align: center;
+  transition: background-color 0.3s ease;
 }
 
 .barra-admin-button:hover {
-  background-color: #bea879; /* Cambio de color al pasar el ratón sobre los botones */
+  background-color: #e65c54;
 }
+
+.barra-admin-button:active {
+  background-color: #cc514a;
+}
+
+/* Ajuste para el contenido principal */

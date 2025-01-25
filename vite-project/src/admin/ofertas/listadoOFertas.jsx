@@ -10,7 +10,6 @@ const OfertasLista = () => {
     const allOfertas = useSelector(state => state.ofertasActivas)
 
 
-    console.log("ofertas:", allOfertas)
 
   const  handleDeleteOferta = (id_oferta) => {
         if (window.confirm("¿Estas seguro de eliminar esta oferta")) {

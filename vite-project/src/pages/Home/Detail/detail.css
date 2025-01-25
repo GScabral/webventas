@@ -1,280 +1,152 @@
+/* Fondo general de la página de detalle */
 .detail-background {
-  background-color: #fff7f7;
+  background-color: #f5f5f5;
   padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
 }
 
+/* Contenedor principal del detalle */
 .detail-container {
-  display:flex;
-  justify-content: space-between;
-  padding: 20px;
-  border: 1px solid #ccc;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  background-color: #e4cac9;
-  font-family: "Cedarville Cursive", cursive;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 20px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  max-width: 900px;
+  width: 100%;
+  margin: 20px;
+  padding: 20px;
 }
 
+/* Contenedor para las imágenes */
+.detail-imagen-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.detail-imagen {
+  max-width: 100%;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+.imagen-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.imagen-button {
+  background-color: #e0e0e0;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.imagen-button.active {
+  background-color: #1976d2;
+  color: #ffffff;
+}
+
+.imagen-button:hover {
+  background-color: #2196f3;
+  color: white;
+}
+
+/* Contenedor de la descripción y selección */
 .detail-content {
-  flex: 1;
-  margin-left: 20px;
+  padding: 20px;
 }
 
 .detail-title {
-  font-size: 24px;
+  font-size: 1.8rem;
   font-weight: bold;
+  color: #333;
   margin-bottom: 10px;
 }
 
 .detail-description {
+  font-size: 1rem;
+  color: #666;
   margin-bottom: 15px;
 }
 
 .detail-details {
-  margin-bottom: 5px;
-}
-
-.detail-imagen-container {
-
-    max-width: 40%; /* Ancho máximo del 50% del contenedor padre */
-    height: auto; /* Mantener proporción de aspecto */
-    margin-right: 10px; /* Reducir el margen derecho a 10px (o el valor que desees) */
-  
-}
-
-.detail-imagen {
-  width: 190%; /* Asegura que la imagen ocupe todo el ancho del contenedor */
-}
-
-.volver {
-  display: block;
-  margin-top: 20px;
-  text-decoration: none;
-  color: #333;
+  font-size: 1.2rem;
   font-weight: bold;
-}
-
-.imagen-nav {
-  margin-top: 10px;
-}
-
-.imagen-nav button {
-  background-color: #f5f5f5;
-  border: none;
-  cursor: pointer;
-  margin-right: 5px;
-  padding: 5px;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-}
-
-.imagen-nav button:hover {
-  background-color: #e0e0e0;
-}
-
-.card-buttons {
-  margin-top: 20px;
-}
-
-.card-buttons button {
-  background-color: #f5f5f5;
-  border: none;
-  cursor: pointer;
-  margin-right: 10px;
-  padding: 10px;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-}
-
-.card-buttons button:hover {
-  background-color: #e0e0e0;
-}
-
-.card-buttons button:focus {
-  outline: none;
-}
-
-.variantes-container {
-  margin-top: 20px;
-}
-
-.variantes-container h4 {
-  font-size: 16px;
-  margin-bottom: 10px;
-}
-
-.variantes-container ul {
-  list-style: none;
-  padding: 0;
-}
-
-.variantes-container li {
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin-bottom: 10px;
-}
-
-.variantes-container li p {
-  margin: 0;
-}
-
-.variantes-container li p:first-child {
-  font-weight: bold;
+  margin-bottom: 20px;
 }
 
 .selecion-detail {
-  background-color: transparent;
-  padding: 20px;
-  border-radius: 8px;
-  font-family: "Cedarville Cursive", cursive;
-  font-weight: 400;
-  font-style: normal;
-  max-width: 50%;
-  overflow: auto;
-  margin-left: -20px;
-}
-
-.selecion-content-detail {
-  display: flex;
-  flex-direction: column;
+  border-top: 1px solid #e0e0e0;
+  padding-top: 20px;
 }
 
 .selecion-content-detail label {
-  margin-bottom: 8px;
-  font-weight: bold;
+  display: block;
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 5px;
 }
 
 .selecion-content-detail select,
-.selecion-content-detail input[type="number"] {
-  width: calc(100% - 16px);
-  margin-bottom: 16px;
-  padding: 10px;
+.selecion-content-detail input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  
+  font-size: 1rem;
 }
 
-.selecion-content-detail button {
-  background-color: #e4cac9;
-  color: #000000;
-  padding: 12px 24px;
+button {
+  background-color: #4caf50;
+  color: white;
   border: none;
-  border-radius: 4px;
+  padding: 10px 15px;
+  font-size: 1rem;
+  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  border: 0.5px black solid ;
-  
+  transition: all 0.3s ease;
 }
 
-.selecion-content-detail button:hover {
-  background-color: #ecb8ea;
+button:hover {
+  background-color: #45a049;
 }
 
-@media screen and (max-width: 800px){
-  .detail-background {
-    background-color: #f8f9fa; /* Color de fondo */
-    padding: 20px; /* Espaciado interno */
-  }
-  
+/* Botón para volver */
+.volver {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 15px;
+  background-color: #1976d2;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.volver:hover {
+  background-color: #1565c0;
+  text-decoration: underline;
+}
+
+/* Responsivo */
+@media (min-width: 768px) {
   .detail-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 800px; /* Ancho máximo del contenedor */
-    margin: 0 auto; /* Centrar el contenedor en la página */
-    background-color: #e4cac9; /* Color de fondo del contenedor */
-    border-radius: 10px; /* Bordes redondeados */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra */
-    padding: 20px; /* Espaciado interno */
-    font-family: "Cedarville Cursive", cursive;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 20px;
+    flex-direction: row;
+    gap: 20px;
   }
-  
-  .detail-imagen-container {
-    display: flex;
-    justify-content: center;
-    flex-direction: column; /* Cambia la dirección de los elementos */
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .detail-imagen {
-    max-width: 100%;
-    height: auto;
-  }
-  
-  .imagen-buttons {
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
-  }
-  
-  .imagen-button {
-    margin: 0 5px;
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-  }
-  
-  .imagen-button.active {
-    font-weight: bold;
-  }
-  
-  .detail-title {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    font-family: "Sedan SC", serif;
-    font-weight: 400;
-    font-style: normal;
-  }
-  
-  .detail-description {
-    margin-bottom: 10px;
-    font-family: "Sedan SC", serif;
-    font-weight: 400;
-    font-style: normal;
-  }
-  
-  .detail-details {
-    margin-bottom: 10px;
-    font-family: "Sedan SC", serif;
-    font-weight: 400;
-    font-style: normal;
-  }
-  
-  .selecion-detail {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-family: "Sedan SC", serif;
-    font-weight: 400;
-    font-style: normal;
-  }
-  
-  .selecion-content-detail {
-    margin-bottom: 20px;
-  }
-  
-  .selecion-content-detail select,
-  .selecion-content-detail input,
-  .selecion-content-detail button {
-    margin-bottom: 10px;
-  }
-  
-  .volver {
-    display: block;
-    text-align: center;
-    margin-top: 20px;
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
+
+  .detail-content {
+    flex: 1;
   }
 }
-
-
-  
