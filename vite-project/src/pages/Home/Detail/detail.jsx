@@ -12,6 +12,7 @@ const Detail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const info = useSelector((state) => state.info);
+  const allProductos = useSelector((state) => state.allProductos);
   const [talleSeleccionado, setTalleSeleccionado] = useState("");
   const [colorSeleccionado, setColorSeleccionado] = useState("");
   const [cantidad, setCantidad] = useState(1);
@@ -20,10 +21,9 @@ const Detail = () => {
   const [imagenActual, setImagenActual] = useState(0);
   const [showModal, setShowModal] = useState(false);
 
-  //  console.log("info:",info)
 
   const [oferta, setOferta] = useState(null)
-  const ofertas= useSelector(state=>state.ofertasActivas)
+  const ofertas = useSelector(state => state.ofertasActivas)
 
 
   useEffect(() => {
@@ -43,7 +43,7 @@ const Detail = () => {
 
   const calcularPrecioFinal = (precio, oferta) => {
     if (oferta) {
-      const precioFinal =precio * (1 - oferta / 100);
+      const precioFinal = precio * (1 - oferta / 100);
       return precioFinal.toFixed(2); // Redondear a 2 decimales
     }
     return precio;
@@ -111,7 +111,7 @@ const Detail = () => {
   };
 
   const handleAgregarAlCarrito = () => {
-   
+
 
     if (!talleSeleccionado || !colorSeleccionado) {
       alert('Por favor, selecciona un talle y un color antes de agregar al carrito.');
@@ -131,9 +131,9 @@ const Detail = () => {
     variantes.push(varianteSeleccionada);
     const producto = {
       id,
-      nombre:info.nombre,
+      nombre: info.nombre,
       precio: precioFinal,
-      descripcion:info.descripcion,
+      descripcion: info.descripcion,
       cantidad_elegida: cantidad, // Incluye la cantidad seleccionada en el objeto del producto
       variantes: variantes,
     };
@@ -146,6 +146,9 @@ const Detail = () => {
       dispatch(getById(id));
     }
   }, [id, dispatch]);
+
+  const productosRecomendados = allProductos.filter(producto => producto.categoria === info.categoria && producto.id !== info.id);
+
 
   return (
     <div className="detail-background">
@@ -220,14 +223,26 @@ const Detail = () => {
               </div>
             </div>
           </div>
+          <Link className="volver" to={"/"}>
+            Volver
+          </Link>
         </div>
       )}
-      <Link className="volver" to={"/"}>
-        Volver
-      </Link>
-    </div>
+      <h1 className="recomendaciones">OTRAS OPCIONES QUE PODRIAN GUSTARTE</h1>
+      <div className="recomendaciones-container">
+        {productosRecomendados.map(producto => (
+          <Link key={producto.id} to={`/detail/${producto.id}`}>
+            <div className="recomendacion-item">
+              <img src={`http://localhost:3004/${producto.variantes[0].imagenes[0]}`} alt={producto.nombre} />
+              <p>{producto.nombre}</p>
+              <p>${producto.precio}</p>
+            </div>
+          </Link>
+        ))}
+      </div>
+    </div >
   );
-  
+
 };
 
 export default Detail;

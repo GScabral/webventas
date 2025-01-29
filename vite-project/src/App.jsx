@@ -1,6 +1,5 @@
 import React from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom'
-
 import Home from './pages/Home/home'
 // import Landing from './pages/landing/landing'
 import PanelAdmin from './admin/panelAdmin'
@@ -18,7 +17,7 @@ import DevolucionCambio from './pages/Home/devolucion/devolucion'
 
 function App() {
   const location = useLocation();
-  const hideNav = location.pathname === '/newUser' || location.pathname === '/iniciar' ||location.pathname === '/carrito'||location.pathname === '/detail/:id' || location.pathname.startsWith('/admin/');
+  const hideNav = location.pathname === '/newUser' || location.pathname === '/iniciar' ||location.pathname === '/carrito'|| /^\/detail\/\d+$/.test(location.pathname)  || location.pathname.startsWith('/admin/');
 
 
 
