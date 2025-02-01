@@ -67,7 +67,7 @@ const Home = () => {
       {/* <button className={`toggle-sidebar ${isResponsive ? 'responsive' : ''}`} onClick={toggleSidebar}>
         <FontAwesomeIcon icon={sidebarVisible ? faBars : faBars} />
       </button> */}
-     
+
       <div className={`main-content ${sidebarVisible ? 'sidebar-open' : ''}`}>
         <div className="Home-container">
           {allProductos.map((producto) => (
@@ -121,19 +121,28 @@ const Home = () => {
           <div className="footer-section">
             <h3>Síguenos</h3>
             <div className="social-icons">
-              <a href="#"><img src="/icons8-facebook-nuevo-48.png" alt="Facebook"/></a>
-              <a href="#"><img src="/instagram.png" alt="Instagram"/></a>
-              <a href="#"><img src="/icons8-x-50.png" alt="Twitter"/></a>
+              <a href="#"><img src="/icons8-facebook-nuevo-48.png" alt="Facebook" /></a>
+              <a href="#"><img src="/instagram.png" alt="Instagram" /></a>
+              <a href="#"><img src="/icons8-x-50.png" alt="Twitter" /></a>
             </div>
           </div>
 
           <div className="footer-section">
-            <h3>Suscríbete</h3>
-            <p>Recibe nuestras últimas noticias y ofertas exclusivas.</p>
-            <form className="subscribe-form">
-              <input type="email" placeholder="Ingresa tu correo" required/>
-                <button type="submit">Suscribirse</button>
-            </form>
+            <h3>Estamos en</h3>
+            <p>Narnia al 5500.</p>
+            <div className="payment-methods">
+              <img src="/icons8-location-48.png" alt="Visa" />
+             
+            </div>
+          </div>
+
+          <div className="footer-section">
+            <h3>Formas de pago</h3>
+            <div className="payment-methods">
+              <img src="/icons8-visa-48.png" alt="Visa" />
+              <img src="/icons8-mastercard-48.png" alt="Mastercard" />
+              <img src="/icons8-mercado-pago-48.png" alt="Mercado Pago" />
+            </div>
           </div>
         </div>
 

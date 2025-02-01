@@ -26,6 +26,7 @@ const Detail = () => {
   const ofertas = useSelector(state => state.ofertasActivas)
 
 
+
   useEffect(() => {
     const obtenerOfertaParaProducto = () => {
       // Buscar la oferta correspondiente al producto actual según su id
@@ -230,15 +231,37 @@ const Detail = () => {
       )}
       <h1 className="recomendaciones">OTRAS OPCIONES QUE PODRIAN GUSTARTE</h1>
       <div className="recomendaciones-container">
-        {productosRecomendados.map(producto => (
-          <Link key={producto.id} to={`/detail/${producto.id}`}>
-            <div className="recomendacion-item">
-              <img src={`http://localhost:3004/${producto.variantes[0].imagenes[0]}`} alt={producto.nombre} />
-              <p>{producto.nombre}</p>
-              <p>${producto.precio}</p>
-            </div>
-          </Link>
-        ))}
+        {productosRecomendados.map(producto => {
+          // Buscar la oferta correspondiente al producto recomendado
+          const ofertaProducto = ofertas.find(oferta => oferta.producto_id === producto.id);
+          const descuento = ofertaProducto ? ofertaProducto.descuento : null;
+
+          return (
+            <Link key={producto.id} to={`/detail/${producto.id}`}>
+              <div className="recomendacion-item">
+                <img src={`http://localhost:3004/${producto.variantes[0].imagenes[0]}`} alt={producto.nombre} />
+                <p className="recomendados-p">{producto.nombre}</p>
+                {descuento ? ( // Mostrar el porcentaje de oferta y el precio final solo si hay oferta
+                  <div>
+                    <p>{descuento}% OFF</p>
+                    <h3 className="card-precio">
+                      <span style={{ textDecoration: 'line-through' }}>
+                        ${producto.precio}
+                      </span>
+                      <span style={{ marginLeft: '10px' }}>
+                        ${calcularPrecioFinal(producto.precio, descuento)}
+                      </span>
+                    </h3>
+                  </div>
+                ) : (
+                  <h3 className="card-precio">
+                    ${producto.precio}
+                  </h3>
+                )}
+              </div>
+            </Link>
+          );
+        })}
       </div>
     </div >
   );

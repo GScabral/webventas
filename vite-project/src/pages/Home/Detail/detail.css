@@ -4,13 +4,13 @@
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  background-color: #fafafa;
+  background-color: #ffebf0;
 }
 
 .detail-container {
   display: flex;
   flex-wrap: wrap;
-  background: white;
+  background: #fff5e1;
   border-radius: 16px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   overflow: hidden;
@@ -18,7 +18,7 @@
   width: 100%;
   padding: 20px;
   animation: fadeIn 0.5s ease-in-out;
-  margin-bottom: 20px; /* Add margin to separate from recommendations */
+  margin-bottom: 20px;
 }
 
 /* Image gallery */
@@ -29,20 +29,20 @@
   align-items: center;
   justify-content: center;
   padding: 20px;
-  background-color: #f8f9fa;
+  background-color: #ffe6e6;
 }
 
 .detail-imagen {
   max-width: 100%;
   width: 400px;
   border-radius: 8px;
-  border: 1px solid #ddd;
+  border: 1px solid #ff99cc;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .detail-imagen:hover {
   transform: scale(1.05);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 20px rgba(255, 0, 102, 0.3);
 }
 
 .imagen-buttons {
@@ -54,8 +54,8 @@
 .imagen-button {
   width: 40px;
   height: 40px;
-  background: #f0f0f0;
-  border: 1px solid #ddd;
+  background: #ffcccc;
+  border: 1px solid #ff99cc;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -64,16 +64,16 @@
   justify-content: center;
   font-size: 1rem;
   font-weight: bold;
-  color: #333;
+  color: #ff3366;
 }
 
 .imagen-button.active,
 .imagen-button:hover {
-  background: #007bff;
+  background: #ff3366;
   color: white;
-  border-color: #007bff;
+  border-color: #cc0052;
   transform: scale(1.1);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 10px rgba(255, 0, 102, 0.3);
 }
 
 /* Product details */
@@ -86,14 +86,14 @@
   font-size: 2rem;
   font-weight: bold;
   margin-bottom: 10px;
-  color: #333;
+  color: #ff3366;
   animation: slideIn 0.5s ease-in-out;
 }
 
 .detail-description {
   font-size: 1.2rem;
   margin-bottom: 20px;
-  color: #555;
+  color: #cc0052;
   line-height: 1.5;
 }
 
@@ -101,7 +101,7 @@
   font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 20px;
-  color: #007bff;
+  color: #ff3366;
 }
 
 .selecion-detail {
@@ -118,7 +118,7 @@
 .selecion-content-detail input {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ddd;
+  border: 1px solid #ff99cc;
   border-radius: 8px;
   margin-bottom: 10px;
   font-size: 1rem;
@@ -128,12 +128,12 @@
 .selecion-content-detail select:focus,
 .selecion-content-detail input:focus {
   outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 4px rgba(0, 123, 255, 0.4);
+  border-color: #ff3366;
+  box-shadow: 0 0 4px rgba(255, 0, 102, 0.4);
 }
 
 button {
-  background-color: #007bff;
+  background-color: #ff3366;
   color: white;
   padding: 10px 20px;
   border: none;
@@ -144,7 +144,7 @@ button {
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: #cc0052;
   transform: scale(1.05);
 }
 
@@ -152,17 +152,14 @@ button:hover {
   display: inline-block;
   margin-top: 20px;
   text-decoration: none;
-  color: #007bff;
+  color: #ff3366;
   font-weight: bold;
   transition: color 0.3s ease;
 }
 
 .volver:hover {
-  color: #0056b3;
+  color: #cc0052;
 }
-
-/* Recommendations */
-/* Recommendations */
 .recomendaciones {
   width: 100%;
   text-align: center;
@@ -178,6 +175,8 @@ button:hover {
   gap: 20px;
   justify-content: center;
   margin-top: 20px;
+  text-decoration: none;
+
 }
 
 .recomendacion-item {
@@ -197,10 +196,19 @@ button:hover {
   margin-bottom: 10px;
 }
 
+.recomendacion-item p {
+  font-size: 1rem;
+  color: #555;
+  margin: 5px 0;
+  text-decoration: none; /* Eliminar subrayado */
+}
+
 .recomendacion-item:hover {
   transform: scale(1.05);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
+
+
 /* Animations */
 @keyframes fadeIn {
   from {
