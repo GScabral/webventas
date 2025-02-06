@@ -56,7 +56,7 @@ const Nav = ({ onSearch }) => {
                 <Link to="/">
                     <button className="superior">Inicio</button>
                 </Link>
-                <Link to="/OFERTAS">
+                <Link to="/Ofertas">
                     <button className="superior">%OFERTAS%</button>
                 </Link>
                 {window.location.pathname !== '/carrito' && (

@@ -36,6 +36,7 @@ import {
 } from "./action"
 
 const initialState = {
+  allProductosforFiltro:[],
   allProductos: [],
   allProductosBackUp: [],
   totalPages: 1,
@@ -70,24 +71,25 @@ const reducer = (state = initialState, action) => {
       const allProductos = action.payload; // Obtener todos los productos
 
       // Dividir los productos según la cantidad que quieres mostrar por página
-      const slicedProductos = allProductos.slice(0, ITEMS_PER_PAGE);
 
       return {
         ...state,
-        allProductos: slicedProductos, // Almacenar solo los productos para la primera página
+        allProductosforFiltro:allProductos,
+        allProductos: allProductos.slice(0, ITEMS_PER_PAGE),
         allProductosBackUp: allProductos,
         totalPages: Math.ceil(allProductos.length / ITEMS_PER_PAGE), // Actualizar el total de páginas
       };
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////      
     case ADD_PRODUCT:
 
-      const newProducto = action.payload;
+    const newProducto = action.payload;
 
-      return {
-        ...state,
-        allProductos: [newProducto, ...state.allProductos],
-        allProductosBackUp: [newProducto, ...state.allProductosBackUp]
-      }
+    return {
+      ...state,
+      allProductos: [newProducto, ...state.allProductos],
+      totalPages: Math.ceil([newProducto, ...state.allProductos].length / ITEMS_PER_PAGE),
+    };
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
     case SEARCH_ID:
       return {
@@ -519,7 +521,7 @@ const reducer = (state = initialState, action) => {
 
     ///////////////////////////////////////////////////////////////////////////  
     case GET_OFERTAS:
-      const ofertasActivas= action.payload
+      const ofertasActivas = action.payload
       return {
         ...state,
         ofertasActivas: ofertasActivas// Almacena las ofertas activas recibidas del servidor
@@ -528,16 +530,16 @@ const reducer = (state = initialState, action) => {
     ///////////////////////////////////////////////////////////////////////////  
     case BORRAR_OFERTA:
       const productoIdParaBorrar = action.payload;
-    
+
       // Actualizar `cantidadOferta` eliminando la oferta del producto correspondiente
       const nuevaCantidadOferta = { ...state.cantidadOferta };
       delete nuevaCantidadOferta[productoIdParaBorrar];
-    
+
       // Filtrar las ofertas activas para eliminar la oferta del producto correspondiente
       const nuevasOfertasActivas = state.ofertasActivas.filter(
         (oferta) => oferta.producto_id !== productoIdParaBorrar
       );
-    
+
       return {
         ...state,
         cantidadOferta: nuevaCantidadOferta, // Actualizar `cantidadOferta` sin la oferta borrada

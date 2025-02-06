@@ -14,11 +14,15 @@ import Principal from './admin/inicio/principalAdmin'
 import NewProduct from './admin/añadir/añadirProducto'
 import ProductList from './admin/productos/listadoProductos'
 import DevolucionCambio from './pages/Home/devolucion/devolucion'
+import Ofertas from './pages/Home/ofertas/ofertas'
 
 function App() {
   const location = useLocation();
-  const hideNav = location.pathname === '/newUser' || location.pathname === '/iniciar' ||location.pathname === '/carrito'|| /^\/detail\/\d+$/.test(location.pathname)  || location.pathname.startsWith('/admin/');
-
+  const hideNav = location.pathname === '/newUser' || 
+                  location.pathname === '/iniciar' || 
+                  location.pathname === '/carrito' || 
+                  /^\/detail\/\d+$/.test(location.pathname) || 
+                  location.pathname.startsWith('/admin');
 
 
   return (
@@ -34,6 +38,7 @@ function App() {
         <Route path='/comoPagar' element={<MetodoPago />} />
         <Route path='/carrito' element={<Carrito />} />
         <Route path='/Favorito' element={<Fav />} />
+        <Route path='/Ofertas' element={<Ofertas />} />
       </Routes>
 
     </div>

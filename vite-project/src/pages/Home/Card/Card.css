@@ -14,7 +14,7 @@ body {
   display: flex;
   flex-direction: column;
   background-color: #fff;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 10px 4px 6px rgba(0, 0, 0, 0.1);
   position: relative;
   transition: transform 0.2s;
 }
